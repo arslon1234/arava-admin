@@ -91,7 +91,7 @@ export default function ResponsiveDrawer(props: Props) {
       {/* <Divider /> */}
       <List className='bg-[#FFF] min-h-[90vh]' >
           {navList.map((el, index) => (
-            <NavLink key={index} to={el.path} className={el.path === pathname ? "block bg-[#0f3] text-white duration-200    " :"  "}>
+            <NavLink key={index} to={el.path} className={el.path === pathname ? "block bg-[#238636] text-white duration-200    " :"  "}>
                <ListItem disablePadding>
                  <ListItemButton>
                    <ListItemIcon>

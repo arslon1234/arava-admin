@@ -92,7 +92,7 @@ function Index() {
                         type="text"
                         name="username"
                         error={touched.username && !!errors.username}
-                        className="w-full mb-1 outline-none"
+                        className="w-full mb-1 outline-none bg-transparent"
                         helperText={
                           <ErrorMessage
                             name="username"

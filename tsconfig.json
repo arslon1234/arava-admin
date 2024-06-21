@@ -5,6 +5,16 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@layut": ["./src/layout"],
+      "@pages": ["./src/pages"],
+      "@router": ["./src/router"],
+      "@interface": ["./src/types/interface"],
+
+      "@coocse": ["./src/utils/cocies.ts"],
+      "@service-auth": ["./src/service/auth"],
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

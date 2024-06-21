@@ -1,9 +1,11 @@
-function App() {
-  return (
-    <>
-      <h1>salom</h1>
-    </>
-  )
-}
+import { Outlet } from "react-router-dom";
 
-export default App
+const App = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+};
+
+export default App;

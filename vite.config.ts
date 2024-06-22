@@ -7,12 +7,18 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@', replacement: '/src' },
-      { find: '@layut', replacement: '/src/layout' },
+      { find: '@layout', replacement: '/src/layout' },
       { find: '@pages', replacement: '/src/pages' },
       { find: '@interface', replacement: '/src/types/interface' },
+      { find: '@ui', replacement: '/src/components/ui' },
+      { find: '@modals', replacement: '/src/components/modals' },
       
-      { find: '@coocse', replacement: '/src/utils/cocies.ts' },
+      { find: '@cookie', replacement: '/src/utils/cookie.ts' },
       {find: "@service-auth" , replacement: "/src/service/auth"},
+
+      { find: '@company', replacement: '/src/service/company' },
+
+      { find: '@stor-company', replacement: '/src/stor/stor-company'},
     ]
   }
 })

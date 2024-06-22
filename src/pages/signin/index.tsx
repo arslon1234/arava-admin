@@ -7,7 +7,7 @@ import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer , toast } from "react-toastify";
 
-import { setCookies } from "@coocse";
+import { setCookies } from "@cookie";
 import {auth} from "@service-auth"
 import "./style.scss";
 
@@ -18,7 +18,7 @@ function Index() {
   // Custom styling for TextField when there's an error
   const StyledTextField = styled(TextField)(({}) => ({
     "& .MuiInputBase-root": {
-      color: "#FFF", // Default text color
+      color: "#0f0", // Default text color
       fontSize: "20px",
     },
     "& .MuiOutlinedInput-root": {

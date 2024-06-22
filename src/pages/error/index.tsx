@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./style.scss";
 
-function index() {
+function Index() {
   const navigate = useNavigate();
 
   const navigetBtn = () => {
@@ -43,4 +43,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

@@ -7,13 +7,19 @@
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./*"],
-      "@layut": ["./src/layout"],
+      "@layout": ["./src/layout"],
       "@pages": ["./src/pages"],
       "@router": ["./src/router"],
       "@interface": ["./src/types/interface"],
+      "@ui": ["./src/components/ui"],
+      "@modals": ["./src/components/modals"],
 
-      "@coocse": ["./src/utils/cocies.ts"],
+      "@cookie": ["./src/utils/cookie.ts"],
       "@service-auth": ["./src/service/auth"],
+
+      "@company": ["./src/service/company"],
+
+      "@stor-company": ["./src/stor/stor-company"],
     },
 
     /* Bundler mode */

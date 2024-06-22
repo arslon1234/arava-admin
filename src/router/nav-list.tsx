@@ -1,10 +1,12 @@
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+
 import CategoryIcon from '@mui/icons-material/Category';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import SettingsIcon from '@mui/icons-material/Settings';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import LanguageIcon from '@mui/icons-material/Language';
+import ElectricMopedIcon from '@mui/icons-material/ElectricMoped';
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
 
 interface navListInterface {
     path: string,
@@ -16,38 +18,33 @@ interface navListInterface {
 const navList:navListInterface[] = [
     {
       path:"/home"  ,
-      title:"Category",
+      title:"Brand type",
       icon: <CategoryIcon />,
     },
     {
-        path:"/home/brands"  ,
-        title:"Brands",
+        path:"/home/brand"  ,
+        title:"Brand",
         icon: <MilitaryTechIcon />,
     },
     {
-        path:"/home/brand-catigory"  ,
-        title:"Brand-Catigory",
-        icon: <DynamicFeedIcon />,
+        path:"/home/company"  ,
+        title:"Company",
+        icon: <HomeWorkIcon />,
     },
     {
-        path:"/home/models"  ,
-        title:"Models",
-        icon: <ModelTrainingIcon />,
+        path:"/home/city"  ,
+        title:"City",
+        icon: <ApartmentIcon />,
     },
     {
-        path:"/home/products"  ,
-        title:"Products",
-        icon: <ProductionQuantityLimitsIcon />,
+        path:"/home/country"  ,
+        title:"Country",
+        icon: <LanguageIcon />,
     },
     {
-        path:"/home/stock"  ,
-        title:"Stock",
-        icon: <MonetizationOnIcon />,
-    },
-    {
-        path:"/home/settings"  ,
-        title:"Settings",
-        icon: <SettingsIcon />,
+        path:"/home/couriers"  ,
+        title:"Couriers",
+        icon: <ElectricMopedIcon />,
     },
 ]
 

@@ -1,7 +1,6 @@
 
 import CategoryIcon from '@mui/icons-material/Category';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import LanguageIcon from '@mui/icons-material/Language';

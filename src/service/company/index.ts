@@ -45,7 +45,7 @@ export interface StoreCompany {
 
 // ----------------> Instance Category <----------------------------
 export const company:Category = {
-    getCompany: ()=> request.get(`/api/company-pageList`),
+    getCompany: ()=> request.get(`/services/admin/api/company-pageList`),
 
     // ESLATMA swagger to'grilansa davom etiladi
     deleteCompany: (id)=> request.delete(`/api/test/${id}`),

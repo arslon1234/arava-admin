@@ -42,7 +42,7 @@ useEffect(()=>{
   {title: "S/N" , value:"t/r"},
   {title: "Company name" , value:"name"},
   {title: "Country Name" , value:"countryName"},
-  {title: "Action" , value:"action2"}
+  {title: "Action" , value:"action"}
 ]
 
 

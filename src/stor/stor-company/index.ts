@@ -14,7 +14,7 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
            const respons = await company.getCompany()
         //    console.log(respons)
            if(respons.status === 200){
-               set({dataCompany: respons?.data?.data});
+               set({dataCompany: respons?.data});
             //    set({totlCount: respons?.data?.data?.count})
            }
            set({isLoader: false})

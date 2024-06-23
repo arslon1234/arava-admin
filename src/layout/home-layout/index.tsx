@@ -9,9 +9,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { ListItemText } from "@mui/material";
 // import { useEffect  } from 'react';
@@ -19,7 +17,7 @@ import { ListItemText } from "@mui/material";
 
 // import {getCookies} from "@coocse"
 import navList from "../../router/nav-list";
-import { Account } from "@ui";
+import { Account, DropdownLanguage } from "@ui";
 // import Logo from "../../assets/texnoatk-logo-grup.svg"
 const drawerWidth = 240;
 
@@ -130,7 +128,7 @@ export default function ResponsiveDrawer(props: Props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar className="bg-[#FFF] ">
+        <Toolbar className="bg-[#FFF] h-[72px] flex items-center justify-between " >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -141,31 +139,19 @@ export default function ResponsiveDrawer(props: Props) {
               display: { sm: "none" },
               color: "#767676", // HEX formatida rang
             }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            noWrap
-            component="div"
-            className="bg-[#FFF] flex items-center justify-between w-full h-full"
-          >
+          ></IconButton>
+          
             <div>
               <h1 className="text-[20px] text-slate-600">
                 {getCategoryName(pathname)}
               </h1>
             </div>
             <div className="flex items-center">
-              <div className="flex items-center gap-5">
-                <button className="text-[17px]  bg-[#BDBDBD] px-2 py-[3px] flex items-center justify-center rounded-[50%]">
-                  uz
-                </button>
-                <button className="text-[17px]  bg-[#BDBDBD] px-2 py-[3px] flex items-center justify-center rounded-[50%]">
-                  ru
-                </button>
+              <div className="">
+                <DropdownLanguage />
               </div>
               <Account />
             </div>
-          </Typography>
         </Toolbar>
       </AppBar>
       <Box

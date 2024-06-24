@@ -18,8 +18,13 @@
       "@service-auth": ["./src/service/auth"],
 
       "@company": ["./src/service/company"],
+      "@country": ["./src/service/country"],
+
+
 
       "@stor-company": ["./src/stor/stor-company"],
+      "@stor-country": ["./src/stor/stor-country"],
+
     },
 
     /* Bundler mode */

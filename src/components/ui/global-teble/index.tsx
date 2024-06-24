@@ -18,7 +18,7 @@ import {
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
-import { ModalDelete , ModalTest } from "@modals"
+import { ModalDelete , ModalTest , ModalCountry } from "@modals"
 
 
 function Index({ heders, body, skelatonLoader }: Props) {
@@ -73,6 +73,10 @@ function Index({ heders, body, skelatonLoader }: Props) {
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
                                    <ModalTest title="put" id={body?.id} data={body}/>
                                    </div>
+                              :heder.value == "action2" ? <div className="flex items-center gap-2">
+                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
+                                  <ModalCountry title="put" id={body?.id} data={body}/>
+                              </div>
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
                               : heder.value == "product_id?.name" ? <>{body?.product_id?.name}</> 
                               : (body[heder.value])

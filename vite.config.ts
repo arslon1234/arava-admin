@@ -17,8 +17,12 @@ export default defineConfig({
       {find: "@service-auth" , replacement: "/src/service/auth"},
 
       { find: '@company', replacement: '/src/service/company' },
+      { find: '@country', replacement: '/src/service/country' },
+
 
       { find: '@stor-company', replacement: '/src/stor/stor-company'},
+      { find: '@stor-country', replacement: '/src/stor/stor-country'},
+
     ]
   }
 })

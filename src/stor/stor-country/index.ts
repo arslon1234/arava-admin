@@ -1,20 +1,20 @@
 
 import { create } from 'zustand' ;
 import { toast } from 'react-toastify'; 
-import { company ,StoreCompany } from '@company';
+import { country ,StoreCompany} from '@country';
 
 
-const useCategoryStore = create <StoreCompany> ((set)=>({
+const useCompanyStore = create <StoreCompany> ((set)=>({
     isLoader: false,
-    dataCompany: [],
+    dataCountry: [],
     totlCount: 0,
-    getDataCompany : async()=>{
+    getDataCountry : async()=>{
         try{
            set({isLoader: true})
-           const respons = await company.getCompany()
+           const respons = await country.getCompany()
         //    console.log(respons)
            if(respons.status === 200){
-               set({dataCompany: respons?.data});
+               set({dataCountry: respons?.data});
             //    set({totlCount: respons?.data?.data?.count})
            }
            set({isLoader: false})
@@ -25,13 +25,14 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
        
     },
 
-    postDataCompany: async(data)=>{
+    postDataCountry: async(data)=>{
         
             try{
-                const respons = await company.postCompany(data)
+                const respons = await country.postCompany(data)
              //    console.log(respons)
-                if(respons.status === 201){
-                    set((state)=>({dataCompany: state.dataCompany.length < 10 ? [...state.dataCompany, respons?.data?.data] : [...state.dataCompany]})) 
+                if(respons.status === 200){
+                    set((state)=>({dataCountry: [...state.dataCountry, data] }))
+                    // set((state)=>({dataCountry: state.dataCountry.length < 10 ? [...state.dataCountry, respons?.data?.data] : [...state.dataCountry]})) \
                     // set((state)=>({totlCount: state.totlCount += 1}))
                     return respons?.status
                 }
@@ -40,12 +41,12 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
              }
     },
 
-    deleteDataCompany: async(id)=>{
+    deleteDataCountry: async(id)=>{
         try{
-           const respons = await company.deleteCompany(id)
+           const respons = await country.deleteCompany(id)
         //    console.log(respons)
            if(respons.status === 200){
-               set((state)=>({dataCompany: state.dataCompany.filter((el:any)=>el.id !== id)})) 
+               set((state)=>({dataCountry: state.dataCountry.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
                toast.success("Deleted successfully")
            }
@@ -54,11 +55,11 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
         }
     },
 
-    updateDataCompany: async(data)=>{
+    updateDataCountry: async(data)=>{
             try{
-                const respons = await company.updateCompany(data)
+                const respons = await country.updateCompany(data)
                 if(respons?.status === 200){
-                    set((state)=>({dataCompany: state.dataCompany.map((el:any)=>el.id === data?.id ? {...data , id:data.id} : el)}))
+                    set((state)=>({dataCountry: state.dataCountry.map((el:any)=>el.id == data?.id ? data : el)}))
                     return respons?.status
                 }
                 
@@ -69,4 +70,4 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
 
 }))
 
-export default useCategoryStore
+export default useCompanyStore

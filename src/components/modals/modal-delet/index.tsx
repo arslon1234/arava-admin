@@ -28,7 +28,7 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
   const deleteData = async() => {
     if(title == "brand"){
 
-      alert("delete" + id);
+      alert("delete , id - " + id);
 
       // try{
       //     const staus = await deleteBrand(id)
@@ -72,8 +72,8 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
         <div className='px-4 py-2'>
             <h3 className=''>Are you sure you want to delete?</h3>
             <div className='flex items-center justify-end gap-3 mt-2'>
-                <button onClick={handleClose} className='py-1 px-2 rounded-md bg-[#D52200] text-white'>No</button>
-                <button onClick={deleteData} className='py-1 px-2 rounded-md bg-[#D52200] text-white'>Yes</button>
+                <button onClick={handleClose} className='py-1 px-2 rounded-md bg-[#2BC62B] hover:bg-[#349a34] active:bg-[#2BC62B] text-white'>No</button>
+                <button onClick={deleteData} className='py-1 px-2 rounded-md bg-[#2BC62B] hover:bg-[#349a34] active:bg-[#2BC62B] text-white'>Yes</button>
             </div>
         </div>
         

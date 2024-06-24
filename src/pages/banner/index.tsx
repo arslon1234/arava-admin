@@ -2,9 +2,9 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {ModalBanner} from "@modals"
 import {GlobalTeble , GlobalSearch} from "@ui";
-import {useCityStore} from "@store"
+import {useBannerStore} from "@store"
 
 
 
@@ -12,11 +12,11 @@ function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
 const [ , setParams] = useState({limit: 10, page:1 , search:change})
-const {getDataCity , dataCity , isLoader } =  useCityStore();
+const {getDataBanner , dataBanner , isLoader } =  useBannerStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCity();
+    getDataBanner();
 },[]);
 
 useEffect(()=>{
@@ -40,10 +40,11 @@ useEffect(()=>{
  // Props Global teble -------------->
  const theder = [
   {title: "S/N" , value:"t/r"},
-  {title: "City name" , value: true ? "nameUz" : "nameRu" },
-  {title: "Region" , value:"regionName"},
-  {title: "Region id" , value:"regionId"},
-  {title: "Action" , value:"action"}
+  {title: "Banner url" , value: "bannerUrl" },
+  {title: "Image url" , value: "imageUrl" },
+  {title: "Created by" , value: "createdBy" },
+  {title: "Created date" , value: "createdDate"},
+  {title: "Action" , value:"action3"}
 ]
 
 
@@ -72,10 +73,10 @@ const hendalChange = (e:any)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} hendelChange={hendalChange}/>
-    <ModalTest title="post" 
+    <ModalBanner title="post" 
     />
   </div>
-   <GlobalTeble heders={theder} body={dataCity} skelatonLoader={isLoader}/>
+   <GlobalTeble heders={theder} body={dataBanner} skelatonLoader={isLoader}/>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

@@ -11,11 +11,10 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
     getDataCompany : async()=>{
         try{
            set({isLoader: true})
-           const respons = await company.getCompany()
-        //    console.log(respons)
-           if(respons.status === 200){
-               set({dataCompany: respons?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+           const response = await company.getCompany()
+           if(response.status === 200){
+               set({dataCompany: response?.data});
+            //    set({totlCount: response?.data?.data?.count})
            }
            set({isLoader: false})
        }catch(error){
@@ -28,12 +27,11 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
     postDataCompany: async(data)=>{
         
             try{
-                const respons = await company.postCompany(data)
-             //    console.log(respons)
-                if(respons.status === 201){
-                    set((state)=>({dataCompany: state.dataCompany.length < 10 ? [...state.dataCompany, respons?.data?.data] : [...state.dataCompany]})) 
+                const response = await company.postCompany(data)
+                if(response.status === 201){
+                    set((state)=>({dataCompany: state.dataCompany.length < 10 ? [...state.dataCompany, response?.data?.data] : [...state.dataCompany]})) 
                     // set((state)=>({totlCount: state.totlCount += 1}))
-                    return respons?.status
+                    return response?.status
                 }
              }catch(error){
                  console.log(error)
@@ -42,9 +40,8 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
 
     deleteDataCompany: async(id)=>{
         try{
-           const respons = await company.deleteCompany(id)
-        //    console.log(respons)
-           if(respons.status === 200){
+           const response = await company.deleteCompany(id)
+           if(response.status === 200){
                set((state)=>({dataCompany: state.dataCompany.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
                toast.success("Deleted successfully")
@@ -56,10 +53,10 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
 
     updateDataCompany: async(data)=>{
             try{
-                const respons = await company.updateCompany(data)
-                if(respons?.status === 200){
+                const response = await company.updateCompany(data)
+                if(response?.status === 200){
                     set((state)=>({dataCompany: state.dataCompany.map((el:any)=>el.id === data?.id ? {...data , id:data.id} : el)}))
-                    return respons?.status
+                    return response?.status
                 }
                 
                 }catch(error:any){

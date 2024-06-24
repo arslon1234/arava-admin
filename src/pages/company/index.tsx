@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {ModalTest} from "@modals"
 import {GlobalTeble , GlobalSearch} from "@ui";
-import useCategoryStore from "@stor-company"
+import {useCategoryStore} from "@store"
 
 
 

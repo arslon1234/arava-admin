@@ -1,11 +1,12 @@
 import SignIn from "./signin";
-import Arror from "./error";
+import Error from "./error";
 import Brand from "./brand";
 import BrandType from "./brand-type";
 import Couriers from "./couriers";
 import Country from "./country";
 import City from "./city";
 import Company from "./company";
+import Banner from "./banner"
 import Test from "./test";
 
-export { SignIn, Arror, Brand, BrandType, Country, City, Company , Couriers , Test};
+export { SignIn, Error, Brand, BrandType, Country, City, Company , Couriers , Banner , Test};

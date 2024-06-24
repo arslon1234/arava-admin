@@ -4,10 +4,10 @@ import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import { Button, TextField } from "@mui/material";
+import { Button, FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 
-import {useCountryStore} from "@store";
+import {useBannerStore} from "@store";
 
 
 const style = {
@@ -29,7 +29,7 @@ interface propsData{
 }
 
 export default function BasicModal({title , id , data}:propsData) {
-  const { postDataCountry, updateDataCountry } = useCountryStore();
+  const { postDataBanner, updateDataBanner } = useBannerStore();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -39,23 +39,26 @@ export default function BasicModal({title , id , data}:propsData) {
  
 
   const validationSchema = Yup.object().shape({
-    nameUz: Yup.string().required("Name is required"),
-    nameRu: Yup.string().required("Name is required"),
-
-    // parent_category_id: Yup.number().min(0, "must be at least greater than 0"),
-    // position: Yup.number().min(0, "must be at least greater than 0"),
+    activated: Yup.string().required("Name is required"),
+    bannerUrl: Yup.string().required("Name is required"),
+    imageUrl: Yup.string().required("Name is required"),
   });
 
   const initialValues: any = {
-    nameUz: data?.nameUz || "", 
-    nameRu: data?.nameRu || "", 
+    activated: data?.activated == true ? "True" : "False" || "", 
+    bannerUrl: data?.bannerUrl || "", 
+    imageUrl: data?.imageUrl || "", 
+
   };
 
   const handelSubmit = async (value:any ) => {
+
+    const activated: boolean|any = value?.activated == "True" ? true : false;
+
     if(!id){
-      console.log(value);
+
       
-      const status = await postDataCountry(value);
+      const status = await postDataBanner({...value, activated:activated});
       if (status === 200) {
       toast.success("success full");
       handleClose();
@@ -66,8 +69,8 @@ export default function BasicModal({title , id , data}:propsData) {
     }else{
       console.log(value);
       
-      const updateData= {id:id, nameUz: value?.nameUz , nameRu: value?.nameRu}
-      const status = await updateDataCountry(updateData);
+      const updateData= {id:id, bannerUrl: value?.bannerUrl , imageUrl: value?.imageUrl , activated:activated}
+      const status = await updateDataBanner(updateData);
       if (status === 200) {
       toast.success("update success full"); 
       handleClose();
@@ -77,6 +80,7 @@ export default function BasicModal({title , id , data}:propsData) {
       }
     }
   };
+
 
   // my code end <--------------------------------
 
@@ -115,19 +119,19 @@ export default function BasicModal({title , id , data}:propsData) {
             <Form className=" max-w-[600px]  w-full flex flex-col gap-[12px]">
               <h1 className="text-center mb-2 text-[26px] font-bold">
                 {
-                  title == "post"? "Add a country" : "Edit a country"
+                  title == "post"? "Add a banner" : "Edit a banner"
                 }
               </h1>
               <Field
                 as={TextField}
-                label="Country name Uz"
+                label="Banner url"
                 sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
                 type="text"
-                name="nameUz"
+                name="bannerUrl"
                 className=" w-[100%]  mb-3 outline-none py-0"
                 helperText={
                   <ErrorMessage
-                     name="nameUz"
+                     name="bannerUrl"
                      component="div"
                      className="mb-3 text-red-500 text-center text-[18px] font-medium"
                   />
@@ -135,19 +139,32 @@ export default function BasicModal({title , id , data}:propsData) {
               />
               <Field
                 as={TextField}
-                label="Country name Ru"
+                label="Image url"
                 sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
                 type="text"
-                name="nameRu"
+                name="imageUrl"
                 className=" w-[100%]  mb-3 outline-none py-0"
                 helperText={
                   <ErrorMessage
-                     name="nameRu"
+                     name="imageUrl"
                      component="div"
                      className="mb-3 text-red-500 text-center text-[18px] font-medium"
                   />
                 }
               />
+               <Field
+                as={RadioGroup}
+                aria-label="activated"
+                name="activated"
+                className="flex items-center mb-3"
+              >
+                <div className=" text-[20px] w-full">Activated</div>
+                <div className="flex items-center justify-between">
+                <FormControlLabel value="False" control={<Radio />} label="False" />
+                <FormControlLabel value="True" control={<Radio />} label="True" />
+                </div>
+              </Field>
+              <ErrorMessage name="activated" component="div" className="mb-3 text-red-500 text-center" />
               
               <Button
                 sx={{ fontSize: "16px", fontWeight: "600" ,backgroundColor: "#2BC62B", "&:hover" :{background: "#349a34"} }}

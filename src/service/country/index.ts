@@ -31,7 +31,7 @@ interface Country{
 }
 
 // ---------> Interface Stor Country <--------------------
-export interface StoreCompany {
+export interface StoreCountry {
     isLoader:boolean;
     dataCountry:any[];
     totlCount:number;

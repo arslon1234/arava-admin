@@ -92,7 +92,7 @@ export default function ResponsiveDrawer(props: Props) {
             to={el.path}
             className={
               el.path === pathname
-                ? "block bg-[rgb(43,198,43)] text-white duration-200    "
+                ? "block bg-[#008524] text-white duration-200    "
                 : "  "
             }
           >

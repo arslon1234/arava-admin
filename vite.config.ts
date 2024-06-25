@@ -21,6 +21,8 @@ export default defineConfig({
       { find: '@brand', replacement: '/src/service/brand' },
       { find: '@brand-type', replacement: '/src/service/brand-type' },
       { find: '@city', replacement: '/src/service/city' },
+      { find: '@сouriers', replacement: '/src/service/сouriers' },
+
       
 
 

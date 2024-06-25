@@ -16,11 +16,13 @@ function Index() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // Custom styling for TextField when there's an error
-  const StyledTextField = styled(TextField)(({}) => ({
+  const StyledTextField = styled(TextField)(({ theme }) => ({
     "& .MuiInputBase-root": {
       color: "#008524", // Default text color
       fontSize: "20px",
+      [theme.breakpoints.down('sm')]: {
+        fontSize: "16px", // Smaller font size for small screens
+      },
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
@@ -38,6 +40,9 @@ function Index() {
       fontSize: "20px", // Default font size
       "&.Mui-focused": {
         color: "#008524", // Focused label color
+      },
+      [theme.breakpoints.down('sm')]: {
+        fontSize: "16px", // Smaller font size for small screens
       },
     },
   }));
@@ -83,14 +88,14 @@ function Index() {
             >
               {({ errors, touched }: FormikProps<any>) => (
                 <Form className=" min-w-[320px] sm:min-w-[400px] w-full flex flex-col gap-[15px]">
-                  <h2 className="text-[32px] text-center text-[#008524] font-medium">Sign In</h2>
+                  <h2 className=" text-[20px] sm:text-[32px] text-center text-[#008524] font-medium">Sign In</h2>
                   <Field
                     as={StyledTextField}
                     label="Username"
                     type="text"
                     name="username"
                     error={touched.username && !!errors.username}
-                    className="w-full mb-1 outline-none bg-transparent"
+                    className="w-full mb-1 outline-none bg-transparent "
                     helperText={
                       <ErrorMessage
                         name="username"
@@ -104,7 +109,7 @@ function Index() {
                     onClick={() => {
                       alert("therefore, it should not be forgotten : ) ");
                     }}
-                    className="text-[20px]  py-2 text-[#008524] forgot-password hover:text-[#2f633d] duration-200 cursor-pointer"
+                    className="text-[18px] sm:text-[20px]  py-2 text-[#008524] forgot-password hover:text-[#2f633d] duration-200 cursor-pointer"
                   >
                     Forgot password?
                   </p>

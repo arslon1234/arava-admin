@@ -4,6 +4,7 @@ import useBannerStore  from "./store-banner"
 import useBrandStore from "./store-brand"
 import useBrandTypeStore from "./store-brand-type"
 import useCityStore from "./store-city"
+import useCouriersStore from "./store-сouriers"
 
 
 export {
@@ -13,4 +14,5 @@ export {
     useBrandStore,
     useBrandTypeStore,
     useCityStore,
+    useCouriersStore,
 }

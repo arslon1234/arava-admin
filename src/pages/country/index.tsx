@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {ModalCountry} from "@modals"
 import {GlobalTeble , GlobalSearch} from "@ui";
-import useCountryStore from "@stor-country"
+import {useCountryStore} from "@store"
 
 
 

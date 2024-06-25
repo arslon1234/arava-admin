@@ -2,7 +2,6 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-// import Divider from '@mui/material/Divider';
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -15,10 +14,8 @@ import { ListItemText } from "@mui/material";
 // import { useEffect  } from 'react';
 // import { useNavigate } from 'react-router-dom';
 
-// import {getCookies} from "@coocse"
 import navList from "../../router/nav-list";
 import { Account, DropdownLanguage } from "@ui";
-// import Logo from "../../assets/texnoatk-logo-grup.svg"
 const drawerWidth = 240;
 
 interface Props {
@@ -62,13 +59,14 @@ export default function ResponsiveDrawer(props: Props) {
 
   const { pathname } = useLocation();
 
-  const getCategoryName = (pathname: any) => {
+  const getCategoryName = (pathname: string) => {
     if (pathname === "/home") return "Brand type";
     if (pathname === "/home/brand") return "Brand";
     if (pathname === "/home/company") return "Company";
     if (pathname === "/home/city") return "City";
     if (pathname === "/home/country") return "Country";
     if (pathname === "/home/couriers") return "Couriers";
+    if (pathname === "/home/banner") return "Banner";
     // if (/^\/home\/category\/\d+$/.test(pathname)) return "Subcategory";
     // if (/^\/home\/brands\/\d+$/.test(pathname)) return "Brand Catigory";
     // if (/^\/home\/products\/\d+$/.test(pathname)) return "Product"; // Regex for dynamic path

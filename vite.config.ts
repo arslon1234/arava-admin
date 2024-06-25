@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -18,10 +17,16 @@ export default defineConfig({
 
       { find: '@company', replacement: '/src/service/company' },
       { find: '@country', replacement: '/src/service/country' },
+      { find: '@banner', replacement: '/src/service/banner' },
+      { find: '@brand', replacement: '/src/service/brand' },
+      { find: '@brand-type', replacement: '/src/service/brand-type' },
+      { find: '@city', replacement: '/src/service/city' },
+      
 
 
-      { find: '@stor-company', replacement: '/src/stor/stor-company'},
-      { find: '@stor-country', replacement: '/src/stor/stor-country'},
+
+
+      { find: '@store', replacement: '/src/store'},
 
     ]
   }

@@ -19,11 +19,18 @@
 
       "@company": ["./src/service/company"],
       "@country": ["./src/service/country"],
+      "@banner": ["./src/service/banner"],
+      "@brand": ["./src/service/brand"],
+      "@brand-type": ["./src/service/brand-type"],
+      "@city": ["./src/service/city"],
 
 
 
-      "@stor-company": ["./src/stor/stor-company"],
-      "@stor-country": ["./src/stor/stor-country"],
+
+
+
+
+      "@store": ["./src/store"],
 
     },
 

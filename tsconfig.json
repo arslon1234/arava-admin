@@ -23,6 +23,8 @@
       "@brand": ["./src/service/brand"],
       "@brand-type": ["./src/service/brand-type"],
       "@city": ["./src/service/city"],
+      "@сouriers": ["./src/service/сouriers"],
+
 
 
 

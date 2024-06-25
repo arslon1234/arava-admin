@@ -86,7 +86,7 @@ export default function BasicModal({title , id , data}:propsData) {
         title == "post" ? 
         <button
         onClick={handleOpen}
-        className="py-2 px-6 text-white font-semibold bg-[#2BC62B] hover:bg-[#349a34] active:bg-[#2BC62B] duration-200 rounded-lg"
+        className="py-2 px-6 text-white font-semibold bg-[#008524] hover:bg-[#008124] active:bg-[#008524] duration-200 rounded-lg"
       >
         To add
       </button> : 
@@ -150,7 +150,7 @@ export default function BasicModal({title , id , data}:propsData) {
               />
               
               <Button
-                sx={{ fontSize: "16px", fontWeight: "600" ,backgroundColor: "#2BC62B", "&:hover" :{background: "#349a34"} }}
+                sx={{ fontSize: "16px", fontWeight: "600" ,backgroundColor: "#008524", "&:hover" :{background: "#008124"} }}
                 variant="contained"
                 type="submit"
                 className="w-[100%] py-3"

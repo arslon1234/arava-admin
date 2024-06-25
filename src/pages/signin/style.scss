@@ -1,110 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-*
-{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Quicksand', sans-serif;
-}
-.wrapper-signin
-{
+%flex_center {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: #000;
-}
-.parent-signin 
-{
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 2px;
-  flex-wrap: wrap;
-  overflow: hidden;
-}
-.parent-signin::before 
-{
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(#000,#0f0,#000);
-  animation: animate 5s linear infinite;
-}
-@keyframes animate 
-{
-  0%
-  {
-    transform: translateY(-100%);
-  }
-  100%
-  {
-    transform: translateY(100%);
-  }
-}
-.parent-signin span 
-{
-  position: relative;
-  display: block;
-  width: calc(6.25vw - 2px);
-  height: calc(6.25vw - 2px);
-  background: #cecece;
-  z-index: 2;
-  transition: 1.5s;
-}
-.parent-signin span:hover 
-{
-  background: #0f0;
-  // color: rgb(43, 198, 43);
-  transition: 0s;
 }
 
-.parent-signin .signin
-{
-  position: absolute;
-  width: 500px;
-  background: rgba(242, 255, 242, 0.995);  
-  z-index: 1000;
+%flex_col {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  border-radius: 4px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-}
-.parent-signin .signin .content 
-{
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  gap: 40px;
+  justify-content: center;
+  align-items: center;
 }
-.parent-signin .signin .content h2 
-{
-  font-size: 2em;
-  color: #0f0;
-  text-transform: uppercase;
+
+.auth {
+  width: 100%;
+  min-height: 100vh;
+  @extend %flex_center;
+  justify-content: space-between;
+  align-items: flex-start;
+  // padding: 50px;
+  background: var(--blueGray);
+  // gap: 10px;
 }
-@media (max-width: 900px)
-{
-  .parent-signin span 
-  {
-    width: calc(10vw - 2px);
-    height: calc(10vw - 2px);
+
+.auth__image {
+  min-height: 100vh;
+  width: 60%;
+
+  img {
+      width: 100%;
+      min-height: 100vh;
   }
 }
-@media (max-width: 600px)
-{
-  .parent-signin span 
-  {
-    width: calc(20vw - 2px);
-    height: calc(20vw - 2px);
+
+.auth__right {
+  width: 50%;
+  height: 622px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+
+@media (max-width: 1100px) {
+  .auth__image {
+      padding: 0;
+
+      img {
+          object-fit: fill;
+      }
+  }
+}
+
+@media (max-width: 990px) {
+
+
+  .auth__image {
+      display: none;
+  }
+
+  .auth {
+      justify-content: center;
   }
 }

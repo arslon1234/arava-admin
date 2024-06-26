@@ -45,7 +45,7 @@ useEffect(()=>{
   {title: "Region" , value:"regionName" },
   {title: "Brand type" , value:"brandTypeName" },
 
-  {title: "Action" , value:"action"}
+  {title: "Action" , value:"brand"}
 ]
 
 

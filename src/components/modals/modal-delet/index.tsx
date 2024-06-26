@@ -5,7 +5,7 @@ import Fade from '@mui/material/Fade';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast  } from 'react-toastify';
 
-import {useBannerStore} from '@store';
+import {useBannerStore , useBrandStore , useBrandTypeStore} from '@store';
 
 
 
@@ -22,6 +22,8 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
 
   // my function start ----------------------
  const {deleteDataBanner} = useBannerStore();
+ const {deleteDataBrand} = useBrandStore();
+ const {deleteDataBrandType} = useBrandTypeStore();
 
 
   
@@ -32,6 +34,28 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
         if(staus === 200){
           handleClose()
           toast.success("Banner deleted successfully")
+        } 
+      }catch(err:any){
+          toast.error("Error " + err?.message)
+          console.log(err);
+      }
+    }else if(title == "brand"){
+      try{
+          const staus = await deleteDataBrand(id)
+        if(staus === 200){
+          handleClose()
+          toast.success("Brand deleted successfully")
+        } 
+      }catch(err:any){
+          toast.error("Error " + err?.message)
+          console.log(err);
+      }
+    }else if(title == "brandType"){
+      try{
+          const staus = await deleteDataBrandType(id)
+        if(staus === 200){
+          handleClose()
+          toast.success("Brand Type deleted successfully")
         } 
       }catch(err:any){
           toast.error("Error " + err?.message)

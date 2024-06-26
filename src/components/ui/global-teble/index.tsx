@@ -71,17 +71,33 @@ function Index({ heders, body, skelatonLoader }: Props) {
                           heders?.map((heder, index2)=>{
                             return <TableCell key={index2}>{
                               heder.value == "action" ? <div className="flex items-center gap-2">
-                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
+                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="test"/></div>
                                    <ModalTest title="put" id={body?.id} data={body}/>
                                    </div>
                               :heder.value == "action2" ? <div className="flex items-center gap-2">
-                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
+                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
                                   <ModalCountry title="put" id={body?.id} data={body}/>
                               </div>
                               :heder.value == "action3" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="banner"/></div>
                               <ModalBanner title="put" id={body?.id} data={body}/>
                               </div>
+                              :heder.value == "brand" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
+                               <ModalTest title="put" id={body?.id} data={body}/>
+                               </div>
+                              :heder.value == "brandType" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="brandType"/></div>
+                               <ModalTest title="put" id={body?.id} data={body}/>
+                               </div> 
+                              :heder.value == "city" ? <div className="flex items-center gap-2">
+                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="city"/></div>
+                                <ModalTest title="put" id={body?.id} data={body}/>
+                              </div> 
+                              :heder.value == "country" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
+                               <ModalTest title="put" id={body?.id} data={body}/>
+                             </div> 
                               : heder.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
                               : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }

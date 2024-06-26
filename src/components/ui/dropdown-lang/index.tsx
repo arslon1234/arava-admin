@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import LanguageIcon from "@mui/icons-material/Language";
 
+import { useTranslation } from 'react-i18next';
+
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -19,7 +21,12 @@ export default function AccountMenu() {
   };
 
   // my code --------------------------------------------------------------------------------
+  const { i18n } = useTranslation();
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    
+  };
   //========================================================================
 
   return (
@@ -75,7 +82,10 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose} className="flex items-center gap-2">
+        <MenuItem onClick={()=>{
+          changeLanguage('uz')
+          handleClose()
+          }} className="flex items-center gap-2">
           <ListItemIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +134,10 @@ export default function AccountMenu() {
           </ListItemIcon>
           Uz
         </MenuItem>
-        <MenuItem onClick={handleClose} className="flex items-center gap-2">
+        <MenuItem onClick={()=>{
+          changeLanguage('ru')
+          handleClose()
+          }} className="flex items-center gap-2">
           <ListItemIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"

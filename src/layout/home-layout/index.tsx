@@ -11,10 +11,18 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Toolbar from "@mui/material/Toolbar";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { ListItemText } from "@mui/material";
-// import { useEffect  } from 'react';
-// import { useNavigate } from 'react-router-dom';
 
-import navList from "../../router/nav-list";
+import CategoryIcon from '@mui/icons-material/Category';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import ElectricMopedIcon from '@mui/icons-material/ElectricMoped';
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import PublicIcon from '@mui/icons-material/Public';
+import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+
+import { useTranslation } from 'react-i18next';
+
+// import navList from "../../router/nav-list";
 import { Account, DropdownLanguage } from "@ui";
 const drawerWidth = 240;
 
@@ -46,16 +54,57 @@ export default function ResponsiveDrawer(props: Props) {
     }
   };
 
-  // my code ....------------------------------------------------
-  //  const navigate = useNavigate()
 
-  //-> useEfect <------
-  // useEffect(() => {
-  //   if(!getCookies("access_token")){
-  //       navigate("/");
-  //   }
-  // })
-  //=-=--=-===-=-===-=-=-=
+
+  //test language ----------------------------------------------------------------
+
+  const { t } = useTranslation();
+interface navListInterface {
+    path: string,
+    title :string,
+    icon: JSX.Element,
+}
+
+
+const navList:navListInterface[] = [
+    
+    {
+      path:"/home"  ,
+      title:t('brandType'),
+      icon: <CategoryIcon />,
+    },
+    {
+        path:"/home/brand"  ,
+        title:t('brand'),
+        icon: <MilitaryTechIcon />,
+    },
+    {
+        path:"/home/company"  ,
+        title:t('company'),
+        icon: <HomeWorkIcon />,
+    },
+    {
+        path:"/home/city"  ,
+        title:t('city'),
+        icon: <ApartmentIcon />,
+    },
+    {
+        path:"/home/country"  ,
+        title:t('country'),
+        icon: <PublicIcon />,
+    },
+    {
+        path:"/home/couriers"  ,
+        title:t('couriers'),
+        icon: <ElectricMopedIcon />,
+    },
+    {
+        path:"/home/banner"  ,
+        title:t('banner'),
+        icon: <ViewCarouselIcon />,
+    },
+]
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   const { pathname } = useLocation();
 

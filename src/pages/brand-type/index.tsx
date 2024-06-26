@@ -43,7 +43,7 @@ useEffect(()=>{
   {title: "Brand type name" , value: true ? "nameUz" : "nameRu" },
   {title: "Description" , value: true ? "descriptionUz" : "descriptionUz" },
   {title: "Sorting" , value: "sorting" },
-  {title: "Action" , value:"action"}
+  {title: "Action" , value:"brandType"}
 ]
 
 

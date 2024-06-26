@@ -43,7 +43,7 @@ useEffect(()=>{
   {title: "City name" , value: true ? "nameUz" : "nameRu" },
   {title: "Region" , value:"regionName"},
   {title: "Region id" , value:"regionId"},
-  {title: "Action" , value:"action"}
+  {title: "Action" , value:"city"}
 ]
 
 

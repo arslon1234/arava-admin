@@ -25,8 +25,6 @@ interface Country{
     getCompany : ()=> any,
     postCompany : (data:postCountry)=> any,
     updateCompany: (data:UpdateCountry)=> any,
-
-    //API da hali qo'shilmadi
     deleteCompany : (id:number)=> any,
 }
 
@@ -38,8 +36,6 @@ export interface StoreCountry {
     getDataCountry: ()=> Promise <any>;
     postDataCountry: (data:postCountry)=> Promise <any>;
     updateDataCountry: (data:UpdateCountry)=> Promise <any>;
-
-    //API da hali qo'shilmadi
     deleteDataCountry: (id:number)=> Promise <any>;
 }
 
@@ -51,7 +47,5 @@ export const country:Country = {
     getCompany: ()=> request.get(`/services/admin/api/country-pageList`),
     postCompany: (data)=> request.post("/services/admin/api/country" , data),
     updateCompany: (data)=> request.put(`/services/admin/api/country`, data),
-
-    //API da hali qo'shilmadi
-    deleteCompany: (id)=> request.delete(`/test/${id}`),
+    deleteCompany: (id)=> request.delete(`/services/admin/api/country/${id}`),
 }

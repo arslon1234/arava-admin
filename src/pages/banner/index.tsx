@@ -42,8 +42,8 @@ useEffect(()=>{
   {title: "S/N" , value:"t/r"},
   {title: "Banner url" , value: "bannerUrl" },
   {title: "Image url" , value: "imageUrl" },
-  {title: "Created by" , value: "createdBy" },
-  {title: "Created date" , value: "createdDate"},
+  {title: "Activated" , value: "activated" },
+  // {title: "Created date" , value: "createdDate"},
   {title: "Action" , value:"action3"}
 ]
 

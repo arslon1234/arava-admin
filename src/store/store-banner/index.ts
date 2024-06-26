@@ -65,6 +65,17 @@ const useBannerStore = create <StoreBanner> ((set)=>({
                     console.log(error)
                 }
     },
+    bannerActivate: async(data)=>{
+        try{
+            const response = await banner.bannerActivate(data)
+            if(response?.status === 200){
+                set((state)=>({dataBanner: state.dataBanner.map((el:any)=>el.id == data?.id? {...el , activated:data?.activated } : el)}))
+                return response?.status
+            }
+        }catch(error:any){
+            console.log(error)
+        }
+    }
 
 }))
 

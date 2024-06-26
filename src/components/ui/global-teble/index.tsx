@@ -18,7 +18,7 @@ import {
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
-import { ModalDelete , ModalTest , ModalCountry , ModalBanner} from "@modals"
+import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBannerStatus} from "@modals"
 import { Link } from "react-router-dom";
 
 
@@ -101,7 +101,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               : heder.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
                               : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
-                              : heder.value == "product_id?.name" ? <>{body?.product_id?.name}</> 
+                              : heder.value == "activated" ? <div className={body?.activated ? "text-[#008512] flex items-center gap-1" : "text-red-500 flex items-center gap-1"}>{body?.activated ? "Activ" : "Activ emas"}<ModalBannerStatus bannerId={body?.id}/></div> 
                               : (body[heder.value])
                             }</TableCell>
                           })

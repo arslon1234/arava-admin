@@ -66,6 +66,7 @@ export default function BasicModal({ title, id, data }: propsData) {
         toast.success("success full");
         handleClose();
         setImage("")
+        window.location.reload();
       } else {
         toast.error("Error :" + status);
         handleClose();
@@ -164,7 +165,7 @@ export default function BasicModal({ title, id, data }: propsData) {
               <Field
                 as={TextField}
                 label="Banner url"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
+                sx={{ "& input": { color: "#00000", fontSize: "20px" ,height:18} }}
                 type="text"
                 name="bannerUrl"
                 className=" w-[100%]  mb-3 outline-none py-0"
@@ -178,7 +179,7 @@ export default function BasicModal({ title, id, data }: propsData) {
               />
               <div className=" flex flex-col gap-3 items-center">
                 <input
-                  className="border py-[14px] w-full px-2 rounded-[4px]"
+                  className="border border-[#C4C4C4] py-[10px] w-full px-2 rounded-[4px] "
                   type="file"
                   accept="image/*"
                   onChange={bannerUpload}

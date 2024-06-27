@@ -20,6 +20,11 @@ export interface GetBanner{
 }
 
 
+export interface BannerActivate{
+    id:number | any;
+    activated:boolean;
+}
+
 
 
 interface Banner{
@@ -29,6 +34,7 @@ interface Banner{
     //API da hali qo'shilmadi
     updateBanner: (data:UpdateBanner)=> any,
     deleteBanner : (id:number)=> any,
+    bannerActivate:(data:BannerActivate)=>any,
 }
 
 // ---------> Interface Stor Banner <--------------------
@@ -42,6 +48,7 @@ export interface StoreBanner {
     //API da hali qo'shilmadi
     updateDataBanner: (data:UpdateBanner)=> Promise <any>;
     deleteDataBanner: (id:number)=> Promise <any>;
+    bannerActivate:(data:BannerActivate)=>Promise<any>,
 }
 
 
@@ -53,5 +60,5 @@ export const banner:Banner = {
     deleteBanner: (id)=> request.delete(`/services/admin/api/banner/${id}`),
     postBanner: (data)=> request.post("/services/admin/api/banner" , data),
     updateBanner: (data)=> request.put(`/services/admin/api/banner`, data),
-
+    bannerActivate:(data)=>request.post(`/services/admin/api/banner/activate?id=${data?.id}&activate=${data?.activated}`),
 }

@@ -4,11 +4,18 @@ import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import { Button, FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
+import {
+  Button,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import axios from "axios";
 
-import {useBannerStore} from "@store";
-
+import { getCookies } from "@cookie";
+import { useBannerStore } from "@store";
 
 const style = {
   position: "absolute" as "absolute",
@@ -17,93 +24,127 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #2BC62B", 
+  border: "2px solid #2BC62B",
   boxShadow: 24,
   p: 4,
 };
 
-interface propsData{
+interface propsData {
   title: string;
   id?: number;
   data?: any;
 }
 
-export default function BasicModal({title , id , data}:propsData) {
+export default function BasicModal({ title, id, data }: propsData) {
   const { postDataBanner, updateDataBanner } = useBannerStore();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [image, setImage] = React.useState("");
 
   /// my code start <-----------------------------
- 
 
   const validationSchema = Yup.object().shape({
-    activated: Yup.string().required("Name is required"),
-    bannerUrl: Yup.string().required("Name is required"),
-    imageUrl: Yup.string().required("Name is required"),
+    activated: Yup.string().required("Activeted is required"),
+    bannerUrl: Yup.string().required("Banner URL is required"),
+    // imageUrl: Yup.string().required("Name is required"),
   });
 
   const initialValues: any = {
-    activated: data?.activated == true ? "True" : "False" || "", 
-    bannerUrl: data?.bannerUrl || "", 
-    imageUrl: data?.imageUrl || "", 
-
+    activated: data?.activated == true ? "True" : "False" || "",
+    bannerUrl: data?.bannerUrl || "",
+    // imageUrl: data?.imageUrl || image ,
   };
 
-  const handelSubmit = async (value:any ) => {
+  const handelSubmit = async (value: any) => {
+    const activated: boolean | any = value?.activated == "True" ? true : false;
 
-    const activated: boolean|any = value?.activated == "True" ? true : false;
-
-    if(!id){
-
-      
-      const status = await postDataBanner({...value, activated:activated});
+    if (!id) {
+      const status = await postDataBanner({ ...value, activated: activated , imageUrl:image });
       if (status === 200) {
-      toast.success("success full");
-      handleClose();
+        toast.success("success full");
+        handleClose();
+        setImage("")
       } else {
-       toast.error("Error :" + status);
-       handleClose();
+        toast.error("Error :" + status);
+        handleClose();
+        setImage("")
       }
-    }else{
+    } else {
       console.log(value);
-      
-      const updateData= {id:id, bannerUrl: value?.bannerUrl , imageUrl: value?.imageUrl , activated:activated}
+
+      const updateData = {
+        id: id,
+        bannerUrl: value?.bannerUrl,
+        imageUrl: data?.imageUrl,
+        activated: activated,
+      };
       const status = await updateDataBanner(updateData);
       if (status === 200) {
-      toast.success("update success full"); 
-      handleClose();
+        toast.success("update success full");
+        handleClose();
       } else {
-       toast.error("Error :" + status);
-       handleClose();
+        toast.error("Error :" + status);
+        handleClose();
       }
     }
   };
 
 
+
+  //  Image Upload Functions --------------------------------
+
+  const baseUrl = import.meta.env.VITE_BASE_URL
+
+  const bannerUpload = async (event: any) => {
+    const file = event.target.files[0];
+    try {
+      const token = getCookies("access_token");
+      const url = baseUrl+"/services/admin/api/banner-image-upload";
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        // toast.success("Media uploaded successfully");
+        setImage(response?.data?.url);
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Error : " + error?.message);
+    }
+  };
+  ////=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
   // my code end <--------------------------------
 
   return (
     <div>
-      {
-        title == "post" ? 
+      {title == "post" ? (
         <button
-        onClick={handleOpen}
-        className="py-2 px-6 text-white font-semibold bg-[#008524] hover:bg-[#349a34] active:bg-[#008524] duration-200 rounded-lg"
-      >
-        To add
-      </button> : 
-      <Button
-        color="inherit"
-        onClick={handleOpen}
-        sx={{ 
-          color: '#767676' // HEX formatida rang
-        }}
-      >
-        <EditIcon  />
-      </Button>
-      }
+          onClick={handleOpen}
+          className="py-2 px-6 text-white font-semibold bg-[#008524] hover:bg-[#349a34] active:bg-[#008524] duration-200 rounded-lg"
+        >
+          To add
+        </button>
+      ) : (
+        <Button
+          color="inherit"
+          onClick={handleOpen}
+          sx={{
+            color: "#767676", // HEX formatida rang
+          }}
+        >
+          <EditIcon />
+        </Button>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
@@ -118,9 +159,7 @@ export default function BasicModal({title , id , data}:propsData) {
           >
             <Form className=" max-w-[600px]  w-full flex flex-col gap-[12px]">
               <h1 className="text-center mb-2 text-[26px] font-bold">
-                {
-                  title == "post"? "Add a banner" : "Edit a banner"
-                }
+                {title == "post" ? "Add a banner" : "Edit a banner"}
               </h1>
               <Field
                 as={TextField}
@@ -131,28 +170,39 @@ export default function BasicModal({title , id , data}:propsData) {
                 className=" w-[100%]  mb-3 outline-none py-0"
                 helperText={
                   <ErrorMessage
-                     name="bannerUrl"
-                     component="div"
-                     className="mb-3 text-red-500 text-center text-[18px] font-medium"
+                    name="bannerUrl"
+                    component="div"
+                    className="mb-3 text-red-500 text-center text-[18px] font-medium"
                   />
                 }
               />
+              <div className=" flex flex-col gap-3 items-center">
+                <input
+                  className="border py-[14px] w-full px-2 rounded-[4px]"
+                  type="file"
+                  accept="image/*"
+                  onChange={bannerUpload}
+                />
+              </div>
+              {
+                data?.imageUrl && <div>
+                <img
+                  src={baseUrl+data?.imageUrl}
+                  alt="banner"
+                  className="w-[100%] h-[150px] object-fill"
+                />
+            </div>
+              }
+              {
+                image && <div>
+                <img
+                  src={baseUrl+image}
+                  alt="banner"
+                  className="w-[100%] h-[150px] object-fill"
+                />
+            </div>
+              }
               <Field
-                as={TextField}
-                label="Image url"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
-                type="text"
-                name="imageUrl"
-                className=" w-[100%]  mb-3 outline-none py-0"
-                helperText={
-                  <ErrorMessage
-                     name="imageUrl"
-                     component="div"
-                     className="mb-3 text-red-500 text-center text-[18px] font-medium"
-                  />
-                }
-              />
-               <Field
                 as={RadioGroup}
                 aria-label="activated"
                 name="activated"
@@ -160,21 +210,36 @@ export default function BasicModal({title , id , data}:propsData) {
               >
                 <div className=" text-[20px] w-full">Activated</div>
                 <div className="flex items-center justify-between">
-                <FormControlLabel value="False" control={<Radio />} label="False" />
-                <FormControlLabel value="True" control={<Radio />} label="True" />
+                  <FormControlLabel
+                    value="False"
+                    control={<Radio />}
+                    label="False"
+                  />
+                  <FormControlLabel
+                    value="True"
+                    control={<Radio />}
+                    label="True"
+                  />
                 </div>
               </Field>
-              <ErrorMessage name="activated" component="div" className="mb-3 text-red-500 text-center" />
-              
+              <ErrorMessage
+                name="activated"
+                component="div"
+                className="mb-3 text-red-500 text-center"
+              />
+
               <Button
-                sx={{ fontSize: "16px", fontWeight: "600" ,backgroundColor: "#008524", "&:hover" :{background: "#008124"} }}
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  backgroundColor: "#008524",
+                  "&:hover": { background: "#008124" },
+                }}
                 variant="contained"
                 type="submit"
                 className="w-[100%] py-3"
               >
-                {
-                  title == "post"? "to add" : "to edit"
-                }
+                {title == "post" ? "to add" : "to edit"}
               </Button>
             </Form>
           </Formik>

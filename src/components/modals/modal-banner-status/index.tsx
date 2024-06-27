@@ -40,6 +40,7 @@ export default function LongMenu({bannerId}:PropsId) {
     const status = await bannerActivate(data)
     if(status === 200){
         handleClose()
+        toast.success("update success full")
     }else {
         toast.error("An error occurred during activation")
         handleClose()

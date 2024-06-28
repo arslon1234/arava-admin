@@ -66,7 +66,7 @@ export default function BasicModal({ title, id, data }: propsData) {
         toast.success("success full");
         handleClose();
         imageUrlUpdated("")
-        // window.location.reload();
+        window.location.reload();
       } else {
         toast.error("Error :" + status);
         handleClose();

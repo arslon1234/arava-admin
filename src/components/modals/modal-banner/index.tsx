@@ -12,10 +12,8 @@ import {
   TextField,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import axios from "axios";
-
-import { getCookies } from "@cookie";
 import { useBannerStore } from "@store";
+import UplodAntd from "../../modals/test-antd-uploding"
 
 const style = {
   position: "absolute" as "absolute",
@@ -36,12 +34,12 @@ interface propsData {
 }
 
 export default function BasicModal({ title, id, data }: propsData) {
-  const { postDataBanner, updateDataBanner } = useBannerStore();
 
+  const baseUrl = import.meta.env.VITE_BASE_URL
+  const { postDataBanner, updateDataBanner , imageUrl , imageUrlUpdated } = useBannerStore();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [image, setImage] = React.useState("");
 
   /// my code start <-----------------------------
 
@@ -61,16 +59,16 @@ export default function BasicModal({ title, id, data }: propsData) {
     const activated: boolean | any = value?.activated == "True" ? true : false;
 
     if (!id) {
-      const status = await postDataBanner({ ...value, activated: activated , imageUrl:image });
+      const status = await postDataBanner({ ...value, activated: activated , imageUrl: imageUrl && imageUrl });
       if (status === 200) {
         toast.success("success full");
         handleClose();
-        setImage("")
+        imageUrlUpdated("")
         window.location.reload();
       } else {
         toast.error("Error :" + status);
         handleClose();
-        setImage("")
+        imageUrlUpdated("")
       }
     } else {
       console.log(value);
@@ -91,40 +89,6 @@ export default function BasicModal({ title, id, data }: propsData) {
       }
     }
   };
-
-
-
-  //  Image Upload Functions --------------------------------
-
-  const baseUrl = import.meta.env.VITE_BASE_URL
-
-  const bannerUpload = async (event: any) => {
-    const file = event.target.files[0];
-    try {
-      const token = getCookies("access_token");
-      const url = baseUrl+"/services/admin/api/banner-image-upload";
-
-      const formData = new FormData();
-      formData.append("image", file);
-
-      const response = await axios.post(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 200) {
-        // toast.success("Media uploaded successfully");
-        setImage(response?.data?.url);
-      }
-    } catch (error: any) {
-      console.log(error);
-      toast.error("Error : " + error?.message);
-    }
-  };
-  ////=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  
-  // my code end <--------------------------------
 
   return (
     <div>
@@ -177,27 +141,21 @@ export default function BasicModal({ title, id, data }: propsData) {
                   />
                 }
               />
-              <div className=" flex flex-col gap-3 items-center">
+              {/* <div className=" flex flex-col gap-3 items-center">
                 <input
                   className="border border-[#C4C4C4] py-[10px] w-full px-2 rounded-[4px] "
                   type="file"
                   accept="image/*"
                   onChange={bannerUpload}
                 />
+              </div> */}
+              <div className="">
+              <UplodAntd/>
               </div>
               {
                 data?.imageUrl && <div>
                 <img
                   src={baseUrl+data?.imageUrl}
-                  alt="banner"
-                  className="w-[100%] h-[150px] object-fill"
-                />
-            </div>
-              }
-              {
-                image && <div>
-                <img
-                  src={baseUrl+image}
                   alt="banner"
                   className="w-[100%] h-[150px] object-fill"
                 />

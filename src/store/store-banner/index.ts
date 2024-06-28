@@ -8,6 +8,7 @@ const useBannerStore = create <StoreBanner> ((set)=>({
     isLoader: false,
     dataBanner: [],
     totlCount: 0,
+    imageUrl: "",
     getDataBanner : async()=>{
         try{
            set({isLoader: true})
@@ -75,6 +76,10 @@ const useBannerStore = create <StoreBanner> ((set)=>({
         }catch(error:any){
             console.log(error)
         }
+    },
+
+    imageUrlUpdated: (Url:string)=>{
+        set({imageUrl: Url})
     }
 
 }))

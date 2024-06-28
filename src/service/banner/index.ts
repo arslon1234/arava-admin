@@ -42,8 +42,11 @@ export interface StoreBanner {
     isLoader:boolean;
     dataBanner:any[];
     totlCount:number;
+    imageUrl:string;
     getDataBanner: ()=> Promise <any>;
     postDataBanner: (data:postBanner)=> Promise <any>;
+
+    imageUrlUpdated:(Url:string)=> void;
     
     //API da hali qo'shilmadi
     updateDataBanner: (data:UpdateBanner)=> Promise <any>;

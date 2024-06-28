@@ -121,7 +121,7 @@ export default function BasicModal({title , id , data}:propsData) {
               <Field
                 as={TextField}
                 label="Country name Uz"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
+                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:18 } ,  }}
                 type="text"
                 name="nameUz"
                 className=" w-[100%]  mb-3 outline-none py-0"
@@ -129,17 +129,17 @@ export default function BasicModal({title , id , data}:propsData) {
                   <ErrorMessage
                      name="nameUz"
                      component="div"
-                     className="mb-3 text-red-500 text-center text-[18px] font-medium"
+                     className="mb-3 text-red-500 text-center text-[18px] font-medium "
                   />
                 }
               />
               <Field
                 as={TextField}
                 label="Country name Ru"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
+                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:18 } }}
                 type="text"
                 name="nameRu"
-                className=" w-[100%]  mb-3 outline-none py-0"
+                className=" w-[100%]  mb-3 outline-none py-0 "
                 helperText={
                   <ErrorMessage
                      name="nameRu"

@@ -24,11 +24,11 @@ export interface GetCouriers{
 
 interface Couriers{
     getCouriers : ()=> any,
+    deleteCouriers: (id:number)=> any,
     
     //API da hali qo'shilmadi
     postCouriers : (data:postCouriers)=> any,
     updateCouriers: (data:UpdateCouriers)=> any,
-    deleteCouriers: (id:number)=> any,
 }
 
 // ---------> Interface Stor Couriers <--------------------
@@ -37,11 +37,11 @@ export interface StoreCouriers {
     dataCouriers:any[];
     totlCount:number;
     getDataCouriers: ()=> Promise <any>;
+    deleteDataCouriers: (id:number)=> Promise <any>;
     
     //API da hali qo'shilmadi
     postDataCouriers: (data:postCouriers)=> Promise <any>;
     updateDataCouriers: (data:UpdateCouriers)=> Promise <any>;
-    deleteDataCouriers: (id:number)=> Promise <any>;
 }
 
 
@@ -50,9 +50,9 @@ export interface StoreCouriers {
 // ----------------> Instance Couriers <----------------------------
 export const сouriers:Couriers = {
     getCouriers: ()=> request.get(`/services/admin/api/couriers-pageList`),
+    deleteCouriers: (id)=> request.delete(`/services/admin/api/delete/${id}`),  //test
 
     //API da hali qo'shilmadi
-    deleteCouriers: (id)=> request.delete(`/services/admin/api/couriers/${id}`),
     postCouriers: (data)=> request.post("/services/admin/api/couriers" , data),
     updateCouriers: (data)=> request.put(`/services/admin/api/couriers`, data),
 

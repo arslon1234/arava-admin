@@ -97,7 +97,11 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               :heder.value == "country" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
                                <ModalTest title="put" id={body?.id} data={body}/>
-                             </div> 
+                             </div>
+                             :heder.value == "couriers" ? <div className="flex items-center gap-2">
+                             <div className=' text-gray-500'><ModalDelete id={body?.id} title="couriers"/></div>
+                              <ModalTest title="put" id={body?.id} data={body}/>
+                              </div> 
                               : heder.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
                               : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }

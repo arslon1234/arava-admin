@@ -5,7 +5,7 @@ import Fade from '@mui/material/Fade';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast  } from 'react-toastify';
 
-import {useBannerStore , useBrandStore , useBrandTypeStore , useCityStore , useCountryStore} from '@store';
+import {useBannerStore , useBrandStore , useBrandTypeStore , useCityStore , useCountryStore , useCouriersStore} from '@store';
 
 
 
@@ -26,6 +26,7 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
  const {deleteDataBrandType} = useBrandTypeStore();
  const {deleteDataCity} = useCityStore();
  const {deleteDataCountry} = useCountryStore();
+ const {deleteDataCouriers} = useCouriersStore();
 
 
   
@@ -85,6 +86,17 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
           toast.error("Error " + err?.message)
           console.log(err);
       }
+    }else if (title == "couriers"){
+      try{
+          const staus = await deleteDataCouriers(id)
+        if(staus === 200){
+          handleClose()
+          toast.success("Couriers deleted successfully")
+        } 
+      }catch(err:any){
+          toast.error("Error " + err?.message)
+          console.log(err);
+      }
     }else {
       alert("delete , id - " + id);
     }
@@ -120,7 +132,7 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
             <h3 className=''>Are you sure you want to delete?</h3>
             <div className='flex items-center justify-end gap-3 mt-2'>
                 <button onClick={handleClose} className='py-1 px-2 rounded-md bg-[#008524] hover:bg-[#008124] active:bg-[#008524] text-white'>No</button>
-                <button onClick={deleteData} className='py-1 px-2 rounded-md bg-[#008524] hover:bg-[#008124] active:bg-[#008524] text-white'>Yes</button>
+                <button onClick={deleteData} className='py-1 px-2 rounded-md bg-red-600 hover:bg-red-700 active:bg-red-600 text-white'>Yes</button>
             </div>
         </div>
         

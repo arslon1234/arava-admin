@@ -119,7 +119,7 @@ export default function BasicModal({title , id , data}:propsData) {
               <Field
                 as={TextField}
                 label="Company name"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
+                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:18 } }}
                 type="text"
                 name="name"
                 className=" w-[100%]  mb-3 outline-none py-0"

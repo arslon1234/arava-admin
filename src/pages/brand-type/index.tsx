@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {ModalBrandTaype} from "@modals"
 import {GlobalTeble , GlobalSearch} from "@ui";
 import {useBrandTypeStore} from "@store"
 
@@ -40,9 +40,9 @@ useEffect(()=>{
  // Props Global teble -------------->
  const theder = [
   {title: "S/N" , value:"t/r"},
-  {title: "Brand type name" , value: true ? "nameUz" : "nameRu" },
-  {title: "Description" , value: true ? "descriptionUz" : "descriptionUz" },
-  {title: "Sorting" , value: "sorting" },
+  {title: "Name" , value: true ? "nameUz" : "nameRu" },
+  {title: "Description" , value: true ? "descriptionUz" : "descriptionRu" },
+  {title: "Activated" , value: "activated2" },
   {title: "Action" , value:"brandType"}
 ]
 
@@ -72,7 +72,7 @@ const hendalChange = (e:any)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} hendelChange={hendalChange}/>
-    <ModalTest title="post" 
+    <ModalBrandTaype title="post" 
     />
   </div>
    <GlobalTeble heders={theder} body={dataBrandType} skelatonLoader={isLoader}/>

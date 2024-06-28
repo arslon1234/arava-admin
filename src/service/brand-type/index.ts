@@ -3,8 +3,11 @@ import request from "../config"
 // ----------------> Instance Services BrandType<-------------------------------------
 export interface postBrandType{
     activated: boolean,
-    bannerUrl: string,
-    imageUrl: string,
+    nameRu: string,
+    nameUz: string,
+    descriptionRu: string,
+    descriptionUz: string,
+    sorting: number,
 }
 
 export interface UpdateBrandType {
@@ -19,16 +22,19 @@ export interface GetBrandType{
     limit?:number;
 }
 
+export interface brandTypeActivated{
+    id?:number|any;
+    activated: boolean;
+}
 
 
 
 interface BrandType{
     getBrandType : ()=> any,
-    
-    //API da hali qo'shilmadi
+    deleteBrandType : (id:number)=> any,
     postBrandType : (data:postBrandType)=> any,
     updateBrandType: (data:UpdateBrandType)=> any,
-    deleteBrandType : (id:number)=> any,
+    brandTypeActivated:(data:brandTypeActivated)=>any,
 }
 
 // ---------> Interface Stor BrandType <--------------------
@@ -37,11 +43,11 @@ export interface StoreBrandType {
     dataBrandType:any[];
     totlCount:number;
     getDataBrandType: ()=> Promise <any>;
-    
-    //API da hali qo'shilmadi
+    deleteDataBrandType: (id:number)=> Promise <any>;
     postDataBrandType: (data:postBrandType)=> Promise <any>;
     updateDataBrandType: (data:UpdateBrandType)=> Promise <any>;
-    deleteDataBrandType: (id:number)=> Promise <any>;
+
+    brandTypeActivated:(data:brandTypeActivated)=> Promise <any>;
 }
 
 
@@ -50,10 +56,10 @@ export interface StoreBrandType {
 // ----------------> Instance Category <----------------------------
 export const brandType:BrandType = {
     getBrandType: ()=> request.get(`/services/admin/api/brand-type-pageList`),
-
-    //API da hali qo'shilmadi
     deleteBrandType: (id)=> request.delete(`/services/admin/api/brand-type/${id}`),
     postBrandType: (data)=> request.post("/services/admin/api/brand-type" , data),
     updateBrandType: (data)=> request.put(`/services/admin/api/brand-type`, data),
+
+    brandTypeActivated: (data)=> request.put(`/services/admin/api/brand-type-activate`, data),
 
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
-import { Button, message, Upload } from 'antd';
+import { Button,  Upload } from 'antd';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getCookies } from '@cookie';
@@ -21,7 +21,7 @@ interface RcFile extends File {
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const App: React.FC = () => {
-  const { imageUrlUpdated } = useBannerStore();
+  const { imageUrlUpdated , imageUrl} = useBannerStore();
 
   const bannerUpload = async (file: File) => {
     try {
@@ -44,7 +44,8 @@ const App: React.FC = () => {
       }
     } catch (error: any) {
       console.error(error);
-      message.error("Media upload failed");
+      toast.error("Media upload failed");
+      imageUrlUpdated("")
     }
   };
 
@@ -94,7 +95,7 @@ const App: React.FC = () => {
       if (info.file.status === 'uploading') {
         console.log(info.file, info.fileList);
       } else if (info.file.status === 'done') {
-        toast.success(`file uploaded successfully`);
+       imageUrl ?  toast.success(`file uploaded successfully`) : toast.error(`file upload failed.`);
       } else if (info.file.status === 'error') {
         toast.error(`file upload failed.`);
       }

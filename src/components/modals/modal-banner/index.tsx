@@ -59,12 +59,14 @@ export default function BasicModal({ title, id, data }: propsData) {
     const activated: boolean | any = value?.activated == "True" ? true : false;
 
     if (!id) {
-      const status = await postDataBanner({ ...value, activated: activated , imageUrl: imageUrl && imageUrl });
+      console.log(imageUrl);
+      
+      const status = await postDataBanner({ ...value, activated: activated , imageUrl: imageUrl != "" && imageUrl });
       if (status === 200) {
         toast.success("success full");
         handleClose();
         imageUrlUpdated("")
-        window.location.reload();
+        // window.location.reload();
       } else {
         toast.error("Error :" + status);
         handleClose();

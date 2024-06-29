@@ -5,7 +5,7 @@ import Fade from '@mui/material/Fade';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast  } from 'react-toastify';
 
-import {useBannerStore , useBrandStore , useBrandTypeStore , useCityStore , useCountryStore , useCouriersStore} from '@store';
+import {useBannerStore , useBrandStore , useBrandTypeStore , useCityStore , useCountryStore , useCouriersStore } from '@store';
 
 
 
@@ -27,6 +27,7 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
  const {deleteDataCity} = useCityStore();
  const {deleteDataCountry} = useCountryStore();
  const {deleteDataCouriers} = useCouriersStore();
+
 
 
   

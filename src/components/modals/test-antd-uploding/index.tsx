@@ -44,7 +44,6 @@ const App: React.FC = () => {
       }
     } catch (error: any) {
       console.error(error);
-      toast.error("Media upload failed");
       imageUrlUpdated("")
     }
   };

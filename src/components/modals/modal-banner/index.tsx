@@ -188,6 +188,7 @@ export default function BasicModal({ title, id, data }: propsData) {
                   backgroundColor: "#008524",
                   "&:hover": { background: "#008124" },
                 }}
+                
                 variant="contained"
                 type="submit"
                 className="w-[100%] py-3"

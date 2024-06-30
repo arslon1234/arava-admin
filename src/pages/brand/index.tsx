@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {DrawerBrand} from "@drawers"
 import {GlobalTeble , GlobalSearch} from "@ui";
 import {useBrandStore} from "@store"
 
@@ -40,10 +40,12 @@ useEffect(()=>{
  // Props Global teble -------------->
  const theder = [
   {title: "S/N" , value:"t/r"},
+  {title: "Name" , value:"name" },
   {title: "Company name" , value:"companyName" },
   {title: "Country" , value:"countryName" },
   {title: "Region" , value:"regionName" },
-  {title: "Brand type" , value:"brandTypeName" },
+  {title: "City" , value:"cityName" },
+  {title: "Image" , value:"imageUrl" },
 
   {title: "Action" , value:"brand"}
 ]
@@ -74,8 +76,7 @@ const hendalChange = (e:any)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} hendelChange={hendalChange}/>
-    <ModalTest title="post" 
-    />
+    <DrawerBrand />
   </div>
    <GlobalTeble heders={theder} body={dataBrand} skelatonLoader={isLoader}/>
 

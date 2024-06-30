@@ -18,7 +18,7 @@ import {
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
-import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBannerStatus, ModalBrandTaype} from "@modals"
+import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBannerStatus, ModalBrandTaype , ModalRegion} from "@modals"
 import { Link } from "react-router-dom";
 
 
@@ -84,7 +84,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               </div>
                               :heder.value == "brand" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
-                               <ModalTest title="put" id={body?.id} data={body}/>
+                               {/* <ModalTest title="put" id={body?.id} data={body}/> */}
                                </div>
                               :heder.value == "brandType" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brandType"/></div>
@@ -102,6 +102,10 @@ function Index({ heders, body, skelatonLoader }: Props) {
                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="couriers"/></div>
                               <ModalTest title="put" id={body?.id} data={body}/>
                               </div> 
+                              :heder.value == "region" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>
+                               <ModalRegion title="put" id={body?.id} data={body}/>
+                               </div>
                               : heder.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
                               : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }

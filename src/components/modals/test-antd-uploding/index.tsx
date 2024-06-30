@@ -1,7 +1,6 @@
-import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
-import { Button,  Upload } from 'antd';
+import { Button, Upload } from 'antd';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getCookies } from '@cookie';
@@ -18,15 +17,19 @@ interface RcFile extends File {
   webkitRelativePath: string;
 }
 
+interface PropsData {
+  text?: string;
+}
+
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const App: React.FC = () => {
-  const { imageUrlUpdated , imageUrl} = useBannerStore();
+const Index = ({ text }: PropsData) => {
+  const { imageUrlUpdated, imageUrl } = useBannerStore();
 
   const bannerUpload = async (file: File) => {
     try {
       const token = getCookies("access_token");
-      const url = `${baseUrl}/services/admin/api/banner-image-upload`;
+      const url = text === "brand" ? `${baseUrl}/services/admin/api/brand-image-upload` : `${baseUrl}/services/admin/api/banner-image-upload`;
 
       const formData = new FormData();
       formData.append("image", file);
@@ -44,7 +47,7 @@ const App: React.FC = () => {
       }
     } catch (error: any) {
       console.error(error);
-      imageUrlUpdated("")
+      imageUrlUpdated("");
     }
   };
 
@@ -52,31 +55,8 @@ const App: React.FC = () => {
     name: 'file',
     listType: 'picture',
     beforeUpload(file: RcFile) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          const img = document.createElement('img');
-          img.src = reader.result as string;
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            const ctx = canvas.getContext('2d')!;
-            ctx.drawImage(img, 0, 0);
-            ctx.fillStyle = 'red';
-            ctx.textBaseline = 'middle';
-            ctx.font = '33px Arial';
-            ctx.fillText('Ant Design', 20, 20);
-            canvas.toBlob((result) => {
-              if (result) {
-                resolve(result as File);
-              } else {
-                reject(new Error('Failed to process image.'));
-              }
-            });
-          };
-        };
+      return new Promise((resolve,) => {
+        resolve(file);
       });
     },
     customRequest: async (options) => {
@@ -94,7 +74,7 @@ const App: React.FC = () => {
       if (info.file.status === 'uploading') {
         console.log(info.file, info.fileList);
       } else if (info.file.status === 'done') {
-       imageUrl ?  toast.success(`file uploaded successfully`) : toast.error(`file upload failed.`);
+        imageUrl ? toast.success(`file uploaded successfully`) : toast.error(`file upload failed.`);
       } else if (info.file.status === 'error') {
         toast.error(`file upload failed.`);
       }
@@ -111,9 +91,14 @@ const App: React.FC = () => {
 
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />} className='w-full px-[96px] text-[18px] py-6 border border-[#C4C4C4] rounded-[5px]'>Image upload</Button>
+      <Button
+        icon={<UploadOutlined />}
+        className={text === "brand" ? "w-full px-[96px] text-[18px] py-[27.5px] border border-[#C4C4C4] rounded-[5px]" : "w-full px-[96px] text-[18px] py-6 border border-[#C4C4C4] rounded-[5px]"}
+      >
+        Image upload
+      </Button>
     </Upload>
   );
 };
 
-export default App;
+export default Index;

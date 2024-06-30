@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { company ,StoreCompany } from '@company';
 
 
-const useCategoryStore = create <StoreCompany> ((set)=>({
+const useCompanyStore = create <StoreCompany> ((set)=>({
     isLoader: false,
     dataCompany: [],
     totlCount: 0,
@@ -66,4 +66,4 @@ const useCategoryStore = create <StoreCompany> ((set)=>({
 
 }))
 
-export default useCategoryStore
+export default useCompanyStore

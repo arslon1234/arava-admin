@@ -2,13 +2,27 @@ import request from "../config"
 
 // ----------------> Instance Services Brand<-------------------------------------
 export interface postBrand{
+    companyId:number|string,
+    name: string,
+    shortName: string,
+    mainOfficeAddress:string,
+    countryId:number|string,
+    regionId:number|string,
+    cityId:number|string,
+    gpsPointX: string,
+    gpsPointY: string,
     activated: boolean,
-    bannerUrl: string,
+    brandTypeIdList: number[] | any,
     imageUrl: string,
 }
 
 export interface UpdateBrand {
     id:number;
+}
+
+export interface Location {
+    lat: number;
+    lng:number;
 }
 
 
@@ -36,12 +50,14 @@ export interface StoreBrand {
     isLoader:boolean;
     dataBrand:any[];
     totlCount:number;
+    location :Location;
     getDataBrand: ()=> Promise <any>;
     
     //API da hali qo'shilmadi
     postDataBrand: (data:postBrand)=> Promise <any>;
     updateDataBrand: (data:UpdateBrand)=> Promise <any>;
     deleteDataBrand: (id:number)=> Promise <any>;
+    locationUpdate : (data:Location)=> void;
 }
 
 

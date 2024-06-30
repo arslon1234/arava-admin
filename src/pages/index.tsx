@@ -6,7 +6,18 @@ import Couriers from "./couriers";
 import Country from "./country";
 import City from "./city";
 import Company from "./company";
-import Banner from "./banner"
-import Test from "./test";
+import Banner from "./banner";
+import Region from "./region"
 
-export { SignIn, Error, Brand, BrandType, Country, City, Company , Couriers , Banner , Test};
+export { 
+    SignIn,
+    Error, 
+    Brand, 
+    BrandType, 
+    Country, 
+    City, 
+    Company , 
+    Couriers , 
+    Banner , 
+    Region  ,
+};

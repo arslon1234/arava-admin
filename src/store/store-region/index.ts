@@ -1,21 +1,19 @@
 
 import { create } from 'zustand' ;
 import { toast } from 'react-toastify'; 
-import { brand , StoreBrand } from '@brand';
+import { region , StoreRegion} from '@region';
 
 
-const useBrandStore = create <StoreBrand> ((set)=>({
+const useRegionStore = create <StoreRegion> ((set)=>({
     isLoader: false,
-    dataBrand: [],
+    dataRegion: [],
     totlCount: 0,
-    location:{lat: 0, lng: 0},
-
-    getDataBrand : async()=>{
+    getDataRegion : async()=>{
         try{
            set({isLoader: true})
-           const response = await brand.getBrand()
+           const response = await region.getRegion()
            if(response.status === 200){
-               set({dataBrand: response?.data});
+               set({dataRegion: response?.data});
             //    set({totlCount: respons?.data?.data?.count})
            }
            set({isLoader: false})
@@ -26,13 +24,13 @@ const useBrandStore = create <StoreBrand> ((set)=>({
        
     },
 
-    postDataBrand: async(data)=>{
+    postDataRegion: async(data)=>{
         
             try{
-                const response = await brand.postBrand(data)
+                const response = await region.postRegion(data)
                 if(response.status === 200){
-                    set((state)=>({dataBrand: [...state.dataBrand, data] }))
-                    // set((state)=>({dataCountry: state.dataCountry.length < 10 ? [...state.dataCountry, response?.data?.data] : [...state.dataCountry]})) \
+                    set((state)=>({dataRegion: [...state.dataRegion, data] }))
+                    // set((state)=>({dataRegion: state.dataRegion.length < 10 ? [...state.dataRegion, response?.data] : [...state.dataRegion]})) \
                     // set((state)=>({totlCount: state.totlCount += 1}))
                     return response?.status
                 }
@@ -41,12 +39,12 @@ const useBrandStore = create <StoreBrand> ((set)=>({
              }
     },
 
-    deleteDataBrand: async(id)=>{
+    deleteDataRegion: async(id)=>{
         try{
-           const response = await brand.deleteBrand(id)
+           const response = await region.deleteRegion(id)
         //    console.log(respons)
            if(response.status === 200){
-               set((state)=>({dataBrand: state.dataBrand.filter((el:any)=>el.id !== id)})) 
+               set((state)=>({dataRegion: state.dataRegion.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
                toast.success("Deleted successfully")
            }
@@ -55,11 +53,11 @@ const useBrandStore = create <StoreBrand> ((set)=>({
         }
     },
 
-    updateDataBrand: async(data)=>{
+    updateDataRegion: async(data)=>{
             try{
-                const response = await brand.updateBrand(data)
+                const response = await region.updateRegion(data)
                 if(response?.status === 200){
-                    set((state)=>({dataBrand: state.dataBrand.map((el:any)=>el.id == data?.id ? data : el)}))
+                    set((state)=>({dataRegion: state.dataRegion.map((el:any)=>el.id == data?.id ? data : el)}))
                     return response?.status
                 }
                 
@@ -68,10 +66,6 @@ const useBrandStore = create <StoreBrand> ((set)=>({
                 }
     },
 
-    locationUpdate : (data)=>{
-        set({location: data})
-    }
-
 }))
 
-export default useBrandStore
+export default useRegionStore

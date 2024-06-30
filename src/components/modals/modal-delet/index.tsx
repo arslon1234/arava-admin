@@ -5,7 +5,9 @@ import Fade from '@mui/material/Fade';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast  } from 'react-toastify';
 
-import {useBannerStore , useBrandStore , useBrandTypeStore , useCityStore , useCountryStore , useCouriersStore } from '@store';
+import {useBannerStore , useBrandStore ,
+   useBrandTypeStore , useCityStore ,
+    useCountryStore , useCouriersStore , useRegionStore } from '@store';
 
 
 
@@ -27,8 +29,7 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
  const {deleteDataCity} = useCityStore();
  const {deleteDataCountry} = useCountryStore();
  const {deleteDataCouriers} = useCouriersStore();
-
-
+ const {deleteDataRegion} = useRegionStore();
 
   
   const deleteData = async() => {
@@ -93,6 +94,17 @@ export default function FadeMenu({id , title}:{id:number , title : string}) {
         if(staus === 200){
           handleClose()
           toast.success("Couriers deleted successfully")
+        } 
+      }catch(err:any){
+          toast.error("Error " + err?.message)
+          console.log(err);
+      }
+    }else if(title == "region"){
+      try{
+          const staus = await deleteDataRegion(id)
+        if(staus === 200){
+          handleClose()
+          toast.success("Region deleted successfully")
         } 
       }catch(err:any){
           toast.error("Error " + err?.message)

@@ -10,9 +10,12 @@
       "@layout": ["./src/layout"],
       "@pages": ["./src/pages"],
       "@router": ["./src/router"],
+      "@validations": ["./src/validations"],
       "@interface": ["./src/types/interface"],
       "@ui": ["./src/components/ui"],
       "@modals": ["./src/components/modals"],
+      "@drawers": ["./src/components/drawers"],
+
 
       "@cookie": ["./src/utils/cookie.ts"],
       "@service-auth": ["./src/service/auth"],
@@ -24,6 +27,8 @@
       "@brand-type": ["./src/service/brand-type"],
       "@city": ["./src/service/city"],
       "@сouriers": ["./src/service/сouriers"],
+      "@region": ["./src/service/region"],
+
 
 
 

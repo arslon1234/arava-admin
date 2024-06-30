@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useBannerStore } from "@store";
-import UplodAntd from "../../modals/test-antd-uploding"
+import UplodAntd from "../test-antd-uploding"
 
 const style = {
   position: "absolute" as "absolute",

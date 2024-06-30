@@ -19,6 +19,7 @@ import ElectricMopedIcon from '@mui/icons-material/ElectricMoped';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import PublicIcon from '@mui/icons-material/Public';
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+import SouthAmericaIcon from '@mui/icons-material/SouthAmerica';
 
 import { useTranslation } from 'react-i18next';
 
@@ -79,9 +80,14 @@ const navList:navListInterface[] = [
         icon: <MilitaryTechIcon />,
     },
     {
-        path:"/home/company"  ,
-        title:t('company'),
-        icon: <HomeWorkIcon />,
+      path:"/home/country"  ,
+      title:t('country'),
+      icon: <PublicIcon />,
+    },
+    {
+      path:"/home/region"  ,
+      title:t('region'),
+      icon: <SouthAmericaIcon />,
     },
     {
         path:"/home/city"  ,
@@ -89,9 +95,9 @@ const navList:navListInterface[] = [
         icon: <ApartmentIcon />,
     },
     {
-        path:"/home/country"  ,
-        title:t('country'),
-        icon: <PublicIcon />,
+        path:"/home/company"  ,
+        title:t('company'),
+        icon: <HomeWorkIcon />,
     },
     {
         path:"/home/couriers"  ,
@@ -103,19 +109,21 @@ const navList:navListInterface[] = [
         title:t('banner'),
         icon: <ViewCarouselIcon />,
     },
+    
 ]
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   const { pathname } = useLocation();
 
   const getCategoryName = (pathname: string) => {
-    if (pathname === "/home") return "Brand type";
-    if (pathname === "/home/brand") return "Brand";
-    if (pathname === "/home/company") return "Company";
-    if (pathname === "/home/city") return "City";
-    if (pathname === "/home/country") return "Country";
-    if (pathname === "/home/couriers") return "Couriers";
-    if (pathname === "/home/banner") return "Banner";
+    if (pathname === "/home") return t("brandType");
+    if (pathname === "/home/brand") return t("brand");
+    if (pathname === "/home/company") return t("company");
+    if (pathname === "/home/city") return t("city");
+    if (pathname === "/home/country") return t("country");
+    if (pathname === "/home/couriers") return t('couriers');
+    if (pathname === "/home/banner") return t('banner');
+    if (pathname === "/home/region") return t('region');
     // if (/^\/home\/category\/\d+$/.test(pathname)) return "Subcategory";
     // if (/^\/home\/brands\/\d+$/.test(pathname)) return "Brand Catigory";
     // if (/^\/home\/products\/\d+$/.test(pathname)) return "Product"; // Regex for dynamic path

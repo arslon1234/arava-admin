@@ -66,6 +66,18 @@ const useBrandTypeStore = create <StoreBrandType> ((set)=>({
                 }
     },
 
+    brandTypeActivated: async(data)=>{
+        try{
+            const response = await brandType.brandTypeActivated(data)
+            if(response?.status === 200){
+                set((state)=>({dataBrandType: state.dataBrandType.map((el:any)=>el.id == data?.id? {...el , activated:data?.activated } : el)}))
+                return response?.status
+            }
+        }catch(error:any){
+            console.log(error)
+        }
+    },
+
 }))
 
 export default useBrandTypeStore

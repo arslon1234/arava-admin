@@ -12,8 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useBannerStore } from "@store";
-import UplodAntd from "../../modals/test-antd-uploding"
+import { useBrandTypeStore } from "@store";
 
 const style = {
   position: "absolute" as "absolute",
@@ -35,8 +34,7 @@ interface propsData {
 
 export default function BasicModal({ title, id, data }: propsData) {
 
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const { postDataBanner, updateDataBanner , imageUrl , imageUrlUpdated } = useBannerStore();
+  const { postDataBrandType, updateDataBrandType , } = useBrandTypeStore();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -45,43 +43,48 @@ export default function BasicModal({ title, id, data }: propsData) {
 
   const validationSchema = Yup.object().shape({
     activated: Yup.string().required("Activeted is required"),
-    bannerUrl: Yup.string().required("Banner URL is required"),
-    // imageUrl: Yup.string().required("Name is required"),
+    nameRu: Yup.string().required("Nmae is required"),
+    nameUz: Yup.string().required("Nmae is required"),
+    descriptionRu: Yup.string().required("Description is required"),
+    descriptionUz: Yup.string().required("Description is required"),
   });
 
   const initialValues: any = {
     activated: data?.activated == true ? "True" : "False" || "",
-    bannerUrl: data?.bannerUrl || "",
-    // imageUrl: data?.imageUrl || image ,
+    nameUz: data?.nameUz || "",
+    nameRu: data?.nameRu || "",
+    descriptionRu: data?.descriptionRu || "",
+    descriptionUz: data?.descriptionUz || "",
   };
 
   const handelSubmit = async (value: any) => {
     const activated: boolean | any = value?.activated == "True" ? true : false;
 
     if (!id) {
-      console.log(imageUrl);
-      
-      const status = await postDataBanner({ ...value, activated: activated , imageUrl: imageUrl != "" && imageUrl });
+      const status = await postDataBrandType({ ...value, activated: activated , sorting:0 });
       if (status === 200) {
         toast.success("success full");
-        handleClose();
-        imageUrlUpdated("")
-        window.location.reload();
+        setTimeout(()=>{
+            handleClose();
+             window.location.reload();
+        },1500)
       } else {
         toast.error("Error :" + status);
         handleClose();
-        imageUrlUpdated("")
       }
     } else {
       console.log(value);
 
       const updateData = {
         id: id,
-        bannerUrl: value?.bannerUrl,
-        imageUrl: data?.imageUrl,
+        nameUz: value?.nameUz ? value.nameUz : data?.nameUz,
+        nameRu: value?.nameRu ? value.nameRu : data?.nameRu,
+        descriptionRu: value?.descriptionRu ? value.descriptionRu : data?.descriptionRu,
+        descriptionUz: value?.descriptionUz ? value.descriptionUz : data?.descriptionUz,
         activated: activated,
+        sorting: data?.sorting ? data?.sorting : 0
       };
-      const status = await updateDataBanner(updateData);
+      const status = await updateDataBrandType(updateData);
       if (status === 200) {
         toast.success("update success full");
         handleClose();
@@ -126,35 +129,69 @@ export default function BasicModal({ title, id, data }: propsData) {
           >
             <Form className=" max-w-[600px]  w-full flex flex-col gap-[12px]">
               <h1 className="text-center mb-2 text-[26px] font-bold">
-                {title == "post" ? "Add a banner" : "Edit a banner"}
+                {title == "post" ? "Add a brand type" : "Edit a brand type" }
               </h1>
               <Field
                 as={TextField}
-                label="Banner url"
+                label="Name uz"
                 sx={{ "& input": { color: "#00000", fontSize: "20px" ,height:18} }}
                 type="text"
-                name="bannerUrl"
+                name="nameUz"
                 className=" w-[100%]  mb-3 outline-none py-0"
                 helperText={
                   <ErrorMessage
-                    name="bannerUrl"
+                    name="nameUz"
                     component="div"
-                    className="mb-3 text-red-500 text-center text-[18px] font-medium"
+                    className=" text-red-500 text-center text-[15px] font-medium"
                   />
                 }
               />
-              <div className="">
-              <UplodAntd/>
-              </div>
-              {
-                data?.imageUrl && <div>
-                <img
-                  src={baseUrl+data?.imageUrl}
-                  alt="banner"
-                  className="w-[100%] h-[150px] object-fill"
-                />
-            </div>
-              }
+              <Field
+                as={TextField}
+                label="Name ru"
+                sx={{ "& input": { color: "#00000", fontSize: "20px" ,height:18} }}
+                type="text"
+                name="nameRu"
+                className=" w-[100%]  mb-3 outline-none py-0"
+                helperText={
+                  <ErrorMessage
+                    name="nameRu"
+                    component="div"
+                    className=" text-red-500 text-center text-[15px] font-medium"
+                  />
+                }
+              />
+              <Field
+                as={TextField}
+                label="Description uz"
+                sx={{ "& input": { color: "#00000", fontSize: "20px" ,height:18} }}
+                type="text"
+                name="descriptionRu"
+                className=" w-[100%]  mb-3 outline-none py-0"
+                helperText={
+                  <ErrorMessage
+                    name="descriptionRu"
+                    component="div"
+                    className=" text-red-500 text-center text-[15px] font-medium"
+                  />
+                }
+              />
+              <Field
+                as={TextField}
+                label="Description ru"
+                sx={{ "& input": { color: "#00000", fontSize: "20px" ,height:18} }}
+                type="text"
+                name="descriptionUz"
+                className=" w-[100%]  mb-3 outline-none py-0"
+                helperText={
+                  <ErrorMessage
+                    name="descriptionUz"
+                    component="div"
+                    className=" text-red-500 text-center text-[15px] font-medium"
+                  />
+                }
+              />
+
               <Field
                 as={RadioGroup}
                 aria-label="activated"

@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.20",
+    "antd": "^5.18.3",
     "axios": "^1.7.2",
     "formik": "^2.4.6",
     "i18next": "^23.11.5",

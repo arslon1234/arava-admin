@@ -30,11 +30,11 @@ export interface BannerActivate{
 interface Banner{
     getBanner : ()=> any,
     postBanner : (data:postBanner)=> any,
+    deleteBanner : (id:number)=> any,
+    bannerActivate:(data:BannerActivate)=>any,
     
     //API da hali qo'shilmadi
     updateBanner: (data:UpdateBanner)=> any,
-    deleteBanner : (id:number)=> any,
-    bannerActivate:(data:BannerActivate)=>any,
 }
 
 // ---------> Interface Stor Banner <--------------------
@@ -42,13 +42,16 @@ export interface StoreBanner {
     isLoader:boolean;
     dataBanner:any[];
     totlCount:number;
+    imageUrl:string;
     getDataBanner: ()=> Promise <any>;
     postDataBanner: (data:postBanner)=> Promise <any>;
+    deleteDataBanner: (id:number)=> Promise <any>;
+    bannerActivate:(data:BannerActivate)=>Promise<any>,
+
+    imageUrlUpdated:(Url:string)=> void;
     
     //API da hali qo'shilmadi
     updateDataBanner: (data:UpdateBanner)=> Promise <any>;
-    deleteDataBanner: (id:number)=> Promise <any>;
-    bannerActivate:(data:BannerActivate)=>Promise<any>,
 }
 
 

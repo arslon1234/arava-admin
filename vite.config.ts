@@ -8,10 +8,12 @@ export default defineConfig({
       { find: '@', replacement: '/src' },
       { find: '@layout', replacement: '/src/layout' },
       { find: '@pages', replacement: '/src/pages' },
+      { find: '@validations', replacement: '/src/validations' },
       { find: '@interface', replacement: '/src/types/interface' },
       { find: '@ui', replacement: '/src/components/ui' },
       { find: '@modals', replacement: '/src/components/modals' },
-      
+      { find: '@drawers', replacement: '/src/components/drawers' },
+
       { find: '@cookie', replacement: '/src/utils/cookie.ts' },
       {find: "@service-auth" , replacement: "/src/service/auth"},
 
@@ -22,14 +24,14 @@ export default defineConfig({
       { find: '@brand-type', replacement: '/src/service/brand-type' },
       { find: '@city', replacement: '/src/service/city' },
       { find: '@сouriers', replacement: '/src/service/сouriers' },
-
-      
-
-
-
+      { find: '@region', replacement: '/src/service/region' },
 
       { find: '@store', replacement: '/src/store'},
 
     ]
-  }
+  },
+  // define: {
+  //   'process.env': process.env
+  // }
+
 })

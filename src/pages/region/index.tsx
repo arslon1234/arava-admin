@@ -2,9 +2,9 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {ModalRegion} from "@modals"
 import {GlobalTeble , GlobalSearch} from "@ui";
-import {useCompanyStore} from "@store"
+import {useRegionStore} from "@store"
 
 
 
@@ -12,11 +12,11 @@ function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
 const [ , setParams] = useState({limit: 10, page:1 , search:change})
-const {getDataCompany , dataCompany , isLoader } =  useCompanyStore();
+const {getDataRegion , dataRegion , isLoader } =  useRegionStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCompany();
+  getDataRegion();
 },[]);
 
 useEffect(()=>{
@@ -40,9 +40,9 @@ useEffect(()=>{
  // Props Global teble -------------->
  const theder = [
   {title: "S/N" , value:"t/r"},
-  {title: "Company name" , value:"name"},
-  {title: "Country name" , value:"countryName"},
-  {title: "Action" , value:"action"}
+  {title: "Region name" , value: true ? "nameUz" : "nameRu" },
+  {title: "Country name" , value: "countryName"},
+  {title: "Action" , value:"region"}
 ]
 
 
@@ -71,10 +71,10 @@ const hendalChange = (e:any)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} hendelChange={hendalChange}/>
-    <ModalTest title="post" 
+    <ModalRegion title="post" 
     />
   </div>
-   <GlobalTeble heders={theder} body={dataCompany} skelatonLoader={isLoader}/>
+   <GlobalTeble heders={theder} body={dataRegion} skelatonLoader={isLoader}/>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

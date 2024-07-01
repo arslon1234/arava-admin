@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useBannerStore } from "@store";
-import UplodAntd from "../../modals/test-antd-uploding"
+import UplodAntd from "../test-antd-uploding"
 
 const style = {
   position: "absolute" as "absolute",
@@ -188,6 +188,7 @@ export default function BasicModal({ title, id, data }: propsData) {
                   backgroundColor: "#008524",
                   "&:hover": { background: "#008124" },
                 }}
+                
                 variant="contained"
                 type="submit"
                 className="w-[100%] py-3"

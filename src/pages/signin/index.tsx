@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage, FormikProps } from "formik";
 import { TextField, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import { setCookies } from "@cookie";
@@ -67,7 +67,8 @@ function Index() {
           navigate("/home");
         }, 1500);
       }
-    } catch (err) {
+    } catch (err:any) {
+      toast.error(err?.message);
       console.log(err);
     }
   };

@@ -1,13 +1,14 @@
-import * as React from "react";
+import { useState , useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import { Button, TextField } from "@mui/material";
+import { Button, MenuItem, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 
-import {useCountryStore} from "@store";
+
+import {useCountryStore , useRegionStore} from "@store";
 
 
 const style = {
@@ -29,9 +30,10 @@ interface propsData{
 }
 
 export default function BasicModal({title , id , data}:propsData) {
-  const { postDataCountry, updateDataCountry } = useCountryStore();
+  const { getDataCountry , dataCountry } = useCountryStore();
+  const {postDataRegion , updateDataRegion} = useRegionStore();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -41,21 +43,28 @@ export default function BasicModal({title , id , data}:propsData) {
   const validationSchema = Yup.object().shape({
     nameUz: Yup.string().required("Name is required"),
     nameRu: Yup.string().required("Name is required"),
-
-    // parent_category_id: Yup.number().min(0, "must be at least greater than 0"),
-    // position: Yup.number().min(0, "must be at least greater than 0"),
+    countryId: Yup.string().required("Name is required"),
   });
 
   const initialValues: any = {
     nameUz: data?.nameUz || "", 
     nameRu: data?.nameRu || "", 
+    countryId: data?.countryId || "",
   };
+
+
+  //useEfect to get country --------------
+  useEffect(() => {
+    getDataCountry();
+  }, []);
+
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   const handelSubmit = async (value:any ) => {
     if(!id){
       console.log(value);
       
-      const status = await postDataCountry(value);
+      const status = await postDataRegion(value);
       if (status === 200) {
       toast.success("success full");
       setTimeout(() => {
@@ -69,8 +78,8 @@ export default function BasicModal({title , id , data}:propsData) {
     }else{
       console.log(value);
       
-      const updateData= {id:id, nameUz: value?.nameUz , nameRu: value?.nameRu}
-      const status = await updateDataCountry(updateData);
+      const updateData= {...value , id:id,}
+      const status = await updateDataRegion(updateData);
       if (status === 200) {
       toast.success("update success full"); 
       setTimeout(() => {
@@ -121,13 +130,41 @@ export default function BasicModal({title , id , data}:propsData) {
             <Form className=" max-w-[600px]  w-full flex flex-col gap-[12px]">
               <h1 className="text-center mb-2 text-[26px] font-bold">
                 {
-                  title == "post"? "Add a country" : "Edit a country"
+                  title == "post"? "Add a region" : "Edit a region"
                 }
               </h1>
+
+                {/* Country data select */}
+                <Field
+                        name="countryId"
+                        type="text"
+                        as={TextField}
+                        label="Country name"
+                        select
+                        sx={{ "& select": {  height:18 } ,  }}
+                        className="relative"
+                        margin="none"
+                        variant="outlined"
+                        fullWidth
+                        helperText={
+                          <ErrorMessage
+                            name="countryId"
+                            component="div"
+                            className="text-[red] text-[15px] text-center"
+                          />
+                        }
+                      >
+                        {dataCountry?.map((item: any, index: number) => (
+                          <MenuItem key={index} value={item.id}>
+                            {true ? item?.nameUz : item?.nameRu}
+                          </MenuItem>
+                        ))}
+                      </Field>
+
               <Field
                 as={TextField}
-                label="Country name Uz"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:18 } ,  }}
+                label="Region name Uz"
+                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:20 } ,  }}
                 type="text"
                 name="nameUz"
                 className=" w-[100%]  mb-3 outline-none py-0"
@@ -135,14 +172,14 @@ export default function BasicModal({title , id , data}:propsData) {
                   <ErrorMessage
                      name="nameUz"
                      component="div"
-                     className="mb-3 text-red-500 text-center text-[18px] font-medium "
+                     className=" text-[red] text-center text-[15px] font-medium "
                   />
                 }
               />
               <Field
                 as={TextField}
-                label="Country name Ru"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:18 } }}
+                label="Region name Ru"
+                sx={{ "& input": { color: "#00000", fontSize: "20px" , height:20 } }}
                 type="text"
                 name="nameRu"
                 className=" w-[100%]  mb-3 outline-none py-0 "
@@ -150,7 +187,7 @@ export default function BasicModal({title , id , data}:propsData) {
                   <ErrorMessage
                      name="nameRu"
                      component="div"
-                     className="mb-3 text-red-500 text-center text-[18px] font-medium"
+                     className=" text-[red] text-center text-[15px] font-medium"
                   />
                 }
               />

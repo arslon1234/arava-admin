@@ -5,5 +5,6 @@
     "city":"City",
     "country":"Country",
     "couriers":"Couriers",
-    "banner":"Banner"
+    "banner":"Banner",
+    "region":"Region"
 }

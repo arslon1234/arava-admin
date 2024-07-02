@@ -1,18 +1,7 @@
 import * as Yup from "yup";
 
 
-// companyId:number|string,
-//     name: string,
-//     shortName: string,
-//     mainOfficeAddress:string,
-//     countryId:number|string,
-//     regionId:number|string,
-//     cityId:number|string,
-//     gpsPointX: string,
-//     gpsPointY: string,
-//     activated: boolean,
-//     brandTypeIdList: number[] | any,
-//     imageUrl: string,
+
 
 // Validation the brand --------------------------------------
 

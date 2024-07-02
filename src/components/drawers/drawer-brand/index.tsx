@@ -100,21 +100,6 @@ export default function TemporaryDrawer({ data }: any) {
     setOpen(newOpen);
   };
 
-  /*
-  companyId:number|string,
-    name: string,
-    shortName: string,
-    mainOfficeAddress:string,
-    countryId:number|string,
-    regionId:number|string,
-    cityId:number|string,
-    gpsPointX: string,
-    gpsPointY: string,
-    activated: boolean,
-    brandTypeIdList: number[] | any,
-    imageUrl: string,
-  */ 
-
   const initialValues = {
     companyId: data?.companyId || "",
     name: data?.name || "",
@@ -202,8 +187,8 @@ export default function TemporaryDrawer({ data }: any) {
                         helperText={
                           <ErrorMessage
                             name="name"
-                            component="span"
-                            className=" text-red-500 text-center"
+                            component="div"
+                            className=" text-[red] text-[15px]"
                           />
                         }
                       />
@@ -225,8 +210,8 @@ export default function TemporaryDrawer({ data }: any) {
                         helperText={
                           <ErrorMessage
                             name="shortName"
-                            component="span"
-                            className="text-red-500 text-center"
+                            component="div"
+                            className="text-[red] text-[15px]"
                           />
                         }
                       />
@@ -249,7 +234,7 @@ export default function TemporaryDrawer({ data }: any) {
                           <ErrorMessage
                             name="mainOfficeAddress"
                             component="span"
-                            className=" text-red-500 text-center"
+                            className=" text-[red] text-[15px]"
                           />
                         }
                       />

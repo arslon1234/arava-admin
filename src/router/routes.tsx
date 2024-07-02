@@ -16,12 +16,12 @@ const index = ()=>{
           <Route path="/" element={<App />}>
             <Route index element={<SignIn />} />
             <Route path="/home/*" element={<HomeLayout />} >
-                <Route index element={<BrandType />} />
+                <Route index element={<Couriers />} />
                 <Route path="brand" element={<Brand />} />
                 <Route path="country" element={<Country />} />
                 <Route path="city" element={<City />} />
                 <Route path="company" element={<Company />} />
-                <Route path="couriers" element={<Couriers/>} />
+                <Route path="brand-type" element={<BrandType/>} />
                 <Route path="banner" element={<Banner/>} />
                 <Route path="region" element={<Region/>} />
             </Route>  

@@ -40,10 +40,10 @@ useEffect(()=>{
  // Props Global teble -------------->
  const theder = [
   {title: "S/N" , value:"t/r"},
-  {title: "Banner url" , value: "bannerUrl" },
+  // {title: "Banner url" , value: "bannerUrl" },
+  {title: "Created date" , value: "createdDate"},
   {title: "Image url" , value: "imageUrl" },
   {title: "Activated" , value: "activated" },
-  // {title: "Created date" , value: "createdDate"},
   {title: "Action" , value:"action3"}
 ]
 

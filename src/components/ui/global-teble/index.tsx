@@ -112,7 +112,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
                               : heder.value == "activated" ? <div><TestSwitch activated={body?.activated} id={body?.id} text="banner"/></div> 
-                              : heder.value == "activated2" ? <div className={body?.activated ? "text-[#008512] flex items-center gap-1" : "text-red-500 flex items-center gap-1"}>{body?.activated ? "Activ" : "Activ emas"}<ModalBannerStatus id={body?.id} text="brandType"/></div> 
+                              : heder.value == "activated2" ? <div><TestSwitch activated={body?.activated} id={body?.id} text="brandType"/></div> 
                               : (body[heder.value])
                             }</TableCell>
                           })

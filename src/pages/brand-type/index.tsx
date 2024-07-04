@@ -41,7 +41,7 @@ useEffect(()=>{
  const theder = [
   {title: "S/N" , value:"t/r"},
   {title: "Name" , value: true ? "nameUz" : "nameRu" },
-  {title: "Description" , value: true ? "descriptionUz" : "descriptionRu" },
+  {title: "Description" , value: true ? "descriptionUz" : "descriptioRu" },
   {title: "Activated" , value: "activated2" },
   {title: "Action" , value:"brandType"}
 ]

@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import {ModalTest} from "@modals"
-import {GlobalTeble , GlobalSearch} from "@ui";
+import {GlobalTeble , GlobalSearch } from "@ui";
 import {useCityStore} from "@store"
 
 
@@ -76,7 +76,6 @@ const hendalChange = (e:any)=>{
     />
   </div>
    <GlobalTeble heders={theder} body={dataCity} skelatonLoader={isLoader}/>
-
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>
 }

@@ -12,16 +12,17 @@ import Toolbar from "@mui/material/Toolbar";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { ListItemText } from "@mui/material";
 
-import CategoryIcon from '@mui/icons-material/Category';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import ElectricMopedIcon from '@mui/icons-material/ElectricMoped';
-import HomeWorkIcon from '@mui/icons-material/HomeWork';
-import PublicIcon from '@mui/icons-material/Public';
-import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
-import SouthAmericaIcon from '@mui/icons-material/SouthAmerica';
+import CategoryIcon from "@mui/icons-material/Category";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import ElectricMopedIcon from "@mui/icons-material/ElectricMoped";
+import HomeWorkIcon from "@mui/icons-material/HomeWork";
+import PublicIcon from "@mui/icons-material/Public";
+import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
+import SouthAmericaIcon from "@mui/icons-material/SouthAmerica";
+import MenuIcon from "@mui/icons-material/Menu";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 // import navList from "../../router/nav-list";
 import { Account, DropdownLanguage } from "@ui";
@@ -55,75 +56,70 @@ export default function ResponsiveDrawer(props: Props) {
     }
   };
 
-
-
   //test language ----------------------------------------------------------------
 
   const { t } = useTranslation();
-interface navListInterface {
-    path: string,
-    title :string,
-    icon: JSX.Element,
-}
+  interface navListInterface {
+    path: string;
+    title: string;
+    icon: JSX.Element;
+  }
 
-
-const navList:navListInterface[] = [
-    
+  const navList: navListInterface[] = [
     {
-      path:"/home"  ,
-      title:t('brandType'),
+      path: "/home",
+      title: t("couriers"),
+      icon: <ElectricMopedIcon />,
+    },
+    {
+      path: "/home/banner",
+      title: t("banner"),
+      icon: <ViewCarouselIcon />,
+    },
+    {
+      path: "/home/brand-type",
+      title: t("brandType"),
       icon: <CategoryIcon />,
     },
     {
-        path:"/home/brand"  ,
-        title:t('brand'),
-        icon: <MilitaryTechIcon />,
+      path: "/home/brand",
+      title: t("brand"),
+      icon: <MilitaryTechIcon />,
     },
     {
-      path:"/home/country"  ,
-      title:t('country'),
+      path: "/home/country",
+      title: t("country"),
       icon: <PublicIcon />,
     },
     {
-      path:"/home/region"  ,
-      title:t('region'),
+      path: "/home/region",
+      title: t("region"),
       icon: <SouthAmericaIcon />,
     },
     {
-        path:"/home/city"  ,
-        title:t('city'),
-        icon: <ApartmentIcon />,
+      path: "/home/city",
+      title: t("city"),
+      icon: <ApartmentIcon />,
     },
     {
-        path:"/home/company"  ,
-        title:t('company'),
-        icon: <HomeWorkIcon />,
+      path: "/home/company",
+      title: t("company"),
+      icon: <HomeWorkIcon />,
     },
-    {
-        path:"/home/couriers"  ,
-        title:t('couriers'),
-        icon: <ElectricMopedIcon />,
-    },
-    {
-        path:"/home/banner"  ,
-        title:t('banner'),
-        icon: <ViewCarouselIcon />,
-    },
-    
-]
+  ];
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   const { pathname } = useLocation();
 
   const getCategoryName = (pathname: string) => {
-    if (pathname === "/home") return t("brandType");
+    if (pathname === "/home/brand-type") return t("brandType");
     if (pathname === "/home/brand") return t("brand");
     if (pathname === "/home/company") return t("company");
     if (pathname === "/home/city") return t("city");
     if (pathname === "/home/country") return t("country");
-    if (pathname === "/home/couriers") return t('couriers');
-    if (pathname === "/home/banner") return t('banner');
-    if (pathname === "/home/region") return t('region');
+    if (pathname === "/home") return t("couriers");
+    if (pathname === "/home/banner") return t("banner");
+    if (pathname === "/home/region") return t("region");
     // if (/^\/home\/category\/\d+$/.test(pathname)) return "Subcategory";
     // if (/^\/home\/brands\/\d+$/.test(pathname)) return "Brand Catigory";
     // if (/^\/home\/products\/\d+$/.test(pathname)) return "Product"; // Regex for dynamic path
@@ -183,7 +179,7 @@ const navList:navListInterface[] = [
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar className="bg-[#FFF] h-[72px] flex items-center justify-between " >
+        <Toolbar className="bg-[#FFF] h-[72px] flex items-center justify-between ">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -194,19 +190,21 @@ const navList:navListInterface[] = [
               display: { sm: "none" },
               color: "#767676", // HEX formatida rang
             }}
-          ></IconButton>
-          
-            <div>
-              <h1 className="text-[20px] text-slate-600">
-                {getCategoryName(pathname)}
-              </h1>
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <div>
+            <h1 className="text-[20px] text-slate-600">
+              {getCategoryName(pathname)}
+            </h1>
+          </div>
+          <div className="flex items-center">
+            <div className="">
+              <DropdownLanguage />
             </div>
-            <div className="flex items-center">
-              <div className="">
-                <DropdownLanguage />
-              </div>
-              <Account />
-            </div>
+            <Account />
+          </div>
         </Toolbar>
       </AppBar>
       <Box

@@ -3,7 +3,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {DrawerCouriers} from "@drawers"
 import {GlobalTeble , GlobalSearch} from "@ui";
 import {useCouriersStore} from "@store"
 
@@ -75,7 +75,7 @@ const hendalChange = (e:any)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} hendelChange={hendalChange}/>
-    <ModalTest title="post" 
+    <DrawerCouriers title="post" 
     />
   </div>
    <GlobalTeble heders={theder} body={dataCouriers} skelatonLoader={isLoader}/>

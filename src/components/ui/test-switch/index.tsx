@@ -1,4 +1,4 @@
-import { Switch } from "antd";
+import { ConfigProvider, Switch } from "antd";
 import { useBannerStore } from "@store";
 
 import { useState } from "react";
@@ -22,7 +22,15 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
   };
   return (
     <>
-      <Switch defaultChecked checked={checked1} onChange={onChange} />
+      <ConfigProvider
+      theme={{
+        token:{
+          colorPrimary: "#008524"
+        }
+      }}
+      >
+        <Switch checked={checked1} onChange={onChange} />
+      </ConfigProvider>
     </>
   );
 };

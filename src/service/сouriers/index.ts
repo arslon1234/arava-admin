@@ -1,10 +1,19 @@
 import request from "../config"
 
 // ----------------> Instance Services Couriers<-------------------------------------
+
 export interface postCouriers{
     activated: boolean,
-    bannerUrl: string,
-    imageUrl: string,
+    firstName: string,
+    lastName: string,
+    login: string,
+    address: string,
+    birthDate: string,
+    email: string,
+    gender: number,
+    homePhone: string,
+    mobilePhone: string,
+    password: string,
 }
 
 export interface UpdateCouriers {

@@ -4,41 +4,63 @@ import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button, ConfigProvider, Form, Input, Radio, Switch } from "antd";
+import EditIcon from "@mui/icons-material/Edit";
+
 import { toast } from "react-toastify";
 import { useCouriersStore } from "@store";
 
+interface CouriersProps {
+  data?: any;
+  id?: number;
+  title: string;
+}
 
-/* eslint-enable no-template-curly-in-string */
-
-export default function TemporaryDrawer({ }: any) {
+export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
   const [open, setOpen] = useState(false);
-  const { postDataCouriers } = useCouriersStore();
-  const [bootonLoding  , setBootonLoding] = useState(false);
+  const { postDataCouriers , updateDataCouriers } = useCouriersStore();
+  const [bootonLoding, setBootonLoding] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
-  
-
   // Function Brand create ---------------------------------------------------
   const handleSubmit = async (values: any) => {
     console.log(values);
-    setBootonLoding(true)
-    try {
-        const respons = await postDataCouriers(values)
-        if(respons === 200){
-            toast.success("Brand creste successfully")
-            setTimeout(()=>{
-              toggleDrawer(false)
-              window.location.reload();
-            },1000)
+    if (!id) {
+      setBootonLoding(true);
+      try {
+        const respons = await postDataCouriers(values);
+        if (respons === 200) {
+          toast.success("Brand creste successfully");
+          setTimeout(() => {
+            toggleDrawer(false);
+            window.location.reload();
+          }, 1000);
         }
-    } catch (err:any) {
-      toast.error("Error : " + err?.message)
-      console.log(err);
-    } finally {
-      setBootonLoding(false)
+      } catch (err: any) {
+        toast.error("Error : " + err?.message);
+        console.log(err);
+      } finally {
+        setBootonLoding(false);
+      }
+    }else{
+      setBootonLoding(true);
+      try {
+        const respons = await updateDataCouriers({...values , id:id});
+        if (respons === 200) {
+          toast.success("update success full"); 
+          setTimeout(() => {
+            toggleDrawer(false);
+            window.location.reload();
+          }, 1000);
+        }
+      } catch (err: any) {
+        toast.error("Error : " + err?.message);
+        console.log(err);
+      } finally {
+        setBootonLoding(false);
+      }
     }
   };
   ///=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -56,7 +78,7 @@ export default function TemporaryDrawer({ }: any) {
             </button>
           </div>
           <div>
-            <h1 className=" text-center text-[20px]">Add a couriers</h1>
+            <h1 className=" text-center text-[20px]">{title=="post" ? "Add a couriers" : "Edite a couriers"}</h1>
           </div>
           <div className="px-2 flex items-center justify-center">
             <div className="">
@@ -91,6 +113,7 @@ export default function TemporaryDrawer({ }: any) {
                       label="First name"
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
+                      initialValue={data?.firstName ? data.firstName : "" }
                     >
                       <Input style={{ width: "100%" }} size="large" />
                     </Form.Item>
@@ -101,6 +124,7 @@ export default function TemporaryDrawer({ }: any) {
                       label="Last name"
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
+                      initialValue={data?.lastName ? data.lastName : ""}
                     >
                       <Input style={{ width: "100%" }} size="large" />
                     </Form.Item>
@@ -111,6 +135,7 @@ export default function TemporaryDrawer({ }: any) {
                       label="Login"
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
+                      initialValue={data?.login ? data.login : ""}
                     >
                       <Input style={{ width: "100%" }} size="large" />
                     </Form.Item>
@@ -130,6 +155,7 @@ export default function TemporaryDrawer({ }: any) {
                           message: "Please input at least 6 characters!",
                         },
                       ]}
+                      initialValue={data?.password? data.password : ""}
                     >
                       <Input.Password style={{ width: "100%" }} size="large" />
                     </Form.Item>
@@ -140,6 +166,7 @@ export default function TemporaryDrawer({ }: any) {
                       label="Address"
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
+                      initialValue={data?.address? data.address : ""}
                     >
                       <Input style={{ width: "100%" }} size="large" />
                     </Form.Item>
@@ -150,6 +177,7 @@ export default function TemporaryDrawer({ }: any) {
                       label="Birth date"
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
+                      initialValue={data?.birthDate? data.birthDate : ""}
                     >
                       <Input
                         type="date"
@@ -163,7 +191,7 @@ export default function TemporaryDrawer({ }: any) {
                       name="mobilePhone"
                       label="Mobile phone"
                       style={{ width: "100%" }}
-                      initialValue={"+998"}
+                      initialValue={data?.mobilePhone ? data?.mobilePhone : "+998"}
                       rules={[
                         {
                           required: true,
@@ -197,7 +225,7 @@ export default function TemporaryDrawer({ }: any) {
                           message: "The number is incorrect",
                         },
                       ]}
-                      initialValue={"+998"}
+                      initialValue={data?.homePhone ? data?.homePhone : "+998"}
                     >
                       <Input
                         style={{ width: "100%" }}
@@ -213,6 +241,7 @@ export default function TemporaryDrawer({ }: any) {
                         label="Gender"
                         style={{ width: "60%" }}
                         rules={[{ required: true }]}
+                        initialValue={data?.gender && data?.gender}
                       >
                         <Radio.Group>
                           <Radio value={0}>Male</Radio>
@@ -226,7 +255,7 @@ export default function TemporaryDrawer({ }: any) {
                         label="Activated"
                         style={{ width: "40%" }}
                         rules={[{ required: true }]}
-                        initialValue={false}
+                        initialValue={data?.activated ? data?.activated : false}
                       >
                         <Switch defaultChecked />
                       </Form.Item>
@@ -245,10 +274,15 @@ export default function TemporaryDrawer({ }: any) {
                         {
                           type: "email",
                           message: "The input is not a valid email!",
-                        }
+                        },
                       ]}
+                      initialValue={data?.email ? data.email : ""} 
                     >
-                      <Input style={{ width: "100%" }} type="email" size="large" />
+                      <Input
+                        style={{ width: "100%" }}
+                        type="email"
+                        size="large"
+                      />
                     </Form.Item>
                   </div>
 
@@ -258,7 +292,6 @@ export default function TemporaryDrawer({ }: any) {
                       htmlType="submit"
                       size="large"
                       loading={bootonLoding}
-                      
                     >
                       Submit
                     </Button>
@@ -274,13 +307,30 @@ export default function TemporaryDrawer({ }: any) {
 
   return (
     <div>
-      <button
+      {
+        title =="post"? (<button
         aria-label="add to favorites"
         onClick={toggleDrawer(true)}
         className="py-2 px-5 rounded-md bg-[#008524] text-white font-medium hover:bg-[#008100] duration-300 active:bg-[#008524]"
       >
         To add
-      </button>
+      </button>) :
+      (
+        <Button
+          color="inherit"
+          onClick={toggleDrawer(true)}
+          style={{
+            color: "#767676",  
+            border : "none",
+            boxShadow: "none",
+            
+          }}
+        >
+          <EditIcon />
+        </Button>
+      )
+
+      }
 
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}

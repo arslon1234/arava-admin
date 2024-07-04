@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 
 import { Props } from "@interface";
 import { TestSwitch } from "@ui";
+import {DrawerCouriers} from "@drawers"
 import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBannerStatus, ModalBrandTaype , ModalRegion} from "@modals"
 
 
@@ -101,7 +102,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                              </div>
                              :heder.value == "couriers" ? <div className="flex items-center gap-2">
                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="couriers"/></div>
-                              <ModalTest title="put" id={body?.id} data={body}/>
+                              <DrawerCouriers title="put" id={body?.id} data={body}/>
                               </div> 
                               :heder.value == "region" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>

@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import { Props } from "@interface";
 import { TestSwitch } from "@ui";
 import {DrawerCouriers} from "@drawers"
-import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBannerStatus, ModalBrandTaype , ModalRegion} from "@modals"
+import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBrandTaype , ModalRegion} from "@modals"
 
 
 function Index({ heders, body, skelatonLoader }: Props) {

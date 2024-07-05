@@ -24,7 +24,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
     setOpen(newOpen);
   };
 
-  // Function Brand create ---------------------------------------------------
+  // function to create brand <---------------------------------------------------
   const handleSubmit = async (values: any) => {
     console.log(values);
     if (!id) {
@@ -77,7 +77,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
               <ClearIcon />
             </button>
           </div>
-          <div>
+          <div> 
             <h1 className=" text-center text-[20px]">{title=="post" ? "Add a couriers" : "Edite a couriers"}</h1>
           </div>
           <div className="px-2 flex items-center justify-center">
@@ -111,6 +111,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="firstName"
                       label="First name"
+                      hasFeedback
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
                       initialValue={data?.firstName ? data.firstName : "" }
@@ -121,6 +122,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     {/* Last name */}
                     <Form.Item
                       name="lastName"
+                      hasFeedback
                       label="Last name"
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
@@ -131,6 +133,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
 
                     {/* Login */}
                     <Form.Item
+                      hasFeedback
                       name="login"
                       label="Login"
                       style={{ width: "100%" }}
@@ -144,6 +147,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="password"
                       label="Password"
+                      hasFeedback
                       style={{ width: "100%" }}
                       rules={[
                         {
@@ -164,6 +168,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="address"
                       label="Address"
+                      hasFeedback
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
                       initialValue={data?.address? data.address : ""}
@@ -175,6 +180,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="birthDate"
                       label="Birth date"
+                      hasFeedback
                       style={{ width: "100%" }}
                       rules={[{ required: true }]}
                       initialValue={data?.birthDate? data.birthDate : ""}
@@ -190,6 +196,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="mobilePhone"
                       label="Mobile phone"
+                      hasFeedback
                       style={{ width: "100%" }}
                       initialValue={data?.mobilePhone ? data?.mobilePhone : "+998"}
                       rules={[
@@ -214,6 +221,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="homePhone"
                       label="Home phone"
+                      hasFeedback
                       style={{ width: "100%" }}
                       rules={[
                         {
@@ -239,6 +247,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                       <Form.Item
                         name="gender"
                         label="Gender"
+                        hasFeedback
                         style={{ width: "60%" }}
                         rules={[{ required: true }]}
                         initialValue={data?.gender && data?.gender}
@@ -253,6 +262,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                       <Form.Item
                         name="activated"
                         label="Activated"
+                        hasFeedback
                         style={{ width: "40%" }}
                         rules={[{ required: true }]}
                         initialValue={data?.activated ? data?.activated : false}
@@ -265,6 +275,7 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
                     <Form.Item
                       name="email"
                       label="Email"
+                      hasFeedback
                       style={{ width: "100%" }}
                       rules={[
                         {

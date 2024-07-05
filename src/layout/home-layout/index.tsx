@@ -59,7 +59,17 @@ export default function ResponsiveDrawer() {
 
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: "#FFF" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed} theme="light" width={250} >
+      <Sider 
+        trigger={null} 
+        collapsible 
+        collapsed={collapsed} 
+        theme="light" 
+        width={250}
+        style={{ 
+          position: 'fixed', 
+          height: '100vh' 
+        }} 
+      >
         <div className="logo" style={{ padding: "16px", textAlign: "center" }}>
           <img
            src="https://www.brandbucket.com/sites/default/files/logo_uploads/508113/large_aravva.png"
@@ -76,22 +86,34 @@ export default function ResponsiveDrawer() {
           ))}
         </Menu>
       </Sider>
-      <Layout>
-        <Header style={{ padding: 0 , height:70, background: colorBgContainer, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Layout style={{ marginLeft: collapsed ? 80 : 250 }}>
+        <Header 
+          style={{ 
+            padding: 0, 
+            height: 70, 
+            background: colorBgContainer, 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "center",
+            position: 'fixed',
+            width: `calc(100% - ${collapsed ? 80 : 250}px)`,
+            zIndex: 1
+          }} 
+        >
           <div className="flex items-start gap-5 ">
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined style={{fontSize:24}}/> : <MenuFoldOutlined  style={{fontSize:24}}/>}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 34,
-              height: 34,
-            }}
-          />
-          <Title level={4} style={{ margin: 0, color: "#767676" }}>
-            {getCategoryName(pathname)}
-          </Title>
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined style={{fontSize:24}}/> : <MenuFoldOutlined  style={{fontSize:24}}/>}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 34,
+                height: 34,
+              }}
+            />
+            <Title level={4} style={{ margin: 0, color: "#767676" }}>
+              {getCategoryName(pathname)}
+            </Title>
           </div>
           <div style={{ display: "flex", alignItems: "center", paddingRight:30}}>
             <DropdownLanguage />
@@ -100,7 +122,7 @@ export default function ResponsiveDrawer() {
         </Header>
         <Content
           style={{
-            margin: "24px 16px",
+            margin: "90px 16px 24px 16px",
             padding: 24,
             minHeight: 360,
             background: colorBgContainer,

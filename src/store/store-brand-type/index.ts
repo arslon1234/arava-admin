@@ -1,7 +1,7 @@
 
 import { create } from 'zustand' ;
-import { toast } from 'react-toastify'; 
 import { brandType , StoreBrandType } from '@brand-type';
+import { toast } from 'react-toastify';
 
 
 const useBrandTypeStore = create <StoreBrandType> ((set)=>({
@@ -46,7 +46,7 @@ const useBrandTypeStore = create <StoreBrandType> ((set)=>({
            if(response.status === 200){
                set((state)=>({dataBrandType: state.dataBrandType.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
-               toast.success("Deleted successfully")
+            toast.success("Brand type deleted successfully")
            }
         }catch(error:any){
             console.log(error)

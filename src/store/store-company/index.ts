@@ -1,7 +1,7 @@
 
 import { create } from 'zustand' ;
-import { toast } from 'react-toastify'; 
 import { company ,StoreCompany } from '@company';
+import { toast } from 'react-toastify';
 
 
 const useCompanyStore = create <StoreCompany> ((set)=>({
@@ -44,7 +44,7 @@ const useCompanyStore = create <StoreCompany> ((set)=>({
            if(response.status === 200){
                set((state)=>({dataCompany: state.dataCompany.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
-               toast.success("Deleted successfully")
+            toast.success("Company deleted successfully")
            }
         }catch(error:any){
             console.log(error)

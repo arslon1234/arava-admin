@@ -1,7 +1,7 @@
 
-import { create } from 'zustand' ;
-import { toast } from 'react-toastify'; 
+import { create } from 'zustand' ; 
 import { сouriers , StoreCouriers } from '@сouriers';
+import { toast } from 'react-toastify';
 
 
 const useCouriersStore = create <StoreCouriers> ((set)=>({
@@ -46,7 +46,7 @@ const useCouriersStore = create <StoreCouriers> ((set)=>({
            if(response.status === 200){
                set((state)=>({dataCouriers: state.dataCouriers.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
-               toast.success("Deleted successfully")
+            toast.success("Couriers deleted successfully")
            }
         }catch(error:any){
             console.log(error)

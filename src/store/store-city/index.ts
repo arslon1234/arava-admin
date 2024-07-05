@@ -1,7 +1,7 @@
 
 import { create } from 'zustand' ;
-import { toast } from 'react-toastify'; 
 import { city , StoreCity } from '@city';
+import { toast } from 'react-toastify';
 
 
 const useCityStore = create <StoreCity> ((set)=>({
@@ -46,7 +46,7 @@ const useCityStore = create <StoreCity> ((set)=>({
            if(response.status === 200){
                set((state)=>({dataCity: state.dataCity.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
-               toast.success("Deleted successfully")
+            toast.success("City deleted successfully")
            }
         }catch(error:any){
             console.log(error)

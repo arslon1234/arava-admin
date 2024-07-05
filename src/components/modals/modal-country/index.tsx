@@ -29,7 +29,8 @@ const Index = ({ title, id, data }: propsData) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  
+  // function to create or update  country <---------------
   const handelSubmit = async (value: any) => {
     setLoader(true);
     let status;
@@ -53,6 +54,7 @@ const Index = ({ title, id, data }: propsData) => {
       handleCancel();
     }
   };
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   return (
     <>
@@ -116,6 +118,7 @@ const Index = ({ title, id, data }: propsData) => {
                 <Form.Item
                   name="nameUz"
                   label="Country name uz"
+                  hasFeedback
                   style={{ width: "100%" }}
                   rules={[{ required: true }]}
                   initialValue={data?.nameUz ? data.nameUz : ""}
@@ -127,6 +130,7 @@ const Index = ({ title, id, data }: propsData) => {
                 <Form.Item
                   name="nameRu"
                   label="Country name ru"
+                  hasFeedback
                   style={{ width: "100%" }}
                   rules={[{ required: true }]}
                   initialValue={data?.nameRu ? data.nameRu : ""}

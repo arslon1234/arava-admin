@@ -37,6 +37,8 @@ const Index = ({ title, id, data }: propsData) => {
     getDataCountry();
   }, []);
 
+
+  // function to create or update region <------------------
   const handleSubmit = async (value: any) => {
     setLoader(true);
     let status;
@@ -60,6 +62,7 @@ const Index = ({ title, id, data }: propsData) => {
       handleCancel();
     }
   };
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   return (
     <>

@@ -1,204 +1,197 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
+
+import { useState } from "react";
+import { Button, Modal, Switch } from "antd";
+import { ConfigProvider, Form, Input } from "antd";
 import { toast } from "react-toastify";
-import * as Yup from "yup";
-import { Field, Formik, Form, ErrorMessage } from "formik";
-import {
-  Button,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+
 import { useBannerStore } from "@store";
 import UplodAntd from "../test-antd-uploding"
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #2BC62B",
-  boxShadow: 24,
-  p: 4,
-};
-
 interface propsData {
-  title: string;
+  title?: string;
   id?: number;
   data?: any;
 }
 
-export default function BasicModal({ title, id, data }: propsData) {
+const Index = ({ title, id, data }: propsData) => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+const { postDataBanner, updateDataBanner, imageUrl, imageUrlUpdated } = useBannerStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loader, setLoader] = useState(false);
 
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const { postDataBanner, updateDataBanner , imageUrl , imageUrlUpdated } = useBannerStore();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  /// my code start <-----------------------------
-
-  const validationSchema = Yup.object().shape({
-    activated: Yup.string().required("Activeted is required"),
-    bannerUrl: Yup.string().required("Banner URL is required"),
-    // imageUrl: Yup.string().required("Name is required"),
-  });
-
-  const initialValues: any = {
-    activated: data?.activated == true ? "True" : "False" || "",
-    bannerUrl: data?.bannerUrl || "",
-    // imageUrl: data?.imageUrl || image ,
+  const showModal = () => {
+    setIsModalOpen(true);
   };
 
-  const handelSubmit = async (value: any) => {
-    const activated: boolean | any = value?.activated == "True" ? true : false;
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  // function to create or update  country <---------------
+  const handelSubmit = async (value: any) => {
+    setLoader(true);
     if (!id) {
       console.log(imageUrl);
-      
-      const status = await postDataBanner({ ...value, activated: activated , imageUrl: imageUrl != "" && imageUrl });
+
+      const status = await postDataBanner({
+        ...value,
+        imageUrl: imageUrl != "" && imageUrl,
+      });
       if (status === 200) {
         toast.success("success full");
-        handleClose();
-        imageUrlUpdated("")
+        setLoader(false);
+        imageUrlUpdated("");
+        handleCancel();
         window.location.reload();
       } else {
         toast.error("Error :" + status);
-        handleClose();
-        imageUrlUpdated("")
+        setLoader(false);
+        imageUrlUpdated("");
+        handleCancel();
       }
     } else {
       console.log(value);
 
       const updateData = {
         id: id,
-        bannerUrl: value?.bannerUrl,
-        imageUrl: data?.imageUrl,
-        activated: activated,
+        bannerUrl: data?.bannerUrl ? data.bannerUrl : value?.bannerUrl,
+        imageUrl: imageUrl ? imageUrl : data?.imageUrl,
+        activated: value?.activated ? value?.activated : data?.activated,
       };
       const status = await updateDataBanner(updateData);
       if (status === 200) {
         toast.success("update success full");
-        handleClose();
+        setLoader(false);
+        handleCancel();
       } else {
         toast.error("Error :" + status);
-        handleClose();
+        setLoader(false);
+        handleCancel();
       }
     }
   };
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   return (
-    <div>
+    <>
       {title == "post" ? (
         <button
-          onClick={handleOpen}
-          className="py-2 px-6 text-white font-semibold bg-[#008524] hover:bg-[#349a34] active:bg-[#008524] duration-200 rounded-lg"
+          onClick={showModal}
+          className="py-2 px-6 text-white font-semibold bg-[#008524] hover:bg-[#008124] active:bg-[#008524] duration-200 rounded-lg"
         >
           To add
         </button>
       ) : (
         <Button
           color="inherit"
-          onClick={handleOpen}
-          sx={{
-            color: "#767676", // HEX formatida rang
+          onClick={showModal}
+          style={{
+            color: "#767676",
+            border: "none",
+            boxShadow: "none", // HEX formatida rang
           }}
         >
           <EditIcon />
         </Button>
       )}
       <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        className="testModal"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[]}
+        width={400}
+        style={{ top: "25%", left: "auto", right: "auto", bottom: "auto" }}
       >
-        <Box sx={style}>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handelSubmit}
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#008524",
+            },
+            components: {
+              Input: {
+                activeBorderColor: "#008524",
+                activeShadow: "#008524",
+                hoverBorderColor: "#008524",
+              },
+            },
+          }}
+        >
+          <Form
+            name="nest-messages"
+            onFinish={handelSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+            layout="vertical"
           >
-            <Form className=" max-w-[600px]  w-full flex flex-col gap-[12px]">
-              <h1 className="text-center mb-2 text-[26px] font-bold">
-                {title == "post" ? "Add a banner" : "Edit a banner"}
-              </h1>
-              <Field
-                as={TextField}
-                label="Banner url"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" ,height:18} }}
-                type="text"
+            <h1 className="text-center mb-2 text-[23px] font-semibold">
+              {title == "post" ? "Add a banner" : "Edit a banner"}
+            </h1>
+            <div>
+              {/*  Banner Url */}
+              <Form.Item
                 name="bannerUrl"
-                className=" w-[100%]  mb-3 outline-none py-0"
-                helperText={
-                  <ErrorMessage
-                    name="bannerUrl"
-                    component="div"
-                    className="mb-3 text-red-500 text-center text-[18px] font-medium"
-                  />
-                }
-              />
-              <div className="">
-              <UplodAntd/>
-              </div>
-              {
-                data?.imageUrl && <div>
-                <img
-                  src={baseUrl+data?.imageUrl}
-                  alt="banner"
-                  className="w-[100%] h-[150px] object-fill"
-                />
-            </div>
-              }
-              <Field
-                as={RadioGroup}
-                aria-label="activated"
-                name="activated"
-                className="flex items-center mb-3"
+                label="Banner url"
+                hasFeedback
+                style={{ width: "100%" }}
+                rules={[{ required: true }]}
+                initialValue={data?.bannerUrl ? data.bannerUrl : ""}
               >
-                <div className=" text-[20px] w-full">Activated</div>
-                <div className="flex items-center justify-between">
-                  <FormControlLabel
-                    value="False"
-                    control={<Radio />}
-                    label="False"
-                  />
-                  <FormControlLabel
-                    value="True"
-                    control={<Radio />}
-                    label="True"
+                <Input style={{ width: "100%" }} size="large" />
+              </Form.Item>
+
+              {/* Image uploud  */}
+              <div className="">
+                <UplodAntd />
+              </div>
+              {data?.imageUrl && (
+                <div>
+                  <img
+                    src={baseUrl + data?.imageUrl}
+                    alt="banner"
+                    className="w-[100%] h-[150px] object-fill"
                   />
                 </div>
-              </Field>
-              <ErrorMessage
+              )}
+            </div>
+            <div className="flex items-end">
+              {/* Activated  */}
+              <Form.Item
                 name="activated"
-                component="div"
-                className="mb-3 text-red-500 text-center"
-              />
-
-              <Button
-                sx={{
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  backgroundColor: "#008524",
-                  "&:hover": { background: "#008124" },
-                }}
-                
-                variant="contained"
-                type="submit"
-                className="w-[100%] py-3"
+                label="Activated"
+                hasFeedback
+                style={{ width: "40%" }}
+                rules={[{ required: true }]}
+                initialValue={data?.activated ? data?.activated : false}
               >
-                {title == "post" ? "to add" : "to edit"}
-              </Button>
-            </Form>
-          </Formik>
-        </Box>
+                <Switch defaultChecked />
+              </Form.Item>
+
+              {/* Form button */}
+              <Form.Item style={{ width: "60%" }}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  loading={loader}
+                  style={{ width: "100%" }}
+                >
+                  Submit
+                </Button>
+              </Form.Item>
+            </div>
+          </Form>
+        </ConfigProvider>
       </Modal>
-    </div>
+    </>
   );
-}
+};
+
+export default Index;

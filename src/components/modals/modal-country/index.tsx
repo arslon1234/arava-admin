@@ -1,86 +1,64 @@
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
+import { Button, Modal } from "antd";
+import { toast } from "react-toastify";
+import { ConfigProvider, Form, Input } from "antd";
 
-import { useCountryStore } from "@store";
-import { ConfigProvider, Form, Input , Button } from "antd";
+import {  useCountryStore } from "@store";
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #2BC62B",
-  boxShadow: 24,
-  p: 4,
-};
 
 interface propsData {
-  title: string;
+  title?: string;
   id?: number;
   data?: any;
 }
 
-export default function BasicModal({ title, id, data }: propsData) {
-  const { postDataCountry, updateDataCountry } = useCountryStore();
+const Index = ({ title, id, data }: propsData) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { postDataCountry , updateDataCountry } = useCountryStore();
+  const [loader, setLoader] = useState(false);
 
-  const [open, setOpen] = useState(false);
-  const [loader , setLoader] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
-  /// my code start <-----------------------------
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const handelSubmit = async (value: any) => {
+    setLoader(true);
+    let status;
     if (!id) {
-      console.log(value);
-      setLoader(true)
-      const status = await postDataCountry(value);
-      if (status === 200) {
-        toast.success("success full");
-        setLoader(false)
-        setTimeout(() => {
-          handleClose();
-          window.location.reload();
-        }, 1000);
-      } else {
-        toast.error("Error :" + status);
-        setLoader(false)
-        handleClose();
-      }
+      status = await postDataCountry(value);
     } else {
-      console.log(value);
+      const updateData = { ...value, id: id };
+      status = await updateDataCountry(updateData);
+    }
 
-      const updateData = {
-        id: id,
-        nameUz: value?.nameUz,
-        nameRu: value?.nameRu,
-      };
-      const status = await updateDataCountry(updateData);
-      if (status === 200) {
-        toast.success("update success full");
-        setTimeout(() => {
-          handleClose();
-          window.location.reload();
-        }, 1000);
-      } else {
-        toast.error("Error :" + status);
-        handleClose();
-      }
+    if (status === 200) {
+      toast.success(id ? "Update successful" : "Addition successful");
+      setLoader(false);
+      setTimeout(() => {
+        handleCancel();
+        window.location.reload();
+      }, 1000);
+    } else {
+      toast.error("Error: " + status);
+      setLoader(false);
+      handleCancel();
     }
   };
 
-  // my code end <--------------------------------
-
   return (
-    <div>
+    <>
       {title == "post" ? (
         <button
-          onClick={handleOpen}
+          onClick={showModal}
           className="py-2 px-6 text-white font-semibold bg-[#008524] hover:bg-[#008124] active:bg-[#008524] duration-200 rounded-lg"
         >
           To add
@@ -88,7 +66,7 @@ export default function BasicModal({ title, id, data }: propsData) {
       ) : (
         <Button
           color="inherit"
-          onClick={handleOpen}
+          onClick={showModal}
           style={{
             color: "#767676",
             border: "none" ,
@@ -98,14 +76,16 @@ export default function BasicModal({ title, id, data }: propsData) {
           <EditIcon />
         </Button>
       )}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <Modal 
+      className="testModal"
+      open={isModalOpen} 
+      onOk={handleOk} 
+      onCancel={handleCancel}
+      footer={[]}
+      width={400}
+      style={{top: "25%" , left : "auto" , right : "auto" , bottom:"auto"} }
       >
-        <Box sx={style}>
-          <ConfigProvider
+        <ConfigProvider
             theme={{
               token: {
                 colorPrimary: "#008524",
@@ -123,7 +103,6 @@ export default function BasicModal({ title, id, data }: propsData) {
               name="nest-messages"
               onFinish={handelSubmit}
               style={{
-                width: 330,
                 display: "flex",
                 flexDirection: "column",
               }}
@@ -168,8 +147,10 @@ export default function BasicModal({ title, id, data }: propsData) {
                   </Form.Item>
             </Form>
           </ConfigProvider>
-        </Box>
       </Modal>
-    </div>
+    </>
   );
-}
+};
+
+export default Index;
+

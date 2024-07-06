@@ -1,7 +1,7 @@
 
 import { create } from 'zustand' ;
-import { toast } from 'react-toastify'; 
 import { banner , StoreBanner } from '@banner';
+import { toast } from 'react-toastify';
 
 
 const useBannerStore = create <StoreBanner> ((set)=>({
@@ -47,7 +47,7 @@ const useBannerStore = create <StoreBanner> ((set)=>({
            if(response.status === 200){
                set((state)=>({dataBanner: state.dataBanner.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
-               toast.success("Deleted successfully")
+              toast.success("Banner deleted successfully")
            }
         }catch(error:any){
             console.log(error)

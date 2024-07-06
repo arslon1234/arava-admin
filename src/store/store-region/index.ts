@@ -1,7 +1,7 @@
 
 import { create } from 'zustand' ;
-import { toast } from 'react-toastify'; 
 import { region , StoreRegion} from '@region';
+import { toast } from 'react-toastify';
 
 
 const useRegionStore = create <StoreRegion> ((set)=>({
@@ -46,7 +46,7 @@ const useRegionStore = create <StoreRegion> ((set)=>({
            if(response.status === 200){
                set((state)=>({dataRegion: state.dataRegion.filter((el:any)=>el.id !== id)})) 
             //    set((state)=>({totlCount: state.totlCount -= 1}))
-               toast.success("Deleted successfully")
+            toast.success("Region deleted successfully")
            }
         }catch(error:any){
             console.log(error)

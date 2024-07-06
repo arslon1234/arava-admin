@@ -1,155 +1,92 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import Fade from '@mui/material/Fade';
+import React, { useState } from 'react';
+import { Button, Popover } from 'antd';
 import DeleteIcon from "@mui/icons-material/Delete";
-import { toast  } from 'react-toastify';
 
-import {useBannerStore , useBrandStore ,
-   useBrandTypeStore , useCityStore ,
-    useCountryStore , useCouriersStore , useRegionStore } from '@store';
+import { useBannerStore, useBrandStore, useBrandTypeStore, useCityStore, useCountryStore, useCouriersStore, useRegionStore } from '@store';
+import "./style.scss"
 
+interface FadeMenuProps {
+  id: number;
+  title: string;
+}
 
+const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
+  const [visible, setVisible] = useState(false);
 
+  const { deleteDataBanner } = useBannerStore();
+  const { deleteDataBrand } = useBrandStore();
+  const { deleteDataBrandType } = useBrandTypeStore();
+  const { deleteDataCity } = useCityStore();
+  const { deleteDataCountry } = useCountryStore();
+  const { deleteDataCouriers } = useCouriersStore();
+  const { deleteDataRegion } = useRegionStore();
 
-export default function FadeMenu({id , title}:{id:number , title : string}) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  // my function start ----------------------
- const {deleteDataBanner} = useBannerStore();
- const {deleteDataBrand} = useBrandStore();
- const {deleteDataBrandType} = useBrandTypeStore();
- const {deleteDataCity} = useCityStore();
- const {deleteDataCountry} = useCountryStore();
- const {deleteDataCouriers} = useCouriersStore();
- const {deleteDataRegion} = useRegionStore();
-
-  
-  const deleteData = async() => {
-    if(title == "banner"){
-      try{
-          const staus = await deleteDataBanner(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("Banner deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
+  const deleteData = async () => {
+    try {
+      let status;
+      switch (title) {
+        case "banner":
+          status = await deleteDataBanner(id);
+          break;
+        case "brand":
+          status = await deleteDataBrand(id);
+          break;
+        case "brandType":
+          status = await deleteDataBrandType(id);
+          break;
+        case "city":
+          status = await deleteDataCity(id);
+          break;
+        case "country":
+          status = await deleteDataCountry(id);
+          break;
+        case "couriers":
+          status = await deleteDataCouriers(id);
+          break;
+        case "region":
+          status = await deleteDataRegion(id);
+          break;
+        default:
+          alert("Delete, id - " + id);
+          return;
       }
-    }else if(title == "brand"){
-      try{
-          const staus = await deleteDataBrand(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("Brand deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
+      if (status === 200) {
+        setVisible(false);
       }
-    }else if(title == "brandType"){
-      try{
-          const staus = await deleteDataBrandType(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("Brand Type deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
-      }
-    }else if(title =="city"){
-      try{
-          const staus = await deleteDataCity(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("City deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
-      }
-    }else if(title == "country"){
-      try{
-          const staus = await deleteDataCountry(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("Country deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
-      }
-    }else if (title == "couriers"){
-      try{
-          const staus = await deleteDataCouriers(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("Couriers deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
-      }
-    }else if(title == "region"){
-      try{
-          const staus = await deleteDataRegion(id)
-        if(staus === 200){
-          handleClose()
-          toast.success("Region deleted successfully")
-        } 
-      }catch(err:any){
-          toast.error("Error " + err?.message)
-          console.log(err);
-      }
-    }else {
-      alert("delete , id - " + id);
+    } catch (err: any) {
+      console.log(err);
     }
-  }
+  };
 
-  // my function end ----------------------
+  const content = (
+    <>
+    <div className='px-4 py-2'>
+      <h3>Are you sure you want to delete?</h3>
+      <div className='flex items-center justify-end gap-3 mt-2'>
+        <Button onClick={() => setVisible(false)} className='button-no'>
+          No
+        </Button>
+        <Button onClick={deleteData} className='button-yes'>
+          Yes
+        </Button>
+      </div>
+    </div>
+    </>
+  );
 
   return (
-    <div>
-      <Button
-        id="fade-button"
-        aria-controls={open ? 'fade-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        color="inherit"
-        
-      >
-        <DeleteIcon/>
-      </Button>
-      <Menu
-        id="fade-menu"
-        MenuListProps={{
-          'aria-labelledby': 'fade-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Fade}
-        sx={{marginTop: 1}}
-      >
-        <div className='px-4 py-2'>
-            <h3 className=''>Are you sure you want to delete?</h3>
-            <div className='flex items-center justify-end gap-3 mt-2'>
-                <button onClick={handleClose} className='py-1 px-2 rounded-md bg-[#008524] hover:bg-[#008124] active:bg-[#008524] text-white'>No</button>
-                <button onClick={deleteData} className='py-1 px-2 rounded-md bg-red-600 hover:bg-red-700 active:bg-red-600 text-white'>Yes</button>
-            </div>
-        </div>
-        
-        </Menu>
-    </div>
+    <>
+    <Popover 
+      content={content} 
+      placement="bottomRight"
+      trigger="click" 
+      visible={visible}
+      onVisibleChange={(visible) => setVisible(visible)}
+    >
+      <Button   onClick={() => setVisible(true)}  style={{border:"none" , boxShadow:"none" }}><DeleteIcon className=' text-zinc-500'/></Button>
+    </Popover>
+    </>
   );
-}
+};
+
+export default FadeMenu;

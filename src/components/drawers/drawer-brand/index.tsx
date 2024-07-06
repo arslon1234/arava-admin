@@ -126,7 +126,6 @@ export default function TemporaryDrawer({ data }: any) {
       gpsPointY: lng,
       
     };
-    // console.log(postBrand);
 
     try {
         const respons = await postDataBrand(postBrand)

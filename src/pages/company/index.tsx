@@ -40,7 +40,9 @@ useEffect(()=>{
  // Props Global teble -------------->
  const theder = [
   {title: "S/N" , value:"t/r"},
-  {title: "Company name" , value:"name"},
+  {title: "First name" , value:"firstName"},
+  {title: "Last name" , value:"lastName"},
+  {title: "Company name" , value:"companyName"},
   {title: "Country name" , value:"countryName"},
   {title: "Action" , value:"action"}
 ]

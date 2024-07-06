@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
-import { Button, Popover } from 'antd';
+import { useState } from "react";
+import { Button, Popover } from "antd";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { useBannerStore, useBrandStore, useBrandTypeStore, useCityStore, useCountryStore, useCouriersStore, useRegionStore } from '@store';
-import "./style.scss"
+import {
+  useBannerStore,
+  useBrandStore,
+  useBrandTypeStore,
+  useCityStore,
+  useCountryStore,
+  useCouriersStore,
+  useRegionStore,
+  useCompanyStore,
+} from "@store";
+import "./style.scss";
 
 interface FadeMenuProps {
   id: number;
   title: string;
 }
 
-const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
+const Index = ({ id, title }: FadeMenuProps) => {
   const [visible, setVisible] = useState(false);
 
   const { deleteDataBanner } = useBannerStore();
@@ -20,6 +29,7 @@ const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
   const { deleteDataCountry } = useCountryStore();
   const { deleteDataCouriers } = useCouriersStore();
   const { deleteDataRegion } = useRegionStore();
+  const { deleteDataCompany } = useCompanyStore();
 
   const deleteData = async () => {
     try {
@@ -46,6 +56,9 @@ const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
         case "region":
           status = await deleteDataRegion(id);
           break;
+        case "company":
+          status = await deleteDataCompany(id);
+          break;
         default:
           alert("Delete, id - " + id);
           return;
@@ -60,33 +73,38 @@ const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
 
   const content = (
     <>
-    <div className='px-4 py-2'>
-      <h3>Are you sure you want to delete?</h3>
-      <div className='flex items-center justify-end gap-3 mt-2'>
-        <Button onClick={() => setVisible(false)} className='button-no'>
-          No
-        </Button>
-        <Button onClick={deleteData} className='button-yes'>
-          Yes
-        </Button>
+      <div className="px-4 py-2">
+        <h3>Are you sure you want to delete?</h3>
+        <div className="flex items-center justify-end gap-3 mt-2">
+          <Button onClick={() => setVisible(false)} className="button-no">
+            No
+          </Button>
+          <Button onClick={deleteData} className="button-yes">
+            Yes
+          </Button>
+        </div>
       </div>
-    </div>
     </>
   );
 
   return (
     <>
-    <Popover 
-      content={content} 
-      placement="bottomRight"
-      trigger="click" 
-      visible={visible}
-      onVisibleChange={(visible) => setVisible(visible)}
-    >
-      <Button   onClick={() => setVisible(true)}  style={{border:"none" , boxShadow:"none" }}><DeleteIcon className=' text-zinc-500'/></Button>
-    </Popover>
+      <Popover
+        content={content}
+        placement="bottomRight"
+        trigger="click"
+        visible={visible}
+        onVisibleChange={(visible) => setVisible(visible)}
+      >
+        <Button
+          onClick={() => setVisible(true)}
+          style={{ border: "none", boxShadow: "none" }}
+        >
+          <DeleteIcon className=" text-zinc-500" />
+        </Button>
+      </Popover>
     </>
   );
 };
 
-export default FadeMenu;
+export default Index;

@@ -6,5 +6,6 @@
     "country":"Страна",
     "couriers":"Курьеры",
     "banner":"Баннер",
-    "region":"Oбласть"
+    "region":"Oбласть",
+    "branch": "Ветвь"
 }

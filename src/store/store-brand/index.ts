@@ -70,6 +70,18 @@ const useBrandStore = create <StoreBrand> ((set)=>({
 
     locationUpdate : (data)=>{
         set({location: data})
+    },
+
+    activateBrand: async(data)=> {
+        try{
+            const response = await brand.brandActivated(data)
+            if(response.status === 200){
+                set((state)=>({dataBrand: state.dataBrand.map((el:any)=> el.id == data.id ? {...el, activated:data?.activated} : el)}))
+                return response?.status
+            }
+        }catch(error:any){
+            console.log(error)
+        }
     }
 
 }))

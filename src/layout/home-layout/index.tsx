@@ -12,6 +12,7 @@ import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import PublicIcon from "@mui/icons-material/Public";
 import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import SouthAmericaIcon from "@mui/icons-material/SouthAmerica";
+import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 
 import { Account, DropdownLanguage } from "@ui";
 import './style.scss'
@@ -41,6 +42,7 @@ export default function ResponsiveDrawer() {
     { path: "/home/region", title: t("region"), icon: <SouthAmericaIcon /> },
     { path: "/home/city", title: t("city"), icon: <ApartmentIcon /> },
     { path: "/home/company", title: t("company"), icon: <HomeWorkIcon /> },
+    { path: "/home/branch", title: t("branch"), icon: <AddHomeWorkIcon /> },
   ];
 
   const { pathname } = useLocation();
@@ -54,6 +56,7 @@ export default function ResponsiveDrawer() {
     if (pathname === "/home") return t("couriers");
     if (pathname === "/home/banner") return t("banner");
     if (pathname === "/home/region") return t("region");
+    if (pathname === "/home/branch") return t("branch");
     return "Error";
   };
 

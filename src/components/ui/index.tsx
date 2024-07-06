@@ -3,7 +3,7 @@ import GlobalTeble from "./global-teble";
 import GlobalSearch from "./global-search";
 import DropdownLanguage from "./dropdown-lang";
 import GoogleMaps from "./google-maps";
-import TestSwitch from "./test-switch";
+import GlobalSwitch from "./global-switch";
 
 
-export {Account , GlobalTeble , GlobalSearch , DropdownLanguage , GoogleMaps , TestSwitch}
+export {Account , GlobalTeble , GlobalSearch , DropdownLanguage , GoogleMaps , GlobalSwitch}

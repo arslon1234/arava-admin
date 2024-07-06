@@ -37,10 +37,10 @@ function Index() {
     { title: "Name", value: "name" },
     { title: "Company name", value: "companyName" },
     { title: "Country", value: "countryName" },
-    // { title: "Region", value: "regionName" },
-    // { title: "City", value: "cityName" },
+    { title: "Region", value: "regionName" },
+    { title: "City", value: "cityName" },
     { title: "Image", value: "imageUrl" },
-    {title: "Activated" , value: "activatedBrand" },
+
     { title: "Action", value: "brand" },
   ];
 

@@ -57,7 +57,7 @@ const useBrandTypeStore = create <StoreBrandType> ((set)=>({
             try{
                 const response = await brandType.updateBrandType(data)
                 if(response?.status === 200){
-                    set((state)=>({dataBrandType: state.dataBrandType.map((el:any)=>el.id == data?.id ? data : el)}))
+                    set((state)=>({dataBrandType: state.dataBrandType.map((el:any)=>el.id == data?.id ? {...el , ...data} : el)}))
                     return response?.status
                 }
                 

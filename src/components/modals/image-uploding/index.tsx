@@ -26,6 +26,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const Index = ({ text }: PropsData) => {
   const { imageUrlUpdated, imageUrl } = useBannerStore();
 
+  // imge upload reyuzible component bo'lgan propsdagi "text" qarab URL o'zgaradi 
   const bannerUpload = async (file: File) => {
     try {
       const token = getCookies("access_token");
@@ -50,7 +51,7 @@ const Index = ({ text }: PropsData) => {
       imageUrlUpdated("");
     }
   };
-
+ //=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   const props: UploadProps = {
     name: 'file',
     listType: 'picture',

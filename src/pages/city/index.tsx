@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {ModalCity} from "@modals"
 import {GlobalTeble , GlobalSearch } from "@ui";
 import {useCityStore} from "@store"
 
@@ -41,8 +41,7 @@ useEffect(()=>{
  const theder = [
   {title: "S/N" , value:"t/r"},
   {title: "City name" , value: true ? "nameUz" : "nameRu" },
-  {title: "Region" , value:"regionName"},
-  {title: "Region id" , value:"regionId"},
+  {title: "Region name" , value:"regionName"},
   {title: "Action" , value:"city"}
 ]
 
@@ -72,7 +71,7 @@ const hendalChange = (e:any)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} hendelChange={hendalChange}/>
-    <ModalTest title="post" 
+    <ModalCity title="post" 
     />
   </div>
    <GlobalTeble heders={theder} body={dataCity} skelatonLoader={isLoader}/>

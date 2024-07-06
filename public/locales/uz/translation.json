@@ -6,5 +6,6 @@
     "country":"Country",
     "couriers":"Couriers",
     "banner":"Banner",
-    "region":"Region"
+    "region":"Region",
+    "branch" : "Branch"
 }

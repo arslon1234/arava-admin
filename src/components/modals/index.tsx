@@ -6,6 +6,7 @@ import ModalBannerStatus from "./modal-banner-status";
 import ModalBrandTaype from "./modal-brand-type";
 import ImageUploding from "./test-antd-uploding";
 import ModalRegion from "./modal-region";
+import ModalCity from "./modal-city";
 
 
 export { 
@@ -17,4 +18,5 @@ export {
     ModalBrandTaype,
     ImageUploding,
     ModalRegion,
+    ModalCity,
 }

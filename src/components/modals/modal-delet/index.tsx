@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Button, Popover } from 'antd';
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -10,7 +10,7 @@ interface FadeMenuProps {
   title: string;
 }
 
-const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
+const Index = ({ id, title }:FadeMenuProps) => {
   const [visible, setVisible] = useState(false);
 
   const { deleteDataBanner } = useBannerStore();
@@ -89,4 +89,4 @@ const FadeMenu: React.FC<FadeMenuProps> = ({ id, title }) => {
   );
 };
 
-export default FadeMenu;
+export default Index;

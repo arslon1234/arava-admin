@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import { Props } from "@interface";
 import { TestSwitch } from "@ui";
 import {DrawerCouriers} from "@drawers"
-import { ModalDelete , ModalTest , ModalCountry , ModalBanner , ModalBrandTaype , ModalRegion} from "@modals"
+import { ModalDelete , ModalTest , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion} from "@modals"
 
 
 function Index({ heders, body, skelatonLoader }: Props) {
@@ -83,7 +83,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               </div>
                               :heder.value == "action3" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="banner"/></div>
-                              <ModalBanner title="put" id={body?.id} data={body}/>
+                              {/* <ModalBanner title="put" id={body?.id} data={body}/> */}
                               </div>
                               :heder.value == "brand" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
@@ -95,7 +95,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                                </div> 
                               :heder.value == "city" ? <div className="flex items-center gap-2">
                                <div className=' text-gray-500'><ModalDelete id={body?.id} title="city"/></div>
-                                <ModalTest title="put" id={body?.id} data={body}/>
+                                <ModalCity title="put" id={body?.id} data={body}/>
                               </div> 
                               :heder.value == "country" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>

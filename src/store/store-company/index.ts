@@ -64,6 +64,19 @@ const useCompanyStore = create <StoreCompany> ((set)=>({
                 }
     },
 
+    activateCompany: async(data)=>{
+        try{
+            const response = await company.activateCompany(data)
+            if(response.status === 200){
+                set((state)=>({dataCompany: state.dataCompany.map((el:any)=>el.id === data?.id? {...el , ...data} : el)}))
+                // toast.success("Company status changed successfully")
+                return response?.status
+            }
+        }catch(error:any){
+            console.log(error)
+        }
+    },
+
 }))
 
 export default useCompanyStore

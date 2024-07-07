@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useBannerStore } from "@store";
-import UplodAntd from "../test-antd-uploding"
+import {ImageUploding} from "@modals"
 
 interface propsData {
   title?: string;
@@ -149,7 +149,7 @@ const { postDataBanner, updateDataBanner, imageUrl, imageUrlUpdated } = useBanne
 
               {/* Image uploud  */}
               <div className="">
-                <UplodAntd />
+                <ImageUploding />
               </div>
               {data?.imageUrl && (
                 <div>

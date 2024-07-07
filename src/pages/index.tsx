@@ -7,7 +7,8 @@ import Country from "./country";
 import City from "./city";
 import Company from "./company";
 import Banner from "./banner";
-import Region from "./region"
+import Region from "./region";
+import Branch from "./branch";
 
 export { 
     SignIn,
@@ -19,5 +20,6 @@ export {
     Company , 
     Couriers , 
     Banner , 
-    Region  ,
+    Region ,
+    Branch ,
 };

@@ -15,6 +15,11 @@ export interface GetCompany{
     limit?:number;
 }
 
+export interface CompanyActivated{
+    id:number|any;
+    activated: boolean;
+}
+
 
 
 
@@ -25,6 +30,8 @@ interface Category{
     postCompany : (data:postCompany)=> any,
     deleteCompany : (id:number)=> any,
     updateCompany: (data:UpdateCompany)=> any,
+
+    activateCompany : (data:CompanyActivated)=> any
 }
 
 // ---------> Interface Stor Company <--------------------
@@ -38,6 +45,8 @@ export interface StoreCompany {
     deleteDataCompany: (id:number)=> Promise <any>;
     postDataCompany: (data:postCompany)=> Promise <any>;
     updateDataCompany: (data:UpdateCompany)=> Promise <any>;
+
+    activateCompany: (data:CompanyActivated)=> Promise <any>;
 }
 
 
@@ -48,7 +57,9 @@ export const company:Category = {
     getCompany: ()=> request.get(`/services/admin/api/company-pageList`),
 
     // ESLATMA swagger to'grilansa davom etiladi
-    deleteCompany: (id)=> request.delete(`/api/test/${id}`),
-    postCompany: (data)=> request.post("/api/test" , data),
-    updateCompany: (data)=> request.patch(`/api/test${data.id}`, data),
+    deleteCompany: (id)=> request.delete(`/services/admin/api/company/${id}`),
+    postCompany: (data)=> request.post("/services/admin/api/company" , data),
+    updateCompany: (data)=> request.patch(`/services/admin/api/company`, data),
+
+    activateCompany: (data)=> request.put(`/services/admin/api/company-activate`, data),
 }

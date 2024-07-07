@@ -34,15 +34,22 @@ export interface GetBrand{
 }
 
 
+export interface BrandActivated{
+    id?:number|any;
+    activated: boolean;
+}
+
 
 
 interface Brand{
     getBrand : ()=> any,
-    
-    //API da hali qo'shilmadi
     postBrand : (data:postBrand)=> any,
-    updateBrand: (data:UpdateBrand)=> any,
     deleteBrand : (id:number)=> any,
+    
+    brandActivated : (data:BrandActivated)=> any,
+
+    // updateBrand test jarayonida 
+    updateBrand: (data:UpdateBrand)=> any,
 }
 
 // ---------> Interface Stor Brand <--------------------
@@ -52,12 +59,15 @@ export interface StoreBrand {
     totlCount:number;
     location :Location;
     getDataBrand: ()=> Promise <any>;
-    
-    //API da hali qo'shilmadi
     postDataBrand: (data:postBrand)=> Promise <any>;
-    updateDataBrand: (data:UpdateBrand)=> Promise <any>;
     deleteDataBrand: (id:number)=> Promise <any>;
     locationUpdate : (data:Location)=> void;
+
+    activateBrand: (data:BrandActivated)=> Promise <any>;
+
+
+    // updateDataBrand test jarayonida 
+    updateDataBrand: (data:UpdateBrand)=> Promise <any>;
 }
 
 
@@ -66,10 +76,12 @@ export interface StoreBrand {
 // ----------------> Instance Category <----------------------------
 export const brand:Brand = {
     getBrand: ()=> request.get(`/services/admin/api/brand-pageList`),
-
-    //API da hali qo'shilmadi
     deleteBrand: (id)=> request.delete(`/services/admin/api/brand/${id}`),
     postBrand: (data)=> request.post("/services/admin/api/brand" , data),
+
+    brandActivated: (data)=> request.put(`/services/admin/api/brand-activate`, data),
+    
+    // updateBrand test jarayonida
     updateBrand: (data)=> request.put(`/services/admin/api/brand`, data),
 
 }

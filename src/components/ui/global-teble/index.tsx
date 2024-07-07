@@ -20,9 +20,9 @@ import { Link } from "react-router-dom";
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
-import { TestSwitch } from "@ui";
+import { GlobalSwitch } from "@ui";
 import {DrawerCouriers} from "@drawers"
-import { ModalDelete , ModalTest , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion} from "@modals"
+import { ModalDelete , ModalCompany , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion} from "@modals"
 
 
 function Index({ heders, body, skelatonLoader }: Props) {
@@ -73,15 +73,15 @@ function Index({ heders, body, skelatonLoader }: Props) {
                         {
                           heders?.map((heder, index2)=>{
                             return <TableCell key={index2}>{
-                              heder.value == "action" ? <div className="flex items-center gap-2">
-                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="test"/></div>
-                                   <ModalTest title="put" id={body?.id} data={body}/>
+                              heder.value == "company" ? <div className="flex items-center gap-2">
+                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="company"/></div>
+                                   <ModalCompany title="put" id={body?.id} data={body}/>
                                    </div>
-                              :heder.value == "action2" ? <div className="flex items-center gap-2">
+                              :heder.value == "country" ? <div className="flex items-center gap-2">
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
                                   <ModalCountry title="put" id={body?.id} data={body}/>
                               </div>
-                              :heder.value == "action3" ? <div className="flex items-center gap-2">
+                              :heder.value == "banner" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="banner"/></div>
                               {/* <ModalBanner title="put" id={body?.id} data={body}/> */}
                               </div>
@@ -99,7 +99,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               </div> 
                               :heder.value == "country" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
-                               <ModalTest title="put" id={body?.id} data={body}/>
+                               <ModalCountry title="put" id={body?.id} data={body}/>
                              </div>
                              :heder.value == "couriers" ? <div className="flex items-center gap-2">
                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="couriers"/></div>
@@ -112,8 +112,10 @@ function Index({ heders, body, skelatonLoader }: Props) {
                               : heder.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
                               : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
-                              : heder.value == "activated" ? <div><TestSwitch activated={body?.activated} id={body?.id} text="banner"/></div> 
-                              : heder.value == "activated2" ? <div><TestSwitch activated={body?.activated} id={body?.id} text="brandType"/></div> 
+                              : heder.value == "activatedBanner" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="banner"/></div> 
+                              : heder.value == "activatedBrandType" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brandType"/></div> 
+                              : heder.value == "activatedBrand" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brand"/></div> 
+                              : heder.value == "activatedCompany" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="company"/></div> 
                               : (body[heder.value])
                             }</TableCell>
                           })

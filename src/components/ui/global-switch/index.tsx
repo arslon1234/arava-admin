@@ -1,5 +1,5 @@
 import { ConfigProvider, Switch } from "antd";
-import { useBannerStore , useBrandTypeStore} from "@store";
+import { useBannerStore , useBrandTypeStore , useBrandStore , useCompanyStore} from "@store";
 
 import { useState } from "react";
 
@@ -7,7 +7,11 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
   const [checked1, setChecked] = useState(activated);
   const { bannerActivate } = useBannerStore();
   const {brandTypeActivated} = useBrandTypeStore();
+  const {activateBrand} = useBrandStore();
+  const {activateCompany } = useCompanyStore();
 
+
+  // reyuzbil switch popsdagi quydagi "activated, text , id" qaiyatlar asosida ishbajaradi
   const onChange = async (checked: boolean) => {
     const data = {
       id: id,
@@ -17,16 +21,25 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
       const status = await bannerActivate(data);
       if (status === 200) {
         setChecked(!checked1);
-        console.log(checked);
       }
     }else if(text =="brandType"){
       const status = await brandTypeActivated(data);
       if(status === 200){
         setChecked(!checked1);
-        console.log(checked);
+      }
+    }else if(text =="brand"){
+      const status = await activateBrand(data);
+      if(status === 200){
+        setChecked(!checked1);
+      }
+    }else if(text =="company"){
+      const status = await activateCompany(data);
+      if(status === 200){
+        setChecked(!checked1);
       }
     }
   };
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   return (
     <>
       <ConfigProvider

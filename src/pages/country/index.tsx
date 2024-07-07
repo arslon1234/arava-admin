@@ -41,7 +41,7 @@ useEffect(()=>{
  const theder = [
   {title: "S/N" , value:"t/r"},
   {title: "Country name" , value: true ? "nameUz" : "nameRu" },
-  {title: "Action" , value:"action2"}
+  {title: "Action" , value:"country"}
 ]
 
 

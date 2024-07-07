@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { DrawerBrandAntd } from "@drawers";
-import { GlobalTeble, GlobalSearch } from "@ui";
-import { useBrandStore } from "@store";
+import { GlobalTable, GlobalSearch } from "@ui";
+import { useBranchStore } from "@store";
 
 function Index() {
   const navigate = useNavigate();
   const [change, setChange] = useState("");
   const [, setParams] = useState({ limit: 10, page: 1, search: change });
-  const { getDataBrand, dataBrand, isLoader } = useBrandStore();
+  const { getDataBranch , dataBranch , isLoader} = useBranchStore();
   // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
   useEffect(() => {
-    getDataBrand();
+    getDataBranch();
   }, []);
 
   useEffect(() => {
@@ -31,14 +31,15 @@ function Index() {
     setChange(searchString);
   }, [location.search]);
 
-  // Props Global teble -------------->
-  const theder = [
+  // Props Global teble header-------------->
+  const header = [
     { title: "S/N", value: "t/r" },
-    { title: "Name", value: "name" },
-    { title: "Company name", value: "companyName" },
-    { title: "Country", value: "countryName" },
-    { title: "Region", value: "regionName" },
-    { title: "City", value: "cityName" },
+    { title: "Branch name", value: "name" },
+    { title: "Brand", value: "brandName" },
+    // { title: "Country", value: "countryName" },
+    // { title: "Region", value: "regionName" },
+    // { title: "City", value: "cityName" },
+    { title: "Activated" , value: "activatedBranch" },
     { title: "Image", value: "imageUrl" },
 
     { title: "Action", value: "brand" },
@@ -53,8 +54,8 @@ function Index() {
   // }
   //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
-  // Hendel chenge ------>
-  const hendalChange = (e: any) => {
+  // Hendel chenge handleChange------>
+  const handleChange = (e: any) => {
     const search = e.target.value;
     setChange(search);
     setParams((preParams) => ({ ...preParams, search }));
@@ -67,11 +68,12 @@ function Index() {
     <>
       <ToastContainer />
       <div className="py-3 flex items-center justify-between">
-        <GlobalSearch search={change} hendelChange={hendalChange} />
+        <GlobalSearch search={change} handleChange={handleChange} />
 
         <DrawerBrandAntd />
       </div>
-      <GlobalTeble heders={theder} body={dataBrand} skelatonLoader={isLoader} />
+      {/* GlobalTable */}
+      <GlobalTable header={header} body={dataBranch} skelatonLoader={isLoader} />
 
       {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
     </>

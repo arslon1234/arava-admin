@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { DrawerBrandAntd } from "@drawers";
-import { GlobalTeble, GlobalSearch } from "@ui";
+import { GlobalTable, GlobalSearch } from "@ui";
 import { useBrandStore } from "@store";
 
 function Index() {
@@ -32,7 +32,7 @@ function Index() {
   }, [location.search]);
 
   // Props Global teble -------------->
-  const theder = [
+  const header = [
     { title: "S/N", value: "t/r" },
     { title: "Name", value: "name" },
     { title: "Company name", value: "companyName" },
@@ -54,7 +54,7 @@ function Index() {
   //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
   // Hendel chenge ------>
-  const hendalChange = (e: any) => {
+  const handleChange = (e: any) => {
     const search = e.target.value;
     setChange(search);
     setParams((preParams) => ({ ...preParams, search }));
@@ -67,11 +67,11 @@ function Index() {
     <>
       <ToastContainer />
       <div className="py-3 flex items-center justify-between">
-        <GlobalSearch search={change} hendelChange={hendalChange} />
+        <GlobalSearch search={change} handleChange={handleChange} />
 
         <DrawerBrandAntd />
       </div>
-      <GlobalTeble heders={theder} body={dataBrand} skelatonLoader={isLoader} />
+      <GlobalTable header={header} body={dataBrand} skelatonLoader={isLoader} />
 
       {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
     </>

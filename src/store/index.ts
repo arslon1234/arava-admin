@@ -7,6 +7,7 @@ import useCityStore from "./store-city"
 import useCouriersStore from "./store-сouriers"
 import useRegionStore from "./store-region"
 import useBranchStore from "./store-branch"
+import useCuisinesStore from "./store-cuisines"
 
 
 export {
@@ -19,4 +20,5 @@ export {
     useCouriersStore,
     useRegionStore,
     useBranchStore,
+    useCuisinesStore,
 }

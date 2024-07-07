@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import { Props } from "@interface";
 import { GlobalSwitch } from "@ui";
 import {DrawerCouriers} from "@drawers"
-import { ModalDelete , ModalCompany , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion} from "@modals"
+import { ModalDelete , ModalCompany , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals"
 
 
 function Index({ header, body, skelatonLoader }: Props) {
@@ -105,11 +105,23 @@ function Index({ header, body, skelatonLoader }: Props) {
                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="couriers"/></div>
                               <DrawerCouriers title="put" id={body?.id} data={body}/>
                               </div> 
+                              :header.value == "cuisines" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="cuisines"/></div>
+                               <ModalCuisines title="put" id={body?.id} data={body}/>
+                             </div>
                               :header.value == "region" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>
                                <ModalRegion title="put" id={body?.id} data={body}/>
                                </div>
-                              : header.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
+                              : header.value == "imageUrl" ? <>
+                                <Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank">
+                                 <img className="w-[120px] h-[40px] object-contain"
+                                  src={body?.imageUrl ? 
+                                  `https://webtest.aravva.uz${body?.imageUrl}` 
+                                  : "https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg"} 
+                                  alt="image" />
+                                </Link>
+                              </> 
                               : header.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
                               : header.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
                               : header.value == "activatedBanner" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="banner"/></div> 

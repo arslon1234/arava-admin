@@ -26,6 +26,8 @@ export default defineConfig({
       { find: '@сouriers', replacement: '/src/service/сouriers' },
       { find: '@region', replacement: '/src/service/region' },
       { find: '@branch', replacement: '/src/service/branch' },
+      { find: '@cuisines', replacement: '/src/service/cuisines' },
+
 
 
       { find: '@store', replacement: '/src/store'},

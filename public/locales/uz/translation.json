@@ -7,5 +7,6 @@
     "couriers":"Couriers",
     "banner":"Banner",
     "region":"Region",
-    "branch" : "Branch"
+    "branch" : "Branch",
+    "cuisines":"Cuisines"
 }

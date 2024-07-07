@@ -1,10 +1,11 @@
 import { useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import { Button, Modal, Switch } from "antd";
-import { toast } from "react-toastify";
+import { Button, Modal } from "antd";
 import { ConfigProvider, Form, Input } from "antd";
+import { toast } from "react-toastify";
+import EditIcon from "@mui/icons-material/Edit";
 
-import { useBrandTypeStore } from "@store";
+import { useBannerStore , useCuisinesStore } from "@store";
+import { ImageUploding } from "@modals";
 
 interface propsData {
   title?: string;
@@ -13,8 +14,10 @@ interface propsData {
 }
 
 const Index = ({ title, id, data }: propsData) => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const { imageUrl, imageUrlUpdated } = useBannerStore();
+  const { postDataCuisines, updateDataCuisines } = useCuisinesStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { postDataBrandType, updateDataBrandType } = useBrandTypeStore();
   const [loader, setLoader] = useState(false);
 
   const showModal = () => {
@@ -29,43 +32,49 @@ const Index = ({ title, id, data }: propsData) => {
     setIsModalOpen(false);
   };
 
-  // function to create or update brand type <------------
+  // function to create or update  country <---------------
   const handelSubmit = async (value: any) => {
     setLoader(true);
-    let status;
     if (!id) {
-      status = await postDataBrandType({ ...value, sorting: 0 });
-    } else {
-      const updateData = {
-        id: id,
-        nameUz: value?.nameUz ? value.nameUz : data?.nameUz,
-        nameRu: value?.nameRu ? value.nameRu : data?.nameRu,
-        descriptionRu: value?.descriptionRu
-          ? value.descriptionRu
-          : data?.descriptionRu,
-        descriptionUz: value?.descriptionUz
-          ? value.descriptionUz
-          : data?.descriptionUz,
-        activated: value?.activated ? value?.activated : data?.activated,
-        sorting: data?.sorting ? data?.sorting : 0,
-      };
-      status = await updateDataBrandType(updateData);
-    }
+      console.log(imageUrl);
 
-    if (status === 200) {
-      toast.success(id ? "Update successful" : "Addition successful");
-      setLoader(false);
-      setTimeout(() => {
+      const status = await postDataCuisines({
+        ...value,
+        imageUrl: imageUrl && imageUrl,
+      });
+      if (status === 200) {
+        toast.success("success full");
+        setLoader(false);
+        imageUrlUpdated("");
         handleCancel();
         window.location.reload();
-      }, 1000);
+      } else {
+        toast.error("Error :" + status);
+        setLoader(false);
+        imageUrlUpdated("");
+        handleCancel();
+      }
     } else {
-      toast.error("Error: " + status);
-      setLoader(false);
-      handleCancel();
+      console.log(value);
+
+      const updateData = {
+        ...value,
+        id: id,
+        imageUrl: imageUrl ? imageUrl : data?.imageUrl,
+      };
+      const status = await updateDataCuisines(updateData);
+      if (status === 200) {
+        toast.success("update success full");
+        setLoader(false);
+        handleCancel();
+      } else {
+        toast.error("Error :" + status);
+        setLoader(false);
+        handleCancel();
+      }
     }
   };
-  //=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   return (
     <>
@@ -96,6 +105,7 @@ const Index = ({ title, id, data }: propsData) => {
         onCancel={handleCancel}
         footer={[]}
         width={400}
+        style={{ top: "5%", left: "auto", right: "auto", bottom: "auto" }}
       >
         <ConfigProvider
           theme={{
@@ -121,13 +131,13 @@ const Index = ({ title, id, data }: propsData) => {
             layout="vertical"
           >
             <h1 className="text-center mb-2 text-[23px] font-semibold">
-              {title == "post" ? "Add a brand type" : "Edit a brand type"}
+              {title == "post" ? "Add a cuisines" : "Edit a cuisines"}
             </h1>
 
             {/*  name  uz*/}
             <Form.Item
               name="nameUz"
-              label="Country name uz"
+              label="Name uz"
               hasFeedback
               style={{ width: "100%" }}
               rules={[{ required: true }]}
@@ -139,7 +149,7 @@ const Index = ({ title, id, data }: propsData) => {
             {/*  name ru */}
             <Form.Item
               name="nameRu"
-              label="Country name ru"
+              label="Name ru"
               hasFeedback
               style={{ width: "100%" }}
               rules={[{ required: true }]}
@@ -172,32 +182,44 @@ const Index = ({ title, id, data }: propsData) => {
               <Input style={{ width: "100%" }} size="large" />
             </Form.Item>
 
-            <div className="flex items-end">
-              {/* Activated  */}
-              <Form.Item
-                name="activated"
-                label="Activated"
-                hasFeedback
-                style={{ width: "40%" }}
-                rules={[{ required: true }]}
-                initialValue={data?.activated ? data?.activated : false}
-              >
-                <Switch defaultChecked />
-              </Form.Item>
+            {/*  sorting */}
+            <Form.Item
+              name="sorting"
+              label="Sorting "
+              hasFeedback
+              style={{ width: "100%" }}
+              rules={[{ required: true }]}
+              initialValue={data?.sorting ? data.sorting : ""}
+            >
+              <Input style={{ width: "100%" }} size="large" type="number" />
+            </Form.Item>
 
-              {/* Form button */}
-              <Form.Item style={{ width: "60%" }}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  size="large"
-                  loading={loader}
-                  style={{ width: "100%" }}
-                >
-                  Submit
-                </Button>
-              </Form.Item>
+            {/* Image uploud  */}
+            <div className="">
+              <ImageUploding />
             </div>
+            {data?.imageUrl && (
+              <div>
+                <img
+                  src={baseUrl + data?.imageUrl}
+                  alt="banner"
+                  className="w-[100%] h-[150px] object-fill"
+                />
+              </div>
+            )}
+
+            {/* Form button */}
+            <Form.Item style={{ width: "100%" , marginTop:10 }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                loading={loader}
+                style={{ width: "100%" }}
+              >
+                Submit
+              </Button>
+            </Form.Item>
           </Form>
         </ConfigProvider>
       </Modal>

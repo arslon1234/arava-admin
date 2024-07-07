@@ -7,7 +7,7 @@ import {
 
 import App from "../App";
 import { Error , SignIn , Brand, BrandType,
-   Country, City, Company , Couriers , Banner , Region , Branch } from "@pages"
+   Country, City, Company , Couriers , Banner , Region , Branch  , Cuisines} from "@pages"
 import {HomeLayout} from "@layout"
 
 const index = ()=>{
@@ -25,6 +25,7 @@ const index = ()=>{
                 <Route path="banner" element={<Banner/>} />
                 <Route path="region" element={<Region/>} />
                 <Route path="branch" element={<Branch/>} />
+                <Route path="cuisines" element={<Cuisines/>} />
             </Route>  
             <Route path="*" element={<Error />} />
             

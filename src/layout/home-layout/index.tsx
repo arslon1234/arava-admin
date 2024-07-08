@@ -85,7 +85,7 @@ export default function ResponsiveDrawer() {
         </div>
         <Menu theme="light" mode="inline" selectedKeys={[pathname]}>
           {navList.map((el) => (
-            <Menu.Item key={el.path} className={pathname === el.path ? 'custom-active-item text-[18px] ' : 'text-[18px]'}>
+            <Menu.Item key={el.path} className={pathname === el.path ? 'custom-active-item text-[18px]  ' : 'text-[18px]'}>
               
               <NavLink className="flex items-center gap-6"  to={el.path}> <div>{el.icon}</div> {el.title}</NavLink>
             </Menu.Item>

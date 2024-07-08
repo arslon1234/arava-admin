@@ -94,7 +94,9 @@ const Index = ({ text }: PropsData) => {
     <Upload {...props}>
       <Button
         icon={<UploadOutlined />}
-        className={text === "brand" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]" : "w-full px-[107px]  text-[18px] py-[20px] border border-[#C4C4C4] rounded-[10px] mb-2"}
+        className={text === "brand" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]"
+         : text== "cuisines"? "w-full px-[64px] text-[18px] py-[18px] border border-[#C4C4C4] rounded-[8px]"
+         : "w-full px-[107px]  text-[18px] py-[20px] border border-[#C4C4C4] rounded-[10px] mb-2"}
       >
         Image upload
       </Button>

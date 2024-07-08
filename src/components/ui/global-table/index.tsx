@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
-import { GlobalSwitch } from "@ui";
+import { GlobalSwitch , DescriptionText } from "@ui";
 import {DrawerCouriers} from "@drawers"
 import { ModalDelete , ModalCompany , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals"
 
@@ -129,6 +129,8 @@ function Index({ header, body, skelatonLoader }: Props) {
                               : header.value == "activatedBrand" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brand"/></div> 
                               : header.value == "activatedCompany" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="company"/></div> 
                               : header.value == "activatedBranch" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="branch"/></div> 
+                              : header.value === "descriptionRu" ? <div><DescriptionText text={ body?.descriptionRz }/></div>
+                              : header.value === "descriptionUz" ? <div><DescriptionText text={body?.descriptionUz }/></div>
                               : (body[header.value])
                             }</TableCell>
                           })

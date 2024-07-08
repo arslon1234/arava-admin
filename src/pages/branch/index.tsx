@@ -55,7 +55,7 @@ function Index() {
   //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
   // Hendel chenge handleChange------>
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value;
     setChange(search);
     setParams((preParams) => ({ ...preParams, search }));

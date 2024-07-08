@@ -105,7 +105,7 @@ const Index = ({ title, id, data }: propsData) => {
         onCancel={handleCancel}
         footer={[]}
         width={600}
-        style={{ top: "5%", left: "auto", right: "auto", bottom: "auto" }}
+        style={{ top: "10%", left: "auto", right: "auto", bottom: "auto" }}
       >
         <ConfigProvider
           theme={{
@@ -195,7 +195,7 @@ const Index = ({ title, id, data }: propsData) => {
               </Form.Item>
 
               {/* Image uploud  */}
-              <div className="mt-8">
+              <div className="mt-[31px]">
                 <ImageUploding text="cuisines" />
               </div>
               {data?.imageUrl && (

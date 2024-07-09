@@ -2,7 +2,17 @@ import request from "../config"
 
 // ----------------> Instance Services Company<-------------------------------------
 export interface postCompany{
-    name: string,
+    login: string;
+    firstName: string;
+    lastName: string;
+    patronymicName: string;
+    gender: number;
+    birthday: string;
+    email: string;
+    companyName: string;
+    countryId: number;
+    activated: boolean;
+    password:string;
 }
 
 export interface UpdateCompany {

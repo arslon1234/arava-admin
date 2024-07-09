@@ -21,8 +21,8 @@ import { Link } from "react-router-dom";
 
 import { Props } from "@interface";
 import { GlobalSwitch , DescriptionText } from "@ui";
-import {DrawerCouriers} from "@drawers"
-import { ModalDelete , ModalCompany , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals"
+import {DrawerCouriers , DrawerCompany} from "@drawers"
+import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals"
 
 
 function Index({ header, body, skelatonLoader }: Props) {
@@ -75,7 +75,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                             return <TableCell key={index2}>{
                               header.value == "company" ? <div className="flex items-center gap-2">
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="company"/></div>
-                                   <ModalCompany title="put" id={body?.id} data={body}/>
+                                   <DrawerCompany title="put" id={body?.id} data={body}/>
                                    </div>
                               :header.value == "country" ? <div className="flex items-center gap-2">
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>

@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalCompany} from "@modals"
+import {DrawerCompany} from "@drawers"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useCompanyStore} from "@store"
 
@@ -74,7 +74,7 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} handleChange={handleChange}/>
-    <ModalCompany title="post" 
+    <DrawerCompany title="post" 
     />
   </div>
    <GlobalTable header={header} body={dataCompany} skelatonLoader={isLoader}/>

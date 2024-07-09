@@ -2,7 +2,7 @@ import  { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import { DrawerBrandAntd } from "@drawers";
+import { DrawerBranch } from "@drawers";
 import { GlobalTable, GlobalSearch } from "@ui";
 import { useBranchStore } from "@store";
 
@@ -70,7 +70,7 @@ function Index() {
       <div className="py-3 flex items-center justify-between">
         <GlobalSearch search={change} handleChange={handleChange} />
 
-        <DrawerBrandAntd />
+        <DrawerBranch title="post" />
       </div>
       {/* GlobalTable */}
       <GlobalTable header={header} body={dataBranch} skelatonLoader={isLoader} />

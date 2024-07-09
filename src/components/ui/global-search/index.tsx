@@ -5,10 +5,10 @@ import SearchIcon from "@mui/icons-material/Search";
 
 interface PropsDataSerch{
     search:string;
-    hendelChange:any;
+    handleChange:any;
 }
 
-function Index({search , hendelChange }:PropsDataSerch) {
+function Index({search , handleChange }:PropsDataSerch) {
   return <>
   
   <div className="w-96">
@@ -19,7 +19,7 @@ function Index({search , hendelChange }:PropsDataSerch) {
              sx={{ml:1 , flex :1}}
              placeholder="Search"
              value={search}
-             onChange={hendelChange}
+             onChange={handleChange}
              inputProps={{"aria-label":"serch google maps"}}/>
             <IconButton type="button" sx={{p: "10px"}} aria-label="search" >
                 <SearchIcon/>

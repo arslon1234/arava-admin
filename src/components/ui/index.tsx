@@ -1,9 +1,10 @@
 import Account from "./menu";
-import GlobalTeble from "./global-teble";
+import GlobalTable from "./global-table";
 import GlobalSearch from "./global-search";
 import DropdownLanguage from "./dropdown-lang";
 import GoogleMaps from "./google-maps";
 import GlobalSwitch from "./global-switch";
+import DescriptionText from "./description-text";
 
 
-export {Account , GlobalTeble , GlobalSearch , DropdownLanguage , GoogleMaps , GlobalSwitch}
+export {Account , GlobalTable , GlobalSearch , DropdownLanguage , GoogleMaps , GlobalSwitch , DescriptionText}

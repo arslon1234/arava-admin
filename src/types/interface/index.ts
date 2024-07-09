@@ -34,7 +34,7 @@ interface Body {
 }
 
 export interface Props {
-  heders: Heder[];
+  header: Heder[];
   body: Body[];
   skelatonLoader: boolean;
   deletIdData?:(id:string)=> any;

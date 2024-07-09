@@ -2,21 +2,21 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {DrawerCompany} from "@drawers"
+import {ModalCuisines} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
-import {useCompanyStore} from "@store"
+import { useCuisinesStore } from "@store";
 
 
 
 function Index() {
 const navigate = useNavigate()
+const {getDataCuisines , dataCuisines , isLoader}= useCuisinesStore();
 const [change, setChange] = useState("")
 const [ , setParams] = useState({limit: 10, page:1 , search:change})
-const {getDataCompany , dataCompany , isLoader } =  useCompanyStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCompany();
+  getDataCuisines();
 },[]);
 
 useEffect(()=>{
@@ -40,12 +40,10 @@ useEffect(()=>{
  // Props Global teble -------------->
  const header = [
   {title: "S/N" , value:"t/r"},
-  {title: "First name" , value:"firstName"},
-  {title: "Last name" , value:"lastName"},
-  {title: "Company name" , value:"companyName"},
-  {title: "Country name" , value:"countryName"},
-  {title: "Activated" , value: "activatedCompany" },
-  {title: "Action" , value:"company"}
+  {title: "Name" , value: true ?  "nameUz" : "nameRu"},
+  {title: "Description" , value: true ?  "descriptionUz" : "descriptionRu"},
+  {title: "Image url" , value: "imageUrl" },
+  {title: "Action" , value:"cuisines"}
 ]
 
 
@@ -74,10 +72,9 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} handleChange={handleChange}/>
-    <DrawerCompany title="post" 
-    />
+    <ModalCuisines title="post" />
   </div>
-   <GlobalTable header={header} body={dataCompany} skelatonLoader={isLoader}/>
+   <GlobalTable header={header} body={dataCuisines} skelatonLoader={isLoader}/>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

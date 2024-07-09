@@ -157,19 +157,19 @@ const Index = ({ title, id, data }: propsData) => {
               rules={[{ required: true }]}
               initialValue={data?.descriptionUz ? data.descriptionUz : ""}
             >
-              <Input style={{ width: "100%" }} size="large" />
+              <Input.TextArea style={{ width: "100%" }} size="small" />
             </Form.Item>
 
             {/*  description ru */}
             <Form.Item
               name="descriptionRu"
-              label="Country description ru"
+              label="Description ru"
               hasFeedback
               style={{ width: "100%" }}
               rules={[{ required: true }]}
               initialValue={data?.descriptionRu ? data.descriptionRu : ""}
             >
-              <Input style={{ width: "100%" }} size="large" />
+              <Input.TextArea style={{ width: "100%" }} size="small" />
             </Form.Item>
 
             <div className="flex items-end">

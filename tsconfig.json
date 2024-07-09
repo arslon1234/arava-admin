@@ -28,14 +28,8 @@
       "@city": ["./src/service/city"],
       "@сouriers": ["./src/service/сouriers"],
       "@region": ["./src/service/region"],
-
-
-
-
-
-
-
-
+      "@branch": ["./src/service/branch"],
+      "@cuisines": ["./src/service/cuisines"],
 
       "@store": ["./src/store"],
 

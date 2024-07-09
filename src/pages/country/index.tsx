@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import {ModalCountry} from "@modals"
-import {GlobalTeble , GlobalSearch} from "@ui";
+import {GlobalTable , GlobalSearch} from "@ui";
 import {useCountryStore} from "@store"
 
 
@@ -38,7 +38,7 @@ useEffect(()=>{
 
 
  // Props Global teble -------------->
- const theder = [
+ const header = [
   {title: "S/N" , value:"t/r"},
   {title: "Country name" , value: true ? "nameUz" : "nameRu" },
   {title: "Action" , value:"country"}
@@ -56,7 +56,7 @@ useEffect(()=>{
 
 
 // Hendel chenge ------>
-const hendalChange = (e:any)=>{
+const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   const search = e.target.value;
   setChange(search)
   setParams(preParams=>({ ...preParams, search }))
@@ -69,11 +69,11 @@ const hendalChange = (e:any)=>{
   return <>
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
-    <GlobalSearch search={change} hendelChange={hendalChange}/>
+    <GlobalSearch search={change} handleChange={handleChange}/>
     <ModalCountry title="post" 
     />
   </div>
-   <GlobalTeble heders={theder} body={dataCountry} skelatonLoader={isLoader}/>
+   <GlobalTable header={header} body={dataCountry} skelatonLoader={isLoader}/>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

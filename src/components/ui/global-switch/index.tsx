@@ -1,5 +1,5 @@
 import { ConfigProvider, Switch } from "antd";
-import { useBannerStore , useBrandTypeStore , useBrandStore , useCompanyStore} from "@store";
+import { useBannerStore , useBrandTypeStore , useBrandStore , useCompanyStore , useBranchStore} from "@store";
 
 import { useState } from "react";
 
@@ -9,6 +9,7 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
   const {brandTypeActivated} = useBrandTypeStore();
   const {activateBrand} = useBrandStore();
   const {activateCompany } = useCompanyStore();
+  const {activatedBranch } = useBranchStore();
 
 
   // reyuzbil switch popsdagi quydagi "activated, text , id" qaiyatlar asosida ishbajaradi
@@ -34,6 +35,11 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
       }
     }else if(text =="company"){
       const status = await activateCompany(data);
+      if(status === 200){
+        setChecked(!checked1);
+      }
+    }else if(text =="branch"){
+      const status = await activatedBranch(data);
       if(status === 200){
         setChecked(!checked1);
       }

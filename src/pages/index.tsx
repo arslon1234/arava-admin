@@ -9,6 +9,7 @@ import Company from "./company";
 import Banner from "./banner";
 import Region from "./region";
 import Branch from "./branch";
+import Cuisines from "./cuisines";
 
 export { 
     SignIn,
@@ -22,4 +23,5 @@ export {
     Banner , 
     Region ,
     Branch ,
+    Cuisines,
 };

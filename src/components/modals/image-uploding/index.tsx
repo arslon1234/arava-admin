@@ -30,7 +30,7 @@ const Index = ({ text }: PropsData) => {
   const bannerUpload = async (file: File) => {
     try {
       const token = getCookies("access_token");
-      const url = text === "brand" ? `${baseUrl}/services/admin/api/brand-image-upload` : `${baseUrl}/services/admin/api/banner-image-upload`;
+      const url = text === "brand" ? `${baseUrl}/services/admin/api/brand-image-upload` : text === "branch" ? `${baseUrl}/services/admin/api/branch-image-upload` :`${baseUrl}/services/admin/api/banner-image-upload`;
 
       const formData = new FormData();
       formData.append("image", file);
@@ -43,7 +43,7 @@ const Index = ({ text }: PropsData) => {
       });
 
       if (response.status === 200) {
-        console.log(response);
+        // console.log(response);
         imageUrlUpdated(response?.data?.url);
       }
     } catch (error: any) {
@@ -94,7 +94,10 @@ const Index = ({ text }: PropsData) => {
     <Upload {...props}>
       <Button
         icon={<UploadOutlined />}
-        className={text === "brand" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]" : "w-full px-[107px]  text-[18px] py-[20px] border border-[#C4C4C4] rounded-[10px] mb-2"}
+        className={text === "brand" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]"
+         : text== "cuisines"? "w-full px-[64px] text-[18px] py-[18.5px] border border-[#C4C4C4] rounded-[8px]"
+         : text== "branch" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]"
+         : "w-full px-[107px]  text-[18px] py-[20px] border border-[#C4C4C4] rounded-[10px] mb-2"}
       >
         Image upload
       </Button>

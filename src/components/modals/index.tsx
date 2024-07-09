@@ -6,6 +6,7 @@ import ModalBrandTaype from "./modal-brand-type";
 import ImageUploding from "./image-uploding";
 import ModalRegion from "./modal-region";
 import ModalCity from "./modal-city";
+import ModalCuisines from "./modal-cuisines"
 
 
 export { 
@@ -17,4 +18,5 @@ export {
     ImageUploding,
     ModalRegion,
     ModalCity,
+    ModalCuisines,
 }

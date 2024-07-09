@@ -20,12 +20,12 @@ import { Link } from "react-router-dom";
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
-import { GlobalSwitch } from "@ui";
-import {DrawerCouriers} from "@drawers"
-import { ModalDelete , ModalCompany , ModalCountry , ModalCity , ModalBrandTaype , ModalRegion} from "@modals"
+import { GlobalSwitch , DescriptionText } from "@ui";
+import {DrawerCouriers , DrawerCompany} from "@drawers"
+import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals"
 
 
-function Index({ heders, body, skelatonLoader }: Props) {
+function Index({ header, body, skelatonLoader }: Props) {
 
   // const navigate = useNavigate();
   // const [searchPaams] = useSearchParams();
@@ -46,10 +46,10 @@ function Index({ heders, body, skelatonLoader }: Props) {
             >
               <TableHead>
                 <TableRow>
-                  {heders?.map((heder, index) => {
+                  {header?.map((header, index) => {
                     return (
                       <TableCell key={index}>
-                        <TableSortLabel>{heder.title}</TableSortLabel>
+                        <TableSortLabel>{header.title}</TableSortLabel>
                       </TableCell>
                     );
                   })}
@@ -60,7 +60,7 @@ function Index({ heders, body, skelatonLoader }: Props) {
                   skelatonLoader ? Array.from(new Array(5)).map((_, index)=>{
                     return <TableRow key={index}>
                       {
-                        heders?.map((_, index2)=>{
+                        header?.map((_, index2)=>{
                           return <TableCell key={index2}><Skeleton /></TableCell>
                         })
                       }
@@ -71,59 +71,74 @@ function Index({ heders, body, skelatonLoader }: Props) {
                     body?.map((body, index)=>{
                       return <TableRow key={index}>
                         {
-                          heders?.map((heder, index2)=>{
+                          header?.map((header, index2)=>{
                             return <TableCell key={index2}>{
-                              heder.value == "company" ? <div className="flex items-center gap-2">
+                              header.value == "company" ? <div className="flex items-center gap-2">
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="company"/></div>
-                                   <ModalCompany title="put" id={body?.id} data={body}/>
+                                   <DrawerCompany title="put" id={body?.id} data={body}/>
                                    </div>
-                              :heder.value == "country" ? <div className="flex items-center gap-2">
+                              :header.value == "country" ? <div className="flex items-center gap-2">
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
                                   <ModalCountry title="put" id={body?.id} data={body}/>
                               </div>
-                              :heder.value == "banner" ? <div className="flex items-center gap-2">
+                              :header.value == "banner" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="banner"/></div>
                               {/* <ModalBanner title="put" id={body?.id} data={body}/> */}
                               </div>
-                              :heder.value == "brand" ? <div className="flex items-center gap-2">
+                              :header.value == "brand" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
                                {/* <ModalTest title="put" id={body?.id} data={body}/> */}
                                </div>
-                              :heder.value == "brandType" ? <div className="flex items-center gap-2">
+                              :header.value == "brandType" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brandType"/></div>
                                <ModalBrandTaype title="put" id={body?.id} data={body}/>
                                </div> 
-                              :heder.value == "city" ? <div className="flex items-center gap-2">
+                              :header.value == "city" ? <div className="flex items-center gap-2">
                                <div className=' text-gray-500'><ModalDelete id={body?.id} title="city"/></div>
                                 <ModalCity title="put" id={body?.id} data={body}/>
                               </div> 
-                              :heder.value == "country" ? <div className="flex items-center gap-2">
+                              :header.value == "country" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="country"/></div>
                                <ModalCountry title="put" id={body?.id} data={body}/>
                              </div>
-                             :heder.value == "couriers" ? <div className="flex items-center gap-2">
+                             :header.value == "couriers" ? <div className="flex items-center gap-2">
                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="couriers"/></div>
                               <DrawerCouriers title="put" id={body?.id} data={body}/>
                               </div> 
-                              :heder.value == "region" ? <div className="flex items-center gap-2">
+                              :header.value == "cuisines" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="cuisines"/></div>
+                               <ModalCuisines title="put" id={body?.id} data={body}/>
+                             </div>
+                              :header.value == "region" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>
                                <ModalRegion title="put" id={body?.id} data={body}/>
                                </div>
-                              : heder.value == "imageUrl" ? <><Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={`https://webtest.aravva.uz${body?.imageUrl}`} alt="image" /></Link></> 
-                              : heder.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
-                              : heder.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
-                              : heder.value == "activatedBanner" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="banner"/></div> 
-                              : heder.value == "activatedBrandType" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brandType"/></div> 
-                              : heder.value == "activatedBrand" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brand"/></div> 
-                              : heder.value == "activatedCompany" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="company"/></div> 
-                              : (body[heder.value])
+                              : header.value == "imageUrl" ? <>
+                                <Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank">
+                                 <img className="w-[120px] h-[40px] object-contain"
+                                  src={body?.imageUrl ? 
+                                  `https://webtest.aravva.uz${body?.imageUrl}` 
+                                  : "https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg"} 
+                                  alt="image" />
+                                </Link>
+                              </> 
+                              : header.value == "bannerUrl" ? <><Link to={body?.bannerUrl} target="_blank"><img className="w-[120px] h-[40px] object-contain" src={body?.bannerUrl} alt="image" /></Link></> 
+                              : header.value == "t/r" ? <>{index + 1 }</> //{page * limit -(limit - 1) +index }
+                              : header.value == "activatedBanner" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="banner"/></div> 
+                              : header.value == "activatedBrandType" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brandType"/></div> 
+                              : header.value == "activatedBrand" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brand"/></div> 
+                              : header.value == "activatedCompany" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="company"/></div> 
+                              : header.value == "activatedBranch" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="branch"/></div> 
+                              : header.value === "descriptionRu" ? <div><DescriptionText text={ body?.descriptionRz }/></div>
+                              : header.value === "descriptionUz" ? <div><DescriptionText text={body?.descriptionUz }/></div>
+                              : (body[header.value])
                             }</TableCell>
                           })
                         }
                       </TableRow>
                     })
                     : <TableRow>
-                      <TableCell colSpan={heders?.length}>No information yet</TableCell>
+                      <TableCell colSpan={header?.length}>No information yet</TableCell>
                     </TableRow>
                 }
               </TableBody>

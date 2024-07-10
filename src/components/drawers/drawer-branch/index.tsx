@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import {
   Button,
   ConfigProvider,
@@ -19,6 +20,7 @@ import {
   useBrandStore,
   useBannerStore,
   useCuisinesStore,
+  useBranchStore,
 } from "@store";
 import { GoogleMaps } from "../../ui";
 
@@ -36,7 +38,8 @@ const Index = ({ data, title }: CouriersProps) => {
   const { getDataBrandType, dataBrandType } = useBrandTypeStore();
   const { getDataBrand, dataBrand, location } = useBrandStore();
   const { getDataCuisines, dataCuisines } = useCuisinesStore();
-  const { imageUrl } = useBannerStore();
+  const { imageUrl , imageUrlUpdated } = useBannerStore();
+  const {postDataBranch} = useBranchStore();
 
   const [timeStartEnd, setTimeStartEnd] = useState({
     start: data?.deliveryFrom ? data?.deliveryFrom : 0,
@@ -74,6 +77,23 @@ const Index = ({ data, title }: CouriersProps) => {
       deliveryPrice: Number(values?.deliveryPrice),
     };
     console.log(postBranch);
+    try{
+      const respons = await postDataBranch(postBranch);
+      if (respons === 200) {
+        toast.success("Brand creste successfully");
+        setTimeout(() => {
+          onClose();
+          imageUrlUpdated("");
+          window.location.reload();
+        }, 1000);
+      }
+
+    }catch(eror){
+      onClose();
+      toast.error("Brand creste failed")
+      imageUrlUpdated("");
+      console.log(eror)
+    }
   };
 
   // slect brand type and cuisines list function <---------------

@@ -10,6 +10,7 @@ import Banner from "./banner";
 import Region from "./region";
 import Branch from "./branch";
 import Cuisines from "./cuisines";
+import WorkingDays from "./branch/working-days"
 
 export { 
     SignIn,
@@ -24,4 +25,5 @@ export {
     Region ,
     Branch ,
     Cuisines,
+    WorkingDays,
 };

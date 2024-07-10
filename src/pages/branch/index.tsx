@@ -36,13 +36,10 @@ function Index() {
     { title: "S/N", value: "t/r" },
     { title: "Branch name", value: "name" },
     { title: "Brand", value: "brandName" },
-    // { title: "Country", value: "countryName" },
-    // { title: "Region", value: "regionName" },
-    // { title: "City", value: "cityName" },
     { title: "Activated" , value: "activatedBranch" },
     { title: "Image", value: "imageUrl" },
 
-    { title: "Action", value: "brand" },
+    { title: "Action", value: "branch" },
   ];
 
   //--- pagination tett mui <----

@@ -12,22 +12,20 @@ import {
   Skeleton,
   // Button,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-
+import { Link , useNavigate} from "react-router-dom";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import ShortcutIcon from '@mui/icons-material/Shortcut';
-// import { useNavigate } from "react-router-dom";
 // import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
 import { GlobalSwitch , DescriptionText } from "@ui";
 import {DrawerCouriers , DrawerCompany} from "@drawers"
-import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals"
-
+import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const [searchPaams] = useSearchParams();
   // const page = Number(searchPaams.get("page")) || 1;
   // const limit = Number(searchPaams.get("limit")) || 10;
@@ -87,6 +85,13 @@ function Index({ header, body, skelatonLoader }: Props) {
                               </div>
                               :header.value == "brand" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
+                               {/* <ModalTest title="put" id={body?.id} data={body}/> */}
+                               </div>
+                              :header.value == "branch" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500 flex items-center gap-2'>
+                                <button onClick={()=>navigate(`/home/branch/${body?.id}`)}><CalendarMonthIcon/></button>
+                                <ModalDelete id={body?.id} title="branch"/>
+                                </div>
                                {/* <ModalTest title="put" id={body?.id} data={body}/> */}
                                </div>
                               :header.value == "brandType" ? <div className="flex items-center gap-2">

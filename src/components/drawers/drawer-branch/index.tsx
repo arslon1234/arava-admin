@@ -339,13 +339,12 @@ const Index = ({ data, title }: CouriersProps) => {
                   <Input.TextArea style={{ width: "100%" }} size="small" />
                 </Form.Item>
 
-
                 {/* ImageUploading */}
                 <div className="mt-[30px]">
                   <ImageUploding text="branch" />
                 </div>
 
-                 {/* Activated */}
+                {/* Activated */}
                 <Form.Item
                   name="activated"
                   label="Activated"
@@ -356,9 +355,6 @@ const Index = ({ data, title }: CouriersProps) => {
                 >
                   <Switch defaultChecked />
                 </Form.Item>
-
-
-
               </div>
               <div className="my-2">
                 <GoogleMaps />

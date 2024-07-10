@@ -3,17 +3,24 @@ import request from "../config"
 // ----------------> Instance Services Branch<-------------------------------------
 
 export interface postBranch{
-    activated: boolean,
-    firstName: string,
-    lastName: string,
-    login: string,
+    brandId: number,
+    name: string,
+    shortName: string,
+    description: string,
     address: string,
-    birthDate: string,
+    phone: string,
     email: string,
-    gender: number,
-    homePhone: string,
-    mobilePhone: string,
-    password: string,
+    countryId: number,
+    regionId: number,
+    cityId: number,
+    gpsPointX: number,
+    gpsPointY: number,
+    deliveryFrom: number,
+    deliveryTo: number,
+    imageUrl: string,
+    deliveryPrice:number,
+    brandTypeIdList:number[],
+    cuisinesIdList:number[],
 }
 
 export interface UpdateBranch {
@@ -38,9 +45,9 @@ interface ActivatedBranch{
 
 interface Branch{
     getBranch : ()=> any,
-    deleteBranch: (id:number)=> any,
     
     //API da hali qo'shilmadi
+    deleteBranch: (id:number)=> any,
     postBranch : (data:postBranch)=> any,
     updateBranch: (data:UpdateBranch)=> any,
     activatedBranch:(data:ActivatedBranch)=> any,
@@ -52,7 +59,7 @@ export interface StoreBranch {
     dataBranch:any[];
     totlCount:number;
     getDataBranch: ()=> Promise <any>;
-
+    
     //API da hali qo'shilmadi
     deleteDataBranch: (id:number)=> Promise <any>;
     postDataBranch: (data:postBranch)=> Promise <any>;

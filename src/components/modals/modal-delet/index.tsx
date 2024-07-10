@@ -12,6 +12,7 @@ import {
   useRegionStore,
   useCompanyStore,
   useCuisinesStore,
+  useBranchStore,
 } from "@store";
 import "./style.scss";
 
@@ -32,6 +33,7 @@ const Index = ({ id, title }: FadeMenuProps) => {
   const { deleteDataRegion } = useRegionStore();
   const { deleteDataCompany } = useCompanyStore();
   const { deleteDataCuisines } = useCuisinesStore();
+  const { deleteDataBranch } = useBranchStore();
 
   const deleteData = async () => {
     try {
@@ -63,6 +65,9 @@ const Index = ({ id, title }: FadeMenuProps) => {
           break;
         case "cuisines":
           status = await deleteDataCuisines(id);
+          break;
+        case "branch":
+          status = await deleteDataBranch(id);
           break;
         default:
           alert("Delete, id - " + id);

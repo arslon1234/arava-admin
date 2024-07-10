@@ -60,6 +60,7 @@ export default function ResponsiveDrawer() {
     if (pathname === "/home/region") return t("region");
     if (pathname === "/home/branch") return t("branch");
     if (pathname === "/home/cuisines") return t("cuisines");
+    if (/^\/home\/branch\/\d+$/.test(pathname)) return "Branch working days"; 
     return "Error";
   };
 

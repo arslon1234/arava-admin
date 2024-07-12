@@ -8,6 +8,7 @@ import useCouriersStore from "./store-сouriers"
 import useRegionStore from "./store-region"
 import useBranchStore from "./store-branch"
 import useCuisinesStore from "./store-cuisines"
+import useBranchWorkingDaysStore from "./store-branch-working-days"
 
 
 export {
@@ -21,4 +22,5 @@ export {
     useRegionStore,
     useBranchStore,
     useCuisinesStore,
+    useBranchWorkingDaysStore,
 }

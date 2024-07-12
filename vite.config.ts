@@ -26,6 +26,7 @@ export default defineConfig({
       { find: '@сouriers', replacement: '/src/service/сouriers' },
       { find: '@region', replacement: '/src/service/region' },
       { find: '@branch', replacement: '/src/service/branch' },
+      { find: '@branch-working-days', replacement: '/src/service/branch-working-days' },
       { find: '@cuisines', replacement: '/src/service/cuisines' },
 
 

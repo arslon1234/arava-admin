@@ -2,53 +2,78 @@ import request from "../config";
 
 // ---------------- Interface branch working days ----------------
 
-export interface postBranchWorkingDays {
-  branchId: number;
-  dayOfWeek: number;
-  startTime: string;
-  endTime: string;
+interface Data {
+    days : number;
+    activated: boolean;
+    workingStartTime:string;
+    workingEndTime : string;
+    open: boolean;
 }
 
-export interface updateBranchWorkingDays {
-  id: number;
+export interface postBranchWorkingDays {
+  id: string | any;
+  data: Data[];
 }
+
+
 
 export interface ActivatedBranch {
     id?: number|any;
     activated: boolean;
 }
 
+export interface BranchWorkingTime {
+    id: number | any,
+    workingStartTime: string |any, 
+    workingEndTime: string | any
+}
+
 interface BranchWorkingDays{
-    getBranchWorkingDays : (id:number)=> any,
+    getBranchWorkingDays : (id:string | undefined)=> any,
+    activatedBranchWorkingDays:(data:ActivatedBranch)=> any,
+    updateBranchWorkingTime : (data:BranchWorkingTime)=> any,
     
     //API da hali qo'shilmadi
-    deleteBranchWorkingDays: (id:number)=> any,
     postBranchWorkingDays : (data:postBranchWorkingDays)=> any,
-    updateBranchWorkingDays: (data:updateBranchWorkingDays)=> any,
-    activatedBranchWorkingDays:(data:ActivatedBranch)=> any,
 }
 
 
 // ----------------> Instance BranchWorkingDays <----------------------------
 
 export const branchWorkingDays: BranchWorkingDays = {
-  getBranchWorkingDays: (id: number) => {
+  getBranchWorkingDays: (id: string | undefined) => {
     return request.get(`/services/admin/api/branch-working-days/${id}`);
   },
 
-  deleteBranchWorkingDays: (id: number) => {
-    return request.delete(`/branch-working-days/${id}`);
+  activatedBranchWorkingDays: (data: ActivatedBranch) => {
+    return request.put(`/services/admin/api/branch-working-days-activate`, data);
   },
+  
+  updateBranchWorkingTime: (data: BranchWorkingTime) => {
+    return request.put(`/services/admin/api/branch-working-time`, data);
+  },
+
+
+
+
+  /// hali qo'shilmadi 
 
   postBranchWorkingDays: (data: postBranchWorkingDays) => {
-    return request.post(`/services/admin/api/branch-working-days`, data);
+    return request.post(`/services/admin/api/branch-working-days/${data?.id}`, data?.data);
   },
 
-  updateBranchWorkingDays: (data: updateBranchWorkingDays) => {
-    return request.put(`/services/admin/api/branch-working-days` , data);
-  },
-
-  activatedBranchWorkingDays: (data: ActivatedBranch) => {
-    return request.put(`/branch-working-days/activated`, data);
-  },
 };
+
+
+// ------- Interfaces Srore Branch Working Days --------------------------------
+
+export interface BranchWorkingDaysState {
+    isLoader:boolean;
+    dataBranchWorkingDays: any[];
+    totlCount:number;
+    getDataBranchDays: (id:string | undefined)=> Promise <any>;
+    activatedBranchDays : (data:ActivatedBranch) => Promise<any>;
+    updateBranchWorkingTime: (data: BranchWorkingTime) => Promise<any>;
+    postBranchWorkingDays: (data: postBranchWorkingDays) => Promise<any>;
+}
+

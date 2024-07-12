@@ -7,4 +7,4 @@ import GlobalSwitch from "./global-switch";
 import DescriptionText from "./description-text";
 
 
-export {Account , GlobalTable , GlobalSearch , DropdownLanguage , GoogleMaps , GlobalSwitch , DescriptionText}
+export {Account , GlobalTable , GlobalSearch , DropdownLanguage , GoogleMaps , GlobalSwitch , DescriptionText }

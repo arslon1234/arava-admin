@@ -1,5 +1,5 @@
 import { ConfigProvider, Switch } from "antd";
-import { useBannerStore , useBrandTypeStore , useBrandStore , useCompanyStore , useBranchStore} from "@store";
+import { useBannerStore , useBrandTypeStore , useBrandStore , useCompanyStore , useBranchStore , useBranchWorkingDaysStore} from "@store";
 
 import { useState } from "react";
 
@@ -10,6 +10,7 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
   const {activateBrand} = useBrandStore();
   const {activateCompany } = useCompanyStore();
   const {activatedBranch } = useBranchStore();
+  const {activatedBranchDays } = useBranchWorkingDaysStore();
 
 
   // reyuzbil switch popsdagi quydagi "activated, text , id" qaiyatlar asosida ishbajaradi
@@ -40,6 +41,11 @@ const Index = ({ activated, text , id }: { activated: boolean; text: string , id
       }
     }else if(text =="branch"){
       const status = await activatedBranch(data);
+      if(status === 200){
+        setChecked(!checked1);
+      }
+    }else if(text =="branchDays"){
+      const status = await activatedBranchDays(data);
       if(status === 200){
         setChecked(!checked1);
       }

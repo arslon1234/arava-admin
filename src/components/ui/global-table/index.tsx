@@ -21,7 +21,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Props } from "@interface";
 import { GlobalSwitch , DescriptionText } from "@ui";
 import {DrawerCouriers , DrawerCompany} from "@drawers"
-import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines} from "@modals";
+import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines , ModalBranchWorkingDaes} from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
 
@@ -94,6 +94,12 @@ function Index({ header, body, skelatonLoader }: Props) {
                                 </div>
                                {/* <ModalTest title="put" id={body?.id} data={body}/> */}
                                </div>
+                               :header.value == "branchWorkingDays" ? <div className="flex items-center gap-2">
+                               <div className=' text-gray-500 flex items-center gap-2'>
+                                 <ModalBranchWorkingDaes id={body?.id} data={body} />
+                                 </div>
+                                {/* <ModalTest title="put" id={body?.id} data={body}/> */}
+                                </div>
                               :header.value == "brandType" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brandType"/></div>
                                <ModalBrandTaype title="put" id={body?.id} data={body}/>
@@ -133,7 +139,8 @@ function Index({ header, body, skelatonLoader }: Props) {
                               : header.value == "activatedBrandType" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brandType"/></div> 
                               : header.value == "activatedBrand" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="brand"/></div> 
                               : header.value == "activatedCompany" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="company"/></div> 
-                              : header.value == "activatedBranch" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="branch"/></div> 
+                              : header.value == "activatedBranch" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="branch"/></div>
+                              : header.value == "activatedBranchDays" ? <div><GlobalSwitch activated={body?.activated} id={body?.id} text="branchDays"/></div> 
                               : header.value === "descriptionRu" ? <div><DescriptionText text={ body?.descriptionRz }/></div>
                               : header.value === "descriptionUz" ? <div><DescriptionText text={body?.descriptionUz }/></div>
                               : (body[header.value])

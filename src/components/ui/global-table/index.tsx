@@ -21,7 +21,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Props } from "@interface";
 import { GlobalSwitch , DescriptionText } from "@ui";
 import {DrawerCouriers , DrawerCompany} from "@drawers"
-import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines , ModalBranchWorkingDaes} from "@modals";
+import { ModalDelete  , ModalCountry, ModalCity , ModalBrandTaype , ModalRegion , ModalCuisines , ModalBranchWorkingDaes, ModalTest} from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
 
@@ -124,6 +124,10 @@ function Index({ header, body, skelatonLoader }: Props) {
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>
                                <ModalRegion title="put" id={body?.id} data={body}/>
                                </div>
+                               :header.value == "menu" ? <div className="flex items-center gap-2">
+                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>
+                                <ModalTest title="put" id={body?.id} data={body}/>
+                                </div>
                               : header.value == "imageUrl" ? <>
                                 <Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank">
                                  <img className="w-[120px] h-[40px] object-contain"

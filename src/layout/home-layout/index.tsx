@@ -14,6 +14,9 @@ import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import SouthAmericaIcon from "@mui/icons-material/SouthAmerica";
 import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import { Account, DropdownLanguage } from "@ui";
 import './style.scss'
@@ -45,6 +48,9 @@ export default function ResponsiveDrawer() {
     { path: "/home/company", title: t("company"), icon: <HomeWorkIcon /> },
     { path: "/home/branch", title: t("branch"), icon: <AddHomeWorkIcon /> },
     { path: "/home/cuisines", title: t("cuisines"), icon: <FastfoodIcon /> },
+    { path: "/home/menu", title: t("menu"), icon: <RestaurantMenuIcon /> },
+    { path: "/home/menu-categories", title: t("menu-categories"), icon: <MenuBookIcon /> },
+    { path: "/home/products", title: t("products"), icon: <ProductionQuantityLimitsIcon /> },
   ];
 
   const { pathname } = useLocation();
@@ -60,6 +66,9 @@ export default function ResponsiveDrawer() {
     if (pathname === "/home/region") return t("region");
     if (pathname === "/home/branch") return t("branch");
     if (pathname === "/home/cuisines") return t("cuisines");
+    if (pathname === "/home/menu") return t("menu");
+    if (pathname === "/home/menu-categories") return t("menu-categories");
+    if (pathname === "/home/products") return t("products");
     if (/^\/home\/branch\/\d+$/.test(pathname)) return "Branch working days"; 
     return "Error";
   };

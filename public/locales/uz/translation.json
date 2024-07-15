@@ -8,5 +8,8 @@
     "banner":"Banner",
     "region":"Region",
     "branch" : "Branch",
-    "cuisines":"Cuisines"
+    "cuisines":"Cuisines",
+    "menu":"Menu",
+    "menu-categories":"Menu categories",
+    "products":"Products"
 }

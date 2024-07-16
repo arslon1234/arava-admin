@@ -28,6 +28,10 @@ export default defineConfig({
       { find: '@branch', replacement: '/src/service/branch' },
       { find: '@branch-working-days', replacement: '/src/service/branch-working-days' },
       { find: '@cuisines', replacement: '/src/service/cuisines' },
+      { find: '@menu', replacement: '/src/service/menu' },
+      { find: '@menu-categories', replacement: '/src/service/menu-categories' },
+      { find: '@products', replacement: '/src/service/products' },
+
 
 
 

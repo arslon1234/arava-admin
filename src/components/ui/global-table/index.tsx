@@ -125,7 +125,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                                <ModalRegion title="put" id={body?.id} data={body}/>
                                </div>
                                :header.value == "menu" ? <div className="flex items-center gap-2">
-                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="region"/></div>
+                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="menu"/></div>
                                 <ModalTest title="put" id={body?.id} data={body}/>
                                 </div>
                               : header.value == "imageUrl" ? <>

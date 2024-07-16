@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {ModalTest} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
-import {useCountryStore} from "@store"
+import {useMenuCategoriesStore} from "@store"
 
 
 
@@ -12,11 +12,11 @@ function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
 const [ , setParams] = useState({limit: 10, page:1 , search:change})
-const {getDataCountry  , isLoader } =  useCountryStore();
+const {getDataMenuCategories, dataMenuCategories  , isLoader } =  useMenuCategoriesStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCountry();
+  getDataMenuCategories();
 },[]);
 
 useEffect(()=>{
@@ -75,7 +75,7 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <ModalTest title="post" 
     />
   </div>
-   <GlobalTable header={header} body={[]} skelatonLoader={isLoader}/>
+   <GlobalTable header={header} body={dataMenuCategories} skelatonLoader={isLoader}/>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

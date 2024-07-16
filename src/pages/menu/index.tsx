@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {ModalTest} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
-import {useCountryStore} from "@store"
+import {useMenuStore} from "@store"
 
 
 
@@ -12,11 +12,11 @@ function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
 const [ , setParams] = useState({limit: 10, page:1 , search:change})
-const {getDataCountry  , isLoader } =  useCountryStore();
+const {getDataMenu, dataMenu  , isLoader } =  useMenuStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCountry();
+  getDataMenu();
 },[]);
 
 useEffect(()=>{
@@ -40,9 +40,9 @@ useEffect(()=>{
  // Props Global teble -------------->
  const header = [
   {title: "S/N" , value:"t/r"},
-  {title: "Menu" , value: true ? "nameUz" : "nameRu" },
-  {title: "Test" , value:"test"},
-  {title: "Test" , value:"test"},
+  {title: "Menu name" , value: "name" },
+  {title: "Branch name" , value:"branchName"},
+  {title: "Description" , value:"description"},
   {title: "Action" , value:"menu"}
 ]
 
@@ -75,7 +75,7 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <ModalTest title="post" 
     />
   </div>
-   <GlobalTable header={header} body={[]} skelatonLoader={isLoader}/>
+   <GlobalTable header={header} body={dataMenu} skelatonLoader={isLoader}/>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

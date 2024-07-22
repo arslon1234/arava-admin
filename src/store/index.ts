@@ -9,6 +9,9 @@ import useRegionStore from "./store-region"
 import useBranchStore from "./store-branch"
 import useCuisinesStore from "./store-cuisines"
 import useBranchWorkingDaysStore from "./store-branch-working-days"
+import useMenuCategoriesStore from "./store-menu-categories"
+import useMenuStore from "./store-menu"
+import useProductsStore from "./store-products"
 
 
 export {
@@ -23,4 +26,8 @@ export {
     useBranchStore,
     useCuisinesStore,
     useBranchWorkingDaysStore,
+    useMenuCategoriesStore,
+    useMenuStore,
+    useProductsStore,
+ 
 }

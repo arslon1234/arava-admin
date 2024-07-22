@@ -1,8 +1,9 @@
 import axios from "axios";
 import { getCookies , setCookies} from "@cookie";
 
+const URL =  import.meta.env.VITE_BASE_URL
 const request = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL
+    baseURL: URL
 })
 
 
@@ -14,7 +15,7 @@ async function  refreshAccsesToken (){
    if(!_refresh_token){
        throw new Error ("Refresh token not found in cookie ") 
    }else{
-       const response:any = await axios.get(`https://ecomapi.ilyosbekdev.uz/auth/refresh/${_refresh_token}`)
+       const response:any = await axios.get(`${URL}/auth/login${_refresh_token}`)
        const {access_token , refresh_token} = response?.data;
        setCookies("access_token", access_token);
        setCookies("refresh_token", refresh_token);

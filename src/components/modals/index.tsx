@@ -8,7 +8,8 @@ import ModalRegion from "./modal-region";
 import ModalCity from "./modal-city";
 import ModalCuisines from "./modal-cuisines";
 import ModalBranchWorkingDaes from "./modal-branch-workin-days";
-import ModalBranchDaysCreate from "./modal-branch-days-create"
+import ModalBranchDaysCreate from "./modal-branch-days-create";
+import ModalTest from "./modal-test";
 
 
 export { 
@@ -23,4 +24,5 @@ export {
     ModalCuisines,
     ModalBranchWorkingDaes,
     ModalBranchDaysCreate,
-}
+    ModalTest,
+};

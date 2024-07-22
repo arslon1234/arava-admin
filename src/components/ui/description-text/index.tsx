@@ -10,8 +10,8 @@ const content = (text?:string)=> (
 const Index = ({text}:{text:string}) => (
 
     
-  <Popover placement="topLeft" content={content(text)} title="Description text">
-    <p>{text.length < 25 ? text : "Description"}</p>
+  <Popover placement="topLeft" content={content(text && text)} title="Description text">
+    <p>{text?.length < 25 ? text : "Description"}</p>
   </Popover>
 );
 

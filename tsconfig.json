@@ -31,6 +31,10 @@
       "@branch": ["./src/service/branch"],
       "@branch-working-days": ["./src/service/branch-working-days"],
       "@cuisines": ["./src/service/cuisines"],
+      "@menu": ["./src/service/menu"],
+      "@menu-categories": ["./src/service/menu-categories"],
+      "@products": ["./src/service/products"],
+
 
       "@store": ["./src/store"],
 

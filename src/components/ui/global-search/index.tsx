@@ -11,10 +11,10 @@ interface PropsDataSerch{
 function Index({search , handleChange }:PropsDataSerch) {
   return <>
   
-  <div className="w-96">
+  <div className="max-w-96">
            <Paper 
            component="form"
-           sx={{p:"2px 4px", width:400 , alignItems: "center" , display: "flex"}}>
+           sx={{p:"2px 4px",maxWidth:400, width: "100%" ,  alignItems: "center" , display: "flex"}}>
             <InputBase
              sx={{ml:1 , flex :1}}
              placeholder="Search"

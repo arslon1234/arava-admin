@@ -127,7 +127,7 @@ const Index = ({ title, id, data }: propsData) => {
             {/*  name  uz*/}
             <Form.Item
               name="nameUz"
-              label="Country name uz"
+              label="Name uz"
               hasFeedback
               style={{ width: "100%" }}
               rules={[{ required: true }]}
@@ -139,7 +139,7 @@ const Index = ({ title, id, data }: propsData) => {
             {/*  name ru */}
             <Form.Item
               name="nameRu"
-              label="Country name ru"
+              label="Name ru"
               hasFeedback
               style={{ width: "100%" }}
               rules={[{ required: true }]}

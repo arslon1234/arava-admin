@@ -70,6 +70,7 @@ export default function ResponsiveDrawer() {
     if (pathname === "/home/menu-categories") return t("menu-categories");
     if (pathname === "/home/products") return t("products");
     if (/^\/home\/branch\/\d+$/.test(pathname)) return "Branch working days"; 
+    if (/^\/home\/menu\/\d+$/.test(pathname)) return "Menu sections"; 
     return "Error";
   };
 

@@ -43,7 +43,7 @@ useEffect(()=>{
   {title: "Product name" , value: true ? "nameUz" : "nameRu" },
   {title: "Test" , value:"test"},
   {title: "Test" , value:"test"},
-  {title: "Action" , value:"menu"}
+  {title: "Action" , value:"test"}
 ]
 
 

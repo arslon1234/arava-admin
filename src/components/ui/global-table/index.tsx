@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import TurnRightIcon from "@mui/icons-material/TurnRight";
 import { Image } from "antd"; // <-- test jarayonida
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import ShortcutIcon from '@mui/icons-material/Shortcut';
@@ -29,6 +30,7 @@ import {
   ModalRegion,
   ModalCuisines,
   ModalBranchWorkingDaes,
+  ModalMenu,
   ModalTest,
 } from "@modals";
 
@@ -45,7 +47,10 @@ function Index({ header, body, skelatonLoader }: Props) {
         <Paper sx={{ width: "100%", mb: 2 }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table
-              stickyHeader sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium"
+              stickyHeader
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size="medium"
             >
               <TableHead>
                 <TableRow>
@@ -225,6 +230,21 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   />
                                 </div>
                               ) : header.value == "menu" ? (
+                                <div className="flex items-center gap-2 text-gray-500">
+                                  <ModalDelete id={body?.id} title="menu" />                                  <ModalMenu
+                                    title="put"
+                                    id={body?.id}
+                                    data={body}
+                                  />
+                                  <button
+                                      onClick={() =>
+                                        navigate(`/home/menu/${body?.id}`)
+                                      }
+                                    >
+                                      <TurnRightIcon />
+                                    </button>
+                                </div>
+                              ) : header.value == "test" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
                                     <ModalDelete id={body?.id} title="menu" />
@@ -235,16 +255,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     data={body}
                                   />
                                 </div>
-                              ) : // : header.value == "imageUrl" ? <>
-                              //   <Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank">
-                              //    <img className="w-[120px] h-[40px] object-contain"
-                              //     src={body?.imageUrl ?
-                              //     `https://webtest.aravva.uz${body?.imageUrl}`
-                              //     : "https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg"}
-                              //     alt="image" />
-                              //   </Link>
-                              // </>
-                              header.value == "imageUrl" ? (
+                              ) : header.value == "imageUrl" ? (
                                 <>
                                   <Image
                                     width={100}
@@ -324,6 +335,10 @@ function Index({ header, body, skelatonLoader }: Props) {
                               ) : header.value === "descriptionUz" ? (
                                 <div>
                                   <DescriptionText text={body?.descriptionUz} />
+                                </div>
+                              ) : header.value === "description" ? (
+                                <div>
+                                  <DescriptionText text={body?.description} />
                                 </div>
                               ) : (
                                 body[header.value]

@@ -2,18 +2,18 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
-import { useMenuCategoriesStore } from "@store";
+import { useMenuSectionStore } from "@store";
 import { GlobalTable  } from "@ui";
-import {ModalTest} from "@modals"
+import {ModalMenuSection} from "@modals"
 
 function Index() {
   const { id } = useParams();
-  const { dataMenuCategories, getDataMenuCategories, isLoader } =
-    useMenuCategoriesStore();
+  const { dataMenuSection, getDataMenuSection, isLoader } =
+  useMenuSectionStore();
 
   // function useEfect getDataBranchDays <-------
   useEffect(() => {
-    getDataMenuCategories();
+    getDataMenuSection(id);
   }, [id]);
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -22,15 +22,16 @@ function Index() {
     { title: "S/N", value: "t/r" },
     { title: "Name Uz", value: "nameUz" },
     { title: "Name Ru", value: "nameRu" },
+    { title: "Action", value: "menu-section" },
   ];
   return (
     <>
       <ToastContainer />
-      <div className="flex items-center justify-between py-4">
-        <h1>Test menu id  : {id}</h1>
-        <ModalTest title="post" />
+      <div className="flex items-center justify-end py-4">
+        
+        <ModalMenuSection title="post" />
       </div>
-      <GlobalTable header={header} body={dataMenuCategories} skelatonLoader={isLoader} />
+      <GlobalTable header={header} body={dataMenuSection} skelatonLoader={isLoader} />
     </>
   );
 }

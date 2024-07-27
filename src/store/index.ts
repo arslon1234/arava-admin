@@ -12,6 +12,7 @@ import useBranchWorkingDaysStore from "./store-branch-working-days"
 import useMenuCategoriesStore from "./store-menu-categories"
 import useMenuStore from "./store-menu"
 import useProductsStore from "./store-products"
+import useMenuSectionStore from "./store-menu-section"
 
 
 export {
@@ -29,5 +30,5 @@ export {
     useMenuCategoriesStore,
     useMenuStore,
     useProductsStore,
- 
+    useMenuSectionStore
 }

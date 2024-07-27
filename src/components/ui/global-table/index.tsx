@@ -33,6 +33,7 @@ import {
   ModalMenu,
   ModalTest,
   ModalMenuCategories,
+  ModalMenuSection
 } from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
@@ -233,7 +234,23 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     data={body}
                                   />
                                 </div>
-                              ) : header.value == "region" ? (
+                              ) : header.value == "menu-section" ? (
+                                <div className="flex items-center gap-2">
+                                  <div className=" text-gray-500">
+                                    <ModalDelete
+                                      id={body?.id}
+                                      title="menu-section"
+                                    />
+                                  </div>
+                                  <ModalMenuSection
+                                    title="put"
+                                    menuSectionId={body?.id}
+                                    data={body}
+                                  />
+                                </div>
+                              )
+                              
+                              : header.value == "region" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
                                     <ModalDelete id={body?.id} title="region" />

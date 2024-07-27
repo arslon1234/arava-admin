@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {ModalMenuCategories} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useMenuCategoriesStore} from "@store"
 
@@ -41,9 +41,9 @@ useEffect(()=>{
  const header = [
   {title: "S/N" , value:"t/r"},
   {title: "Menu categories" , value: true ? "nameUz" : "nameRu" },
-  {title: "Test" , value:"test"},
-  {title: "Test" , value:"test"},
-  {title: "Action" , value:"test"}
+  {title: "Description" , value:true ? "descriptionUz" : "descriptionRu" },
+  {title: "imageUrl" , value:"imageUrl"},
+  {title: "Action" , value:"menu-categories"}
 ]
 
 
@@ -72,7 +72,7 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} handleChange={handleChange}/>
-    <ModalTest title="post" 
+    <ModalMenuCategories title="post" 
     />
   </div>
    <GlobalTable header={header} body={dataMenuCategories} skelatonLoader={isLoader}/>

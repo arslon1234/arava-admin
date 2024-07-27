@@ -32,6 +32,7 @@ import {
   ModalBranchWorkingDaes,
   ModalMenu,
   ModalTest,
+  ModalMenuCategories,
 } from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
@@ -218,6 +219,20 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     data={body}
                                   />
                                 </div>
+                              ) : header.value == "menu-categories" ? (
+                                <div className="flex items-center gap-2">
+                                  <div className=" text-gray-500">
+                                    <ModalDelete
+                                      id={body?.id}
+                                      title="menu-categories"
+                                    />
+                                  </div>
+                                  <ModalMenuCategories
+                                    title="put"
+                                    id={body?.id}
+                                    data={body}
+                                  />
+                                </div>
                               ) : header.value == "region" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
@@ -231,18 +246,19 @@ function Index({ header, body, skelatonLoader }: Props) {
                                 </div>
                               ) : header.value == "menu" ? (
                                 <div className="flex items-center gap-2 text-gray-500">
-                                  <ModalDelete id={body?.id} title="menu" />                                  <ModalMenu
+                                  <ModalDelete id={body?.id} title="menu" />{" "}
+                                  <ModalMenu
                                     title="put"
                                     id={body?.id}
                                     data={body}
                                   />
                                   <button
-                                      onClick={() =>
-                                        navigate(`/home/menu/${body?.id}`)
-                                      }
-                                    >
-                                      <TurnRightIcon />
-                                    </button>
+                                    onClick={() =>
+                                      navigate(`/home/menu/${body?.id}`)
+                                    }
+                                  >
+                                    <TurnRightIcon />
+                                  </button>
                                 </div>
                               ) : header.value == "test" ? (
                                 <div className="flex items-center gap-2">

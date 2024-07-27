@@ -11,6 +11,7 @@ import ModalBranchWorkingDaes from "./modal-branch-workin-days";
 import ModalBranchDaysCreate from "./modal-branch-days-create";
 import ModalTest from "./modal-test";
 import ModalMenu from "./modal-menu";
+import ModalMenuCategories from "./modal-menu-categories";
 
 export { 
     ModalDelete , 
@@ -26,4 +27,5 @@ export {
     ModalBranchDaysCreate,
     ModalTest,
     ModalMenu,
+    ModalMenuCategories,
 };

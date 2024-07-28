@@ -83,8 +83,8 @@ export default function ResponsiveDrawer() {
         theme="light" 
         width={250}
         style={{ 
-          position: 'fixed', 
-          height: '100vh' 
+          position: "fixed", 
+          minHeight: '100vh' 
         }} 
       >
         <div className="logo" style={{ padding: "16px", textAlign: "center" }}>

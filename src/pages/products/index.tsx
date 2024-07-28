@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {DrawerProduct} from "@drawers"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useProductsStore} from "@store"
 
@@ -40,10 +40,12 @@ useEffect(()=>{
  // Props Global teble -------------->
  const header = [
   {title: "S/N" , value:"t/r"},
-  {title: "Product name" , value: true ? "nameUz" : "nameRu" },
-  {title: "Test" , value:"test"},
-  {title: "Test" , value:"test"},
-  {title: "Action" , value:"test"}
+  {title: "Product name" , value:  "name" },
+  {title: "Company name" , value:"companyName"},
+  {title: "Description" , value:"description"},
+  {title: "Categories name" , value:"categoriesName"},
+  {title: "Image url" , value:"imageUrl"},
+  {title: "Action" , value:"product"}
 ]
 
 
@@ -72,7 +74,7 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} handleChange={handleChange}/>
-    <ModalTest title="post" 
+    <DrawerProduct title="post" 
     />
   </div>
    <GlobalTable header={header} body={dataProducts} skelatonLoader={isLoader}/>

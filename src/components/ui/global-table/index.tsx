@@ -21,7 +21,7 @@ import { Image } from "antd"; // <-- test jarayonida
 
 import { Props } from "@interface";
 import { GlobalSwitch, DescriptionText } from "@ui";
-import { DrawerCouriers, DrawerCompany } from "@drawers";
+import { DrawerCouriers, DrawerCompany , DrawerProduct } from "@drawers";
 import {
   ModalDelete,
   ModalCountry,
@@ -31,7 +31,6 @@ import {
   ModalCuisines,
   ModalBranchWorkingDaes,
   ModalMenu,
-  ModalTest,
   ModalMenuCategories,
   ModalMenuSection
 } from "@modals";
@@ -249,7 +248,6 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   />
                                 </div>
                               )
-                              
                               : header.value == "region" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
@@ -277,12 +275,12 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     <TurnRightIcon />
                                   </button>
                                 </div>
-                              ) : header.value == "test" ? (
+                              ) : header.value == "product" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
-                                    <ModalDelete id={body?.id} title="menu" />
+                                    <ModalDelete id={body?.id} title="products" />
                                   </div>
-                                  <ModalTest
+                                  <DrawerProduct
                                     title="put"
                                     id={body?.id}
                                     data={body}

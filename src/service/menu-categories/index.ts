@@ -6,6 +6,10 @@ import request from "../config"
 export interface postMenuCategories{
     nameRu: string,
     nameUz: string,
+    descriptionUz: string,
+    descriptionRu: string,
+    imageUrl: string,
+    parentId: number
 }
 
 export interface UpdateMenuCategories {
@@ -24,7 +28,10 @@ export interface GetMenuCategories{
 
 
 interface MenuCategories{
-    getMenuCategories : ()=> any,
+    getMenuCategories : ()=> Promise <any>,
+    postMenuCategories: (data:postMenuCategories)=> Promise <any>,
+    updateMenuCategories: (data:UpdateMenuCategories)=> Promise <any>,
+    deleteMenuCategories: (id:number)=> Promise <any>,
 }
 
 // ---------> Interface Stor Menu <--------------------
@@ -33,6 +40,9 @@ export interface StoreMenuCategories {
     dataMenuCategories:any[];
     totlCount:number;
     getDataMenuCategories: ()=> Promise <any>;
+    postDataMenuCategories: (data:postMenuCategories)=> Promise <any>,
+    updateDataMenuCategories: (data:UpdateMenuCategories)=> Promise <any>,
+    deleteDataMenuCategories: (id:number)=> Promise <any>,
 }
 
 
@@ -40,5 +50,8 @@ export interface StoreMenuCategories {
 
 // ----------------> Instance Menu <----------------------------
 export const menuCategories:MenuCategories = {
-    getMenuCategories: ()=> request.get(`/services/admin/api/menu-categories-pageList`),
+    getMenuCategories: ()=> request.get(`/services/admin/api/categories-pageList`),
+    postMenuCategories: (data)=> request.post(`/services/admin/api/categories`, data),
+    updateMenuCategories: (data)=> request.put(`/services/admin/api/categories`, data),
+    deleteMenuCategories: (id)=> request.delete(`/services/admin/api/categories/${id}`),
 }

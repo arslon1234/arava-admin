@@ -26,13 +26,12 @@ export default function TemporaryDrawer({ title, id, data }: CouriersProps) {
 
   // function to create brand <---------------------------------------------------
   const handleSubmit = async (values: any) => {
-    console.log(values);
     if (!id) {
       setBootonLoding(true);
       try {
         const respons = await postDataCouriers(values);
         if (respons === 200) {
-          toast.success("Brand creste successfully");
+          toast.success("Couriers create successfully");
           setTimeout(() => {
             toggleDrawer(false);
             window.location.reload();

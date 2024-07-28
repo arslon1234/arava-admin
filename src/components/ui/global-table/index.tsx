@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import TurnRightIcon from "@mui/icons-material/TurnRight";
 import { Image } from "antd"; // <-- test jarayonida
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import ShortcutIcon from '@mui/icons-material/Shortcut';
@@ -20,7 +21,7 @@ import { Image } from "antd"; // <-- test jarayonida
 
 import { Props } from "@interface";
 import { GlobalSwitch, DescriptionText } from "@ui";
-import { DrawerCouriers, DrawerCompany } from "@drawers";
+import { DrawerCouriers, DrawerCompany , DrawerProduct } from "@drawers";
 import {
   ModalDelete,
   ModalCountry,
@@ -29,7 +30,9 @@ import {
   ModalRegion,
   ModalCuisines,
   ModalBranchWorkingDaes,
-  ModalTest,
+  ModalMenu,
+  ModalMenuCategories,
+  ModalMenuSection
 } from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
@@ -45,7 +48,10 @@ function Index({ header, body, skelatonLoader }: Props) {
         <Paper sx={{ width: "100%", mb: 2 }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table
-              stickyHeader sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium"
+              stickyHeader
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size="medium"
             >
               <TableHead>
                 <TableRow>
@@ -213,7 +219,36 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     data={body}
                                   />
                                 </div>
-                              ) : header.value == "region" ? (
+                              ) : header.value == "menu-categories" ? (
+                                <div className="flex items-center gap-2">
+                                  <div className=" text-gray-500">
+                                    <ModalDelete
+                                      id={body?.id}
+                                      title="menu-categories"
+                                    />
+                                  </div>
+                                  <ModalMenuCategories
+                                    title="put"
+                                    id={body?.id}
+                                    data={body}
+                                  />
+                                </div>
+                              ) : header.value == "menu-section" ? (
+                                <div className="flex items-center gap-2">
+                                  <div className=" text-gray-500">
+                                    <ModalDelete
+                                      id={body?.id}
+                                      title="menu-section"
+                                    />
+                                  </div>
+                                  <ModalMenuSection
+                                    title="put"
+                                    menuSectionId={body?.id}
+                                    data={body}
+                                  />
+                                </div>
+                              )
+                              : header.value == "region" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
                                     <ModalDelete id={body?.id} title="region" />
@@ -225,26 +260,33 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   />
                                 </div>
                               ) : header.value == "menu" ? (
+                                <div className="flex items-center gap-2 text-gray-500">
+                                  <ModalDelete id={body?.id} title="menu" />{" "}
+                                  <ModalMenu
+                                    title="put"
+                                    id={body?.id}
+                                    data={body}
+                                  />
+                                  <button
+                                    onClick={() =>
+                                      navigate(`/home/menu/${body?.id}`)
+                                    }
+                                  >
+                                    <TurnRightIcon />
+                                  </button>
+                                </div>
+                              ) : header.value == "product" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
-                                    <ModalDelete id={body?.id} title="menu" />
+                                    <ModalDelete id={body?.id} title="products" />
                                   </div>
-                                  <ModalTest
+                                  <DrawerProduct
                                     title="put"
                                     id={body?.id}
                                     data={body}
                                   />
                                 </div>
-                              ) : // : header.value == "imageUrl" ? <>
-                              //   <Link to={`https://webtest.aravva.uz${body?.imageUrl}`} target="_blank">
-                              //    <img className="w-[120px] h-[40px] object-contain"
-                              //     src={body?.imageUrl ?
-                              //     `https://webtest.aravva.uz${body?.imageUrl}`
-                              //     : "https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg"}
-                              //     alt="image" />
-                              //   </Link>
-                              // </>
-                              header.value == "imageUrl" ? (
+                              ) : header.value == "imageUrl" ? (
                                 <>
                                   <Image
                                     width={100}
@@ -324,6 +366,10 @@ function Index({ header, body, skelatonLoader }: Props) {
                               ) : header.value === "descriptionUz" ? (
                                 <div>
                                   <DescriptionText text={body?.descriptionUz} />
+                                </div>
+                              ) : header.value === "description" ? (
+                                <div>
+                                  <DescriptionText text={body?.description} />
                                 </div>
                               ) : (
                                 body[header.value]

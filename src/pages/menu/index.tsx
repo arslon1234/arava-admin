@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import {ModalTest} from "@modals"
+import {ModalMenu} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useMenuStore} from "@store"
 
@@ -72,7 +72,7 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   <ToastContainer />
   <div className="py-3 flex items-center justify-between">
     <GlobalSearch search={change} handleChange={handleChange}/>
-    <ModalTest title="post" 
+    <ModalMenu title="post" 
     />
   </div>
    <GlobalTable header={header} body={dataMenu} skelatonLoader={isLoader}/>

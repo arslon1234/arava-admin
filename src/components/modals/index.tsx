@@ -10,7 +10,9 @@ import ModalCuisines from "./modal-cuisines";
 import ModalBranchWorkingDaes from "./modal-branch-workin-days";
 import ModalBranchDaysCreate from "./modal-branch-days-create";
 import ModalTest from "./modal-test";
-
+import ModalMenu from "./modal-menu";
+import ModalMenuCategories from "./modal-menu-categories";
+import ModalMenuSection from "./modal-menu-section"
 
 export { 
     ModalDelete , 
@@ -25,4 +27,7 @@ export {
     ModalBranchWorkingDaes,
     ModalBranchDaysCreate,
     ModalTest,
+    ModalMenu,
+    ModalMenuCategories,
+    ModalMenuSection,
 };

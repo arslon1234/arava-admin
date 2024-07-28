@@ -70,6 +70,7 @@ export default function ResponsiveDrawer() {
     if (pathname === "/home/menu-categories") return t("menu-categories");
     if (pathname === "/home/products") return t("products");
     if (/^\/home\/branch\/\d+$/.test(pathname)) return "Branch working days"; 
+    if (/^\/home\/menu\/\d+$/.test(pathname)) return "Menu sections"; 
     return "Error";
   };
 
@@ -82,8 +83,8 @@ export default function ResponsiveDrawer() {
         theme="light" 
         width={250}
         style={{ 
-          position: 'fixed', 
-          height: '100vh' 
+          position: "fixed", 
+          minHeight: '100vh' 
         }} 
       >
         <div className="logo" style={{ padding: "16px", textAlign: "center" }}>

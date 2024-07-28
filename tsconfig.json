@@ -32,6 +32,7 @@
       "@branch-working-days": ["./src/service/branch-working-days"],
       "@cuisines": ["./src/service/cuisines"],
       "@menu": ["./src/service/menu"],
+      "@menu-section": ["./src/service/menu/menu-section.ts"],
       "@menu-categories": ["./src/service/menu-categories"],
       "@products": ["./src/service/products"],
 

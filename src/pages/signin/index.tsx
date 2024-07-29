@@ -7,16 +7,15 @@ import { auth } from "@service-auth";
 import ImageAuth from "../../assets/SPRK_default_preset_name_custom – 2.png";
 import "./style.scss";
 import { Button, ConfigProvider, Form, Input } from "antd";
+import {Signin } from "@interface"
 
 function Index() {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
   // Function to handle form submission
-  const signIn = async (values: any) => {
+  const signIn = async (values:Signin ) => {
     setLoader(true);
-    console.log(values);
-    
     try {
       const res = await auth.signin(values);
       if (res?.status == 200) {

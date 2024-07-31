@@ -21,7 +21,7 @@ import { Image } from "antd"; // <-- test jarayonida
 
 import { Props } from "@interface";
 import { GlobalSwitch, DescriptionText } from "@ui";
-import { DrawerCouriers, DrawerCompany , DrawerProduct } from "@drawers";
+import { DrawerCouriers, DrawerCompany  } from "@drawers";
 import {
   ModalDelete,
   ModalCountry,
@@ -38,9 +38,6 @@ import {
 function Index({ header, body, skelatonLoader }: Props) {
   const navigate = useNavigate();
   const URL = import.meta.env.VITE_BASE_URL;
-  // const [searchPaams] = useSearchParams();
-  // const page = Number(searchPaams.get("page")) || 1;
-  // const limit = Number(searchPaams.get("limit")) || 10;
 
   return (
     <>
@@ -280,11 +277,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   <div className=" text-gray-500">
                                     <ModalDelete id={body?.id} title="products" />
                                   </div>
-                                  <DrawerProduct
-                                    title="put"
-                                    id={body?.id}
-                                    data={body}
-                                  />
+                                  
                                 </div>
                               ) : header.value == "imageUrl" ? (
                                 <>

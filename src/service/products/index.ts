@@ -11,7 +11,6 @@ export interface postProducts{
     categoriesId: number,
     descriptionRu: string,
     descriptionUz: string,
-    imageThumbUrl: string,
     imageUrl: string,
     inStock: boolean,
     ingredientsRu: string,
@@ -53,11 +52,14 @@ interface Products{
 export interface StoreProducts {
     isLoader:boolean;
     dataProducts:any[];
+    imgeList:any[];
     totlCount:number;
     getDataProducts: ()=> Promise <any>;
     postDataProducts: (data:postProducts)=> Promise <any>,
     updateDataProducts: (data:UpdateProducts)=> Promise <any>,
     deleteDataProducts: (id:number)=> Promise <any>,
+    pushImgeList:(url:string)=>void;
+    clearImgeList: ()=> void;
 }
 
 

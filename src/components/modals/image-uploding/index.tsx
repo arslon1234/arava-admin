@@ -4,7 +4,7 @@ import { Button, Upload } from 'antd';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getCookies } from '@cookie';
-import { useBannerStore } from '@store';
+import { useBannerStore , useProductsStore } from '@store';
 
 // Define the RcFile type
 interface RcFile extends File {
@@ -25,6 +25,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Index = ({ text }: PropsData) => {
   const { imageUrlUpdated, imageUrl } = useBannerStore();
+  const { pushImgeList , imgeList } = useProductsStore();
 
   // imge upload reyuzible component bo'lgan propsdagi "text" qarab URL o'zgaradi 
   const bannerUpload = async (file: File) => {
@@ -33,6 +34,7 @@ const Index = ({ text }: PropsData) => {
       const url = text === "brand" ? `${baseUrl}/services/admin/api/brand-image-upload`
        : text === "branch" ? `${baseUrl}/services/admin/api/branch-image-upload` 
        : text === "menu-categories" ? `${baseUrl}/services/admin/api/categories-image-upload` 
+       : text === "product" ? `${baseUrl}/services/admin/api/product-image-upload` 
        :`${baseUrl}/services/admin/api/banner-image-upload`;
 
       const formData = new FormData();
@@ -45,9 +47,13 @@ const Index = ({ text }: PropsData) => {
         },
       });
 
+      
       if (response.status === 200) {
-        // console.log(response);
-        imageUrlUpdated(response?.data?.url);
+        if(text == "product"){
+           pushImgeList(response?.data?.url)
+        }else{
+            imageUrlUpdated(response?.data?.url);
+        }
       }
     } catch (error: any) {
       console.error(error);
@@ -76,9 +82,15 @@ const Index = ({ text }: PropsData) => {
     },
     onChange(info) {
       if (info.file.status === 'uploading') {
-        console.log(info.file, info.fileList);
+        // console.log(info.file, info.fileList);
       } else if (info.file.status === 'done') {
-        imageUrl ? toast.success(`file uploaded successfully`) : toast.error(`file upload failed.`);
+        if(imageUrl){
+          toast.success(`file uploaded successfully`);
+        }else if(imgeList){
+          toast.success(`file uploaded successfully`);
+        }else{
+          toast.error(`file upload failed.`)
+        }
       } else if (info.file.status === 'error') {
         toast.error(`file upload failed.`);
       }
@@ -98,9 +110,10 @@ const Index = ({ text }: PropsData) => {
       <Button
         icon={<UploadOutlined />}
         className={text === "brand" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]"
-         : text== "cuisines"? "w-full px-[64px] text-[18px] py-[18.5px] border border-[#C4C4C4] rounded-[8px]"
+         : text== "cuisines" ?  "w-full px-[64px] text-[18px] py-[18.5px] border border-[#C4C4C4] rounded-[8px]"
          : text== "menu-categories"? "w-full px-[64px] text-[18px] py-[18.5px] border border-[#C4C4C4] rounded-[8px]"
          : text== "branch" ? "w-full px-[64px] text-[18px] py-[20.5px] border border-[#C4C4C4] rounded-[10px]"
+         : text== "product" ? "w-full px-[64px] text-[18px] py-[18.5px] border border-[#C4C4C4] rounded-[8px] mt-[30px]"
          : "w-full px-[107px]  text-[18px] py-[20px] border border-[#C4C4C4] rounded-[10px] mb-2"}
       >
         Image upload

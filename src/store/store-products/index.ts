@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const useProductsStore = create <StoreProducts> ((set)=>({
     isLoader: false,
     dataProducts: [],
+    imgeList: [],
     totlCount: 0,
     getDataProducts: async()=>{
         try{
@@ -29,6 +30,7 @@ const useProductsStore = create <StoreProducts> ((set)=>({
             const response = await products.postProducts(data)
             if(response.status === 200){
                 set((state)=>({dataProducts: [...state.dataProducts, data] }))
+                set({isLoader: false})
                 return response?.status
             }
         }catch(error){
@@ -42,6 +44,7 @@ const useProductsStore = create <StoreProducts> ((set)=>({
             const response = await products.updateProducts(data)
             if(response.status === 200){
                 set((state)=>({dataProducts: state.dataProducts.map((el:any)=>el.id == data?.id? data : el)}))
+                set({isLoader: false})
                 return response?.status
             }
         }catch(error){
@@ -55,13 +58,20 @@ const useProductsStore = create <StoreProducts> ((set)=>({
             const response = await products.deleteProducts(id)
             if(response.status === 200){
                 set((state)=>({dataProducts: state.dataProducts.filter((el:any)=>el.id!= id)}))
-                toast.success("Product deleted successfully")
+                toast.success("Product deleted successfully");
+                set({isLoader: false})
                 return response?.status
             }
         }catch(error){
             console.log(error)
             set({isLoader: false})
         }
+    },
+    pushImgeList:(url)=>{
+        set((state)=>({imgeList: [...state.imgeList, url]}))
+    },
+    clearImgeList: ()=>{
+        set({imgeList: []})
     }
 }))
 

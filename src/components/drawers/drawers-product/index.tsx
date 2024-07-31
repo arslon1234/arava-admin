@@ -11,10 +11,14 @@ import {
   Switch,
 } from "antd";
 import {
-    useBrandStore,
-    useCuisinesStore,
-    useMenuCategoriesStore,
+  useBrandStore,
+  useCuisinesStore,
+  useMenuCategoriesStore,
+  useProductsStore,
+  useBranchStore,
 } from "@store";
+import { ImageUploding } from "@modals";
+import { toast } from "react-toastify";
 const { Option } = Select;
 
 interface CouriersProps {
@@ -23,13 +27,16 @@ interface CouriersProps {
   title?: string;
 }
 
-const Index = ({ data, title }: CouriersProps) => {
+const Index = ({ data, title, id }: CouriersProps) => {
   const [open, setOpen] = useState(false);
   const [bootonLoding, setBootonLoding] = useState(false);
   const { getDataBrand, dataBrand } = useBrandStore();
   const { getDataCuisines, dataCuisines } = useCuisinesStore();
+  const { getDataBranch, dataBranch } = useBranchStore();
   const { getDataMenuCategories, dataMenuCategories } =
     useMenuCategoriesStore();
+  const { imgeList, clearImgeList, postDataProducts, updateDataProducts } =
+    useProductsStore();
 
   const showDrawer = () => {
     setOpen(true);
@@ -44,57 +51,79 @@ const Index = ({ data, title }: CouriersProps) => {
     getDataMenuCategories();
     getDataBrand();
     getDataCuisines();
+    getDataBranch();
   }, []);
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   // function to create and updet products <---------------------------------------------------
   const handleSubmit = async (values: any) => {
-    setBootonLoding(true);
-    console.log(values);
-    setBootonLoding(false);
+    const array2 = values?.branchPrice
+      ?.split(",")
+      .map((item: string) => Number(item.trim()));
+    let newProduct = {
+      ...values,
+      galleryList: imgeList.length && imgeList,
+      imageUrl: imgeList[0] && imgeList[0],
+      productBranchList: values?.branchList?.map((el: number, i: number) => {
+        return {
+          branchId: el,
+          price: array2[i],
+        };
+      }),
+    };
+    delete newProduct.branchList;
+    delete newProduct.branchPrice;
 
-    // if (!id) {
-    //   setBootonLoding(true);
-    //   try {
-    //     const respons = await postDataProducts(values);
-    //     if (respons === 200) {
-    //       toast.success("Brand creste successfully");
-    //       setTimeout(() => {
-    //         toggleDrawer(false);
-    //         window.location.reload();
-    //       }, 1000);
-    //     }
-    //   } catch (err: any) {
-    //     toast.error("Error : " + err?.message);
-    //     console.log(err);
-    //   } finally {
-    //     setBootonLoding(false);
-    //   }
-    // } else {
-    //   setBootonLoding(true);
-    //   try {
-    //     const respons = await updateDataProducts({ ...values, id: id });
-    //     if (respons === 200) {
-    //       toast.success("update success full");
-    //       setTimeout(() => {
-    //         toggleDrawer(false);
-    //         window.location.reload();
-    //       }, 1000);
-    //     }
-    //   } catch (err: any) {
-    //     toast.error("Error : " + err?.message);
-    //     console.log(err);
-    //   } finally {
-    //     setBootonLoding(false);
-    //   }
-    // }
+    // console.log(newProduct);
+
+    if (!id) {
+      setBootonLoding(true);
+      try {
+        const respons = await postDataProducts(newProduct);
+        if (respons === 200) {
+          toast.success("Product creste successfully");
+
+          setTimeout(() => {
+            setOpen(false);
+            clearImgeList();
+            window.location.reload();
+          }, 1000);
+        }
+      } catch (err: any) {
+        toast.error("Error : " + err?.message);
+        console.log(err);
+      } finally {
+        setBootonLoding(false);
+      }
+    } else {
+      setBootonLoding(true);
+      try {
+        const respons = await updateDataProducts({ ...newProduct, id: id });
+        if (respons === 200) {
+          toast.success("update success full");
+          setTimeout(() => {
+            setOpen(false);
+            window.location.reload();
+          }, 1000);
+        }
+      } catch (err: any) {
+        toast.error("Error : " + err?.message);
+        console.log(err);
+      } finally {
+        setBootonLoding(false);
+      }
+    }
   };
   ///=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-  // slect cuisines list function <---------------
+  // slect cuisines list and branch list function <---------------
   const cuisinesOptions = dataCuisines.map((item: any) => ({
     value: item.id,
     label: item.nameUz || item.nameRu,
+  }));
+  const branchOptions = dataBranch.map((item: any) => ({
+    value: item.id,
+    label: item.name,
   }));
   //=-=-=-=-==-==-=-=-=-=-===-=-=-=-=-=-=--=-=-==-=-=-=-=-=-=-=-=-=-=-
 
@@ -103,16 +132,16 @@ const Index = ({ data, title }: CouriersProps) => {
     <>
       {title == "post" ? (
         <Button
-        type="primary"
-        onClick={showDrawer}
-        style={{
-          backgroundColor: "#008524",
-          fontWeight: 600,
-          padding: "18px 20px",
-        }}
-      >
-        To add
-      </Button>
+          type="primary"
+          onClick={showDrawer}
+          style={{
+            backgroundColor: "#008524",
+            fontWeight: 600,
+            padding: "18px 20px",
+          }}
+        >
+          To add
+        </Button>
       ) : (
         <Button
           color="inherit"
@@ -289,6 +318,34 @@ const Index = ({ data, title }: CouriersProps) => {
                   </Select>
                 </Form.Item>
 
+                {/* branch list name | id */}
+                <Form.Item
+                  label="Select a baranch list"
+                  name="branchList"
+                  hasFeedback
+                  rules={[{ required: true, message: "Select branch" }]}
+                >
+                  <Select
+                    mode="tags"
+                    size="large"
+                    style={{ width: "100%" }}
+                    placeholder="Select baranch list"
+                    options={branchOptions}
+                  />
+                </Form.Item>
+
+                {/* branch price */}
+                <Form.Item
+                  name="branchPrice"
+                  label="Branch price"
+                  hasFeedback
+                  style={{ width: "100%" }}
+                  rules={[{ required: true }]}
+                  // initialValue={data?.ingredientsUz ? data.ingredientsUz : ""}
+                >
+                  <Input style={{ width: "100%" }} size="large" />
+                </Form.Item>
+
                 {/* cuisines list name | id */}
                 <Form.Item
                   label="Select a cuisines list"
@@ -305,30 +362,35 @@ const Index = ({ data, title }: CouriersProps) => {
                   />
                 </Form.Item>
 
-                {/* in stock  */}
-                <Form.Item
-                  name="inStock"
-                  label="In stock"
-                  hasFeedback
-                  style={{ width: "40%" }}
-                  rules={[{ required: true }]}
-                  initialValue={data?.inStock ? data?.inStock : false}
-                >
-                  <Switch defaultChecked />
-                </Form.Item>
-              </div>
+                {/* Imge uploding */}
+                <ImageUploding text="product" />
 
-              {/* form button  */}
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  size="large"
-                  loading={bootonLoding}
-                >
-                  Submit
-                </Button>
-              </Form.Item>
+                {/* in stock  */}
+                <div className="flex items-end justify-between">
+                  <Form.Item
+                    name="inStock"
+                    label="In stock"
+                    hasFeedback
+                    style={{ width: "40%" }}
+                    rules={[{ required: true }]}
+                    initialValue={data?.inStock ? data?.inStock : false}
+                  >
+                    <Switch defaultChecked />
+                  </Form.Item>
+
+                  {/* form button  */}
+                  <Form.Item>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      size="large"
+                      loading={bootonLoding}
+                    >
+                      Submit
+                    </Button>
+                  </Form.Item>
+                </div>
+              </div>
             </Form>
           </ConfigProvider>
         </div>

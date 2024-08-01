@@ -1,15 +1,15 @@
 {
-    "brandType":"Brand type",
-    "brand":"Brand",
-    "company":"Company",
-    "city":"City",
-    "country":"Country",
-    "couriers":"Couriers",
-    "banner":"Banner",
-    "region":"Region",
-    "branch" : "Branch",
-    "cuisines":"Cuisines",
-    "menu":"Menu",
-    "menu-categories":"Menu categories",
-    "products":"Products"
+    "Brand type":"Brand type",
+    "Brand":"Brand",
+    "Company":"Company",
+    "City":"City",
+    "Country":"Country",
+    "Couriers":"Couriers",
+    "Banner":"Banner",
+    "Region":"Region",
+    "Branch" : "Branch",
+    "Cuisines":"Cuisines",
+    "Menu":"Menu",
+    "Categories":"Menu categories",
+    "Products":"Products"
 }

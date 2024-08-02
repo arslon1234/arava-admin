@@ -21,7 +21,7 @@ import { Image } from "antd"; // <-- test jarayonida
 
 import { Props } from "@interface";
 import { GlobalSwitch, DescriptionText } from "@ui";
-import { DrawerCouriers, DrawerCompany  } from "@drawers";
+import { DrawerCouriers, DrawerCompany } from "@drawers";
 import {
   ModalDelete,
   ModalCountry,
@@ -32,7 +32,7 @@ import {
   ModalBranchWorkingDaes,
   ModalMenu,
   ModalMenuCategories,
-  ModalMenuSection
+  ModalMenuSection,
 } from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
@@ -244,8 +244,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     data={body}
                                   />
                                 </div>
-                              )
-                              : header.value == "region" ? (
+                              ) : header.value == "region" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
                                     <ModalDelete id={body?.id} title="region" />
@@ -275,9 +274,11 @@ function Index({ header, body, skelatonLoader }: Props) {
                               ) : header.value == "product" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
-                                    <ModalDelete id={body?.id} title="products" />
+                                    <ModalDelete
+                                      id={body?.id}
+                                      title="products"
+                                    />
                                   </div>
-                                  
                                 </div>
                               ) : header.value == "imageUrl" ? (
                                 <>

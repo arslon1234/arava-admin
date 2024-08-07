@@ -16,12 +16,12 @@ export interface UpdateMenu {
 // test apida qoshilsa qo'shiladi
 export interface GetMenu {
   search?: string;
-  page?: number;
-  limit?: number;
+  page: number;
+  size: number;
 }
 
 interface Menu {
-  getMenu: () => any;
+  getMenu: (params:GetMenu) => any;
   postMenu: (data: postMenu) => any;
   updateMenu: (data: UpdateMenu) => any;
   deleteMenu: (id: number) => any;
@@ -32,7 +32,7 @@ export interface StoreMenu {
   isLoader: boolean;
   dataMenu: any[];
   totlCount: number;
-  getDataMenu: () => Promise<any>;
+  getDataMenu: (params:GetMenu) => Promise<any>;
   postDataMenu: (data: postMenu) => Promise<any>;
   updateDataMenu: (data: UpdateMenu) => Promise<any>;
   deleteDataMenu: (id: number) => Promise<any>;
@@ -40,7 +40,7 @@ export interface StoreMenu {
 
 // ----------------> Instance Menu <----------------------------
 export const menu: Menu = {
-  getMenu: () => request.get(`/services/admin/api/menu-pageList`),
+  getMenu: (params:GetMenu) => request.get(`/services/admin/api/menu-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`,),
   postMenu: (data) => request.post(`/services/admin/api/menu`, data),
   updateMenu: (data) => request.put(`/services/admin/api/menu`, data),
   deleteMenu: (id) => request.delete(`/services/admin/api/menu/${id}`),

@@ -9,12 +9,12 @@ const useProductsStore = create <StoreProducts> ((set)=>({
     dataProducts: [],
     imgeList: [],
     totlCount: 0,
-    getDataProducts: async()=>{
+    getDataProducts: async(params)=>{
         try{
            set({isLoader: true})
-           const response = await products.getProducts()
+           const response = await products.getProducts(params)
            if(response.status === 200){
-               set({dataProducts: response?.data});
+               set({dataProducts: response?.data?.content});
             //    set({totlCount: respons?.data?.data?.count})
            }
            set({isLoader: false})

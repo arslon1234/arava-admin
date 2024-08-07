@@ -20,15 +20,15 @@ export interface UpdateMenuCategories {
 // test apida qoshilsa qo'shiladi
 export interface GetMenuCategories{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
 
 
 interface MenuCategories{
-    getMenuCategories : ()=> Promise <any>,
+    getMenuCategories : (params: GetMenuCategories)=> Promise <any>,
     postMenuCategories: (data:postMenuCategories)=> Promise <any>,
     updateMenuCategories: (data:UpdateMenuCategories)=> Promise <any>,
     deleteMenuCategories: (id:number)=> Promise <any>,
@@ -39,7 +39,7 @@ export interface StoreMenuCategories {
     isLoader:boolean;
     dataMenuCategories:any[];
     totlCount:number;
-    getDataMenuCategories: ()=> Promise <any>;
+    getDataMenuCategories: (params:GetMenuCategories)=> Promise <any>;
     postDataMenuCategories: (data:postMenuCategories)=> Promise <any>,
     updateDataMenuCategories: (data:UpdateMenuCategories)=> Promise <any>,
     deleteDataMenuCategories: (id:number)=> Promise <any>,
@@ -50,7 +50,7 @@ export interface StoreMenuCategories {
 
 // ----------------> Instance Menu <----------------------------
 export const menuCategories:MenuCategories = {
-    getMenuCategories: ()=> request.get(`/services/admin/api/categories-pageList`),
+    getMenuCategories: (params)=> request.get(`/services/admin/api/categories-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     postMenuCategories: (data)=> request.post(`/services/admin/api/categories`, data),
     updateMenuCategories: (data)=> request.put(`/services/admin/api/categories`, data),
     deleteMenuCategories: (id)=> request.delete(`/services/admin/api/categories/${id}`),

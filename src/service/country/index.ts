@@ -12,17 +12,17 @@ export interface UpdateCountry {
 
 
 // test apida qoshilsa qo'shiladi
-export interface GetCountry{
+export interface getCountry{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
 
 
 interface Country{
-    getCompany : ()=> any,
+    getCompany : (params:getCountry)=> any,
     postCompany : (data:postCountry)=> any,
     updateCompany: (data:UpdateCountry)=> any,
     deleteCompany : (id:number)=> any,
@@ -33,7 +33,7 @@ export interface StoreCountry {
     isLoader:boolean;
     dataCountry:any[];
     totlCount:number;
-    getDataCountry: ()=> Promise <any>;
+    getDataCountry: (params:getCountry)=> Promise <any>;
     postDataCountry: (data:postCountry)=> Promise <any>;
     updateDataCountry: (data:UpdateCountry)=> Promise <any>;
     deleteDataCountry: (id:number)=> Promise <any>;
@@ -44,7 +44,7 @@ export interface StoreCountry {
 
 // ----------------> Instance Category <----------------------------
 export const country:Country = {
-    getCompany: ()=> request.get(`/services/admin/api/country-pageList`),
+    getCompany: (params)=> request.get(`/services/admin/api/country-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     postCompany: (data)=> request.post("/services/admin/api/country" , data),
     updateCompany: (data)=> request.put(`/services/admin/api/country`, data),
     deleteCompany: (id)=> request.delete(`/services/admin/api/country/${id}`),

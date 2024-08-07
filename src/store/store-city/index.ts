@@ -8,10 +8,10 @@ const useCityStore = create <StoreCity> ((set)=>({
     isLoader: false,
     dataCity: [],
     totlCount: 0,
-    getDataCity : async()=>{
+    getDataCity : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await city.getCity()
+           const response = await city.getCity(params)
            if(response.status === 200){
                set({dataCity: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

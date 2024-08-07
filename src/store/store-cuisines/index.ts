@@ -8,10 +8,10 @@ const useCuisinesStore = create <StoreCuisines> ((set)=>({
     isLoader: false,
     dataCuisines: [],
     totlCount: 0,
-    getDataCuisines : async()=>{
+    getDataCuisines : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await cuisines.getCuisines()
+           const response = await cuisines.getCuisines(params)
            if(response.status === 200){
                set({dataCuisines: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

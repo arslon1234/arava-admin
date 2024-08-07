@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { useBranchWorkingDaysStore } from "@store";
 import { GlobalTable  } from "@ui";
 import {ModalBranchDaysCreate} from "@modals"
+import { Spin } from "antd";
 
 function Index() {
   const { id } = useParams();
@@ -34,7 +35,10 @@ function Index() {
           <ModalBranchDaysCreate />
         </div>
       }
+      <Spin spinning={isLoader} size="large">
+
       <GlobalTable header={header} body={dataBranchWorkingDays} skelatonLoader={isLoader} />
+      </Spin>
     </>
   );
 }

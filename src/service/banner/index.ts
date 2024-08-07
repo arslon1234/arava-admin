@@ -15,8 +15,8 @@ export interface UpdateBanner {
 // test apida qoshilsa qo'shiladi
 export interface GetBanner{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 

@@ -5,19 +5,20 @@ import { useNavigate } from "react-router-dom";
 import {DrawerProduct} from "@drawers"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useProductsStore} from "@store"
+import { Spin } from "antd";
 
 
 
 function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
-const [ , setParams] = useState({limit: 10, page:1 , search:change})
+const [ params, setParams] = useState({size: 10, page:0 , search:change})
 const {getDataProducts, dataProducts  , isLoader } =  useProductsStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataProducts();
-},[]);
+  getDataProducts(params);
+},[params]);
 
 useEffect(()=>{
   const params = new URLSearchParams(location.search);
@@ -77,7 +78,10 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <DrawerProduct title="post" 
     />
   </div>
+  <Spin spinning={isLoader} size="large">
+
    <GlobalTable header={header} body={dataProducts} skelatonLoader={isLoader}/>
+  </Spin>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

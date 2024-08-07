@@ -55,12 +55,12 @@ const Index = ({ data, title }: CouriersProps) => {
   };
 
   useEffect(() => {
-    getDataCountry();
-    getDataRegion();
-    getDataCity();
-    getDataBrandType();
-    getDataBrand();
-    getDataCuisines();
+    getDataCountry({page:0, size:100, search:""});
+    getDataRegion({page:0, size:100, search:""});
+    getDataCity({page:0, size:100, search:""});
+    getDataBrandType({page:0, size:100, search:""});
+    getDataBrand({page:0, size:100, search:""});
+    getDataCuisines({page:0, size:100, search:""});
   }, []);
 
   const handleSubmit = async (values: any) => {

@@ -8,10 +8,10 @@ const useMenuStore = create <StoreMenu> ((set)=>({
     isLoader: false,
     dataMenu: [],
     totlCount: 0,
-    getDataMenu: async()=>{
+    getDataMenu: async(params)=>{
         try{
            set({isLoader: true})
-           const response = await menu.getMenu()
+           const response = await menu.getMenu(params)
            if(response.status === 200){
                set({dataMenu: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

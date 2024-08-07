@@ -24,15 +24,15 @@ export interface UpdateCouriers {
 // test apida qoshilsa qo'shiladi
 export interface GetCouriers{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
 
 
 interface Couriers{
-    getCouriers : ()=> any,
+    getCouriers : (params:GetCouriers)=> any,
     deleteCouriers: (id:number)=> any,
     
     //API da hali qo'shilmadi
@@ -45,7 +45,7 @@ export interface StoreCouriers {
     isLoader:boolean;
     dataCouriers:any[];
     totlCount:number;
-    getDataCouriers: ()=> Promise <any>;
+    getDataCouriers: (params:GetCouriers)=> Promise <any>;
     deleteDataCouriers: (id:number)=> Promise <any>;
     
     //API da hali qo'shilmadi
@@ -58,7 +58,7 @@ export interface StoreCouriers {
 
 // ----------------> Instance Couriers <----------------------------
 export const сouriers:Couriers = {
-    getCouriers: ()=> request.get(`/services/admin/api/couriers-pageList`),
+    getCouriers: (params)=> request.get(`/services/admin/api/couriers-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     deleteCouriers: (id)=> request.delete(`/services/admin/api/delete/${id}`),  //test
 
     //API da hali qo'shilmadi

@@ -8,10 +8,10 @@ const useBranchStore = create <StoreBranch> ((set)=>({
     isLoader: false,
     dataBranch: [],
     totlCount: 0,
-    getDataBranch : async()=>{
+    getDataBranch : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await branch.getBranch()
+           const response = await branch.getBranch(params)
            if(response.status === 200){
                set({dataBranch: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

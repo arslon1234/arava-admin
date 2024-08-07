@@ -8,10 +8,10 @@ const useBrandTypeStore = create <StoreBrandType> ((set)=>({
     isLoader: false,
     dataBrandType: [],
     totlCount: 0,
-    getDataBrandType : async()=>{
+    getDataBrandType : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await brandType.getBrandType()
+           const response = await brandType.getBrandType(params)
            if(response.status === 200){
                set({dataBrandType: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

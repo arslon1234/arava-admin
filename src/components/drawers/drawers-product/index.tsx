@@ -49,9 +49,9 @@ const Index = ({ data, title, id }: CouriersProps) => {
   // function useEffects <--------------
   useEffect(() => {
     getDataMenuCategories();
-    getDataBrand();
-    getDataCuisines();
-    getDataBranch();
+    getDataBrand({page:0, size:100, search:""});
+    getDataCuisines({page:0, size:100, search:""});
+    getDataBranch({page:0, size:100, search:""});
   }, []);
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 

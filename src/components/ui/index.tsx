@@ -5,6 +5,7 @@ import DropdownLanguage from "./dropdown-lang";
 import GoogleMaps from "./google-maps";
 import GlobalSwitch from "./global-switch";
 import DescriptionText from "./description-text";
+import GlobalPogination from "./global-pogination";
 
 
-export {Account , GlobalTable , GlobalSearch , DropdownLanguage , GoogleMaps , GlobalSwitch , DescriptionText }
+export {Account , GlobalTable , GlobalSearch , DropdownLanguage ,GlobalPogination , GoogleMaps , GlobalSwitch , DescriptionText }

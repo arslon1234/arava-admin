@@ -15,7 +15,7 @@ const useProductsStore = create <StoreProducts> ((set)=>({
            const response = await products.getProducts(params)
            if(response.status === 200){
                set({dataProducts: response?.data?.content});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({totlCount: response?.data?.totalElements});
            }
            set({isLoader: false})
        }catch(error){
@@ -57,7 +57,8 @@ const useProductsStore = create <StoreProducts> ((set)=>({
             set({isLoader: true})
             const response = await products.deleteProducts(id)
             if(response.status === 200){
-                set((state)=>({dataProducts: state.dataProducts.filter((el:any)=>el.id!= id)}))
+                set((state)=>({dataProducts: state.dataProducts.filter((el:any)=>el.id!= id)}));
+                set((state)=>({totlCount: state.totlCount - 1}));
                 toast.success("Product deleted successfully");
                 set({isLoader: false})
                 return response?.status

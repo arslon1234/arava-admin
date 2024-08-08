@@ -9,7 +9,6 @@ import {
   TableSortLabel,
   Paper,
   Skeleton,
-  // Button,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -17,7 +16,7 @@ import TurnRightIcon from "@mui/icons-material/TurnRight";
 import { Image } from "antd"; // <-- test jarayonida
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import ShortcutIcon from '@mui/icons-material/Shortcut';
-// import {  useSearchParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
 import { GlobalSwitch, DescriptionText } from "@ui";
@@ -38,6 +37,9 @@ import {
 function Index({ header, body, skelatonLoader }: Props) {
   const navigate = useNavigate();
   const URL = import.meta.env.VITE_BASE_URL;
+  const [searchPaams] = useSearchParams();
+  const page = Number(searchPaams.get("page")) || 0;
+  const size = Number(searchPaams.get("size")) || 10;
 
   return (
     <>
@@ -304,7 +306,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   </Link>
                                 </>
                               ) : header.value == "t/r" ? (
-                                <>{index + 1}</> //{page * limit -(limit - 1) +index }
+                                 <>{page * size -(size - 1) + index }</> //<>{index + 1}</>
                               ) : header.value == "activatedBanner" ? (
                                 <div>
                                   <GlobalSwitch

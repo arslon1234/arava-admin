@@ -140,7 +140,7 @@ export default function ResponsiveDrawer() {
         <Content
           style={{
             margin: "90px 16px 24px 16px",
-            padding: 24,
+            padding: "10px 20px",
             minHeight: 360,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,

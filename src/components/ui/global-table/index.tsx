@@ -38,7 +38,7 @@ function Index({ header, body, skelatonLoader }: Props) {
   const navigate = useNavigate();
   const URL = import.meta.env.VITE_BASE_URL;
   const [searchPaams] = useSearchParams();
-  const page = Number(searchPaams.get("page")) || 0;
+  const page = Number(searchPaams.get("page")) || 1;
   const size = Number(searchPaams.get("size")) || 10;
 
   return (

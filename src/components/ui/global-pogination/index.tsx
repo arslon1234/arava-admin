@@ -14,6 +14,7 @@ function Index({totleCuont , page , setParams } :PropsGlobalPagination) {
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         console.log(event);
+        // console.log(value);
         setParams(value)
         const searchPaams = new URLSearchParams(location.search);
         searchPaams.set("page", `${value}`);

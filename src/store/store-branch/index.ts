@@ -13,8 +13,8 @@ const useBranchStore = create <StoreBranch> ((set)=>({
            set({isLoader: true})
            const response = await branch.getBranch(params)
            if(response.status === 200){
-               set({dataBranch: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataBranch: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){

@@ -12,9 +12,9 @@ import { Spin } from "antd";
 function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
-const [ params, setParams] = useState({size: 10, page:0 , search:change})
+const [ params, setParams] = useState({size: 10, page:1 , search:change})
 const {getDataProducts, dataProducts  , isLoader , totlCount} =  useProductsStore();
-const totleCuont2 = Math.ceil(totlCount / params?.size)
+const totleCuont2 = Math.ceil(totlCount / params?.size )
 
 useEffect(() =>{
   getDataProducts(params);
@@ -82,8 +82,10 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
 
    <GlobalTable header={header} body={dataProducts} skelatonLoader={isLoader}/>
   </Spin>
+   <div className="flex items-center justify-end">
 
    <GlobalPogination totleCuont={totleCuont2} page={params?.page} setParams={changePage} />
+   </div>
   </>
 }
 

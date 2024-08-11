@@ -8,10 +8,10 @@ const useCompanyStore = create <StoreCountry> ((set)=>({
     isLoader: false,
     dataCountry: [],
     totlCount: 0,
-    getDataCountry : async()=>{
+    getDataCountry : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await country.getCompany()
+           const response = await country.getCompany(params)
            if(response.status === 200){
                set({dataCountry: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

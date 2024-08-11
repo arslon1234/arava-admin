@@ -8,10 +8,10 @@ const useCouriersStore = create <StoreCouriers> ((set)=>({
     isLoader: false,
     dataCouriers: [],
     totlCount: 0,
-    getDataCouriers : async()=>{
+    getDataCouriers : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await сouriers.getCouriers()
+           const response = await сouriers.getCouriers(params)
            if(response.status === 200){
                set({dataCouriers: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

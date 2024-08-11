@@ -55,12 +55,12 @@ const Index = ({ data, title }: CouriersProps) => {
   };
 
   useEffect(() => {
-    getDataCountry();
-    getDataRegion();
-    getDataCity();
-    getDataBrandType();
-    getDataBrand();
-    getDataCuisines();
+    getDataCountry({page:0, size:100, search:""});
+    getDataRegion({page:0, size:100, search:""});
+    getDataCity({page:0, size:100, search:""});
+    getDataBrandType({page:0, size:100, search:""});
+    getDataBrand({page:0, size:100, search:""});
+    getDataCuisines({page:0, size:100, search:""});
   }, []);
 
   const handleSubmit = async (values: any) => {
@@ -113,6 +113,7 @@ const Index = ({ data, title }: CouriersProps) => {
     // console.log(e?.[0].$m);
     // console.log(e?.[1].$m);
     setTimeStartEnd({ start: e?.[0].$m, end: e?.[1].$m });
+    
   };
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   return (
@@ -343,6 +344,7 @@ const Index = ({ data, title }: CouriersProps) => {
                   <TimePicker.RangePicker
                     style={{ width: "100%" }}
                     size="large"
+                    format="mm"
                     onChange={(e) => testTimeToEnd(e)}
                   />
                 </Form.Item>
@@ -375,10 +377,15 @@ const Index = ({ data, title }: CouriersProps) => {
                 >
                   <Switch defaultChecked />
                 </Form.Item>
+                
               </div>
+
+              {/* Google maps */}
               <div className="my-2">
                 <GoogleMaps />
               </div>
+
+              {/* Form button */}
               <Form.Item>
                 <Button type="primary" htmlType="submit" size="large">
                   Submit

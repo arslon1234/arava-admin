@@ -1,28 +1,29 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { DrawerBranch } from "@drawers";
 import { GlobalTable, GlobalSearch } from "@ui";
 import { useBranchStore } from "@store";
+import { Spin } from "antd";
 
 function Index() {
   const navigate = useNavigate();
   const [change, setChange] = useState("");
-  const [, setParams] = useState({ limit: 10, page: 1, search: change });
-  const { getDataBranch , dataBranch , isLoader} = useBranchStore();
+  const [params, setParams] = useState({ size: 10, page: 0, search: change });
+  const { getDataBranch, dataBranch, isLoader } = useBranchStore();
   // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
   useEffect(() => {
-    getDataBranch();
-  }, []);
+    getDataBranch(params);
+  }, [params]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const page = params.get("page");
     const search = params.get("search");
     const searchString = search ? search : "";
-    const pageNuber = page ? parseInt(page) : 1;
+    const pageNuber = page ? parseInt(page) : 0;
     setParams((preParams) => ({
       ...preParams,
       page: pageNuber,
@@ -36,7 +37,7 @@ function Index() {
     { title: "S/N", value: "t/r" },
     { title: "Branch name", value: "name" },
     { title: "Brand", value: "brandName" },
-    { title: "Activated" , value: "activatedBranch" },
+    { title: "Activated", value: "activatedBranch" },
     { title: "Image", value: "imageUrl" },
 
     { title: "Action", value: "branch" },
@@ -70,7 +71,13 @@ function Index() {
         <DrawerBranch title="post" />
       </div>
       {/* GlobalTable */}
-      <GlobalTable header={header} body={dataBranch} skelatonLoader={isLoader} />
+      <Spin spinning={isLoader} size="large" >
+        <GlobalTable
+          header={header}
+          body={dataBranch}
+          skelatonLoader={isLoader}
+        />
+      </Spin>
 
       {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
     </>

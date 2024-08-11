@@ -8,10 +8,10 @@ const useMenuCategoriesStore = create <StoreMenuCategories> ((set)=>({
     isLoader: false,
     dataMenuCategories: [],
     totlCount: 0,
-    getDataMenuCategories: async()=>{
+    getDataMenuCategories: async(params)=>{
         try{
            set({isLoader: true})
-           const response = await menuCategories.getMenuCategories()
+           const response = await menuCategories.getMenuCategories(params)
            if(response.status === 200){
                set({dataMenuCategories: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

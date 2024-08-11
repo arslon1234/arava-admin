@@ -10,10 +10,10 @@ const useBrandStore = create <StoreBrand> ((set)=>({
     totlCount: 0,
     location:{lat: 0, lng: 0},
 
-    getDataBrand : async()=>{
+    getDataBrand : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await brand.getBrand()
+           const response = await brand.getBrand(params)
            if(response.status === 200){
                set({dataBrand: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

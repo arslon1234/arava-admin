@@ -35,7 +35,7 @@ const Index = ({ data, id, title }: CouriersProps) => {
   };
 
   useEffect(() => {
-    getDataCountry();
+    getDataCountry({page:0, size:100, search:""});
   }, []);
 
   // function to create company <---------------------------------------------------

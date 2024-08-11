@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {ModalCuisines} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
 import { useCuisinesStore } from "@store";
+import { Spin } from "antd";
 
 
 
@@ -12,19 +13,19 @@ function Index() {
 const navigate = useNavigate()
 const {getDataCuisines , dataCuisines , isLoader}= useCuisinesStore();
 const [change, setChange] = useState("")
-const [ , setParams] = useState({limit: 10, page:1 , search:change})
+const [ params, setParams] = useState({size: 10, page:0 , search:change})
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCuisines();
-},[]);
+  getDataCuisines(params);
+},[params]);
 
 useEffect(()=>{
   const params = new URLSearchParams(location.search);
   const page = params.get("page");
   const search = params.get("search");
   const searchString =  search ? search  : ""
-  const pageNuber = page ? parseInt(page): 1;
+  const pageNuber = page ? parseInt(page): 0;
   setParams(preParams=>({
      ...preParams,
       page:pageNuber,
@@ -74,7 +75,9 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <GlobalSearch search={change} handleChange={handleChange}/>
     <ModalCuisines title="post" />
   </div>
+  <Spin spinning={isLoader} size="large">
    <GlobalTable header={header} body={dataCuisines} skelatonLoader={isLoader}/>
+  </Spin>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

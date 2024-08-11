@@ -18,8 +18,8 @@ export interface UpdateBrandType {
 // test apida qoshilsa qo'shiladi
 export interface GetBrandType{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 export interface brandTypeActivated{
@@ -30,7 +30,7 @@ export interface brandTypeActivated{
 
 
 interface BrandType{
-    getBrandType : ()=> any,
+    getBrandType : (params:GetBrandType)=> any,
     deleteBrandType : (id:number)=> any,
     postBrandType : (data:postBrandType)=> any,
     updateBrandType: (data:UpdateBrandType)=> any,
@@ -42,7 +42,7 @@ export interface StoreBrandType {
     isLoader:boolean;
     dataBrandType:any[];
     totlCount:number;
-    getDataBrandType: ()=> Promise <any>;
+    getDataBrandType: (params:GetBrandType)=> Promise <any>;
     deleteDataBrandType: (id:number)=> Promise <any>;
     postDataBrandType: (data:postBrandType)=> Promise <any>;
     updateDataBrandType: (data:UpdateBrandType)=> Promise <any>;
@@ -55,7 +55,7 @@ export interface StoreBrandType {
 
 // ----------------> Instance Category <----------------------------
 export const brandType:BrandType = {
-    getBrandType: ()=> request.get(`/services/admin/api/brand-type-pageList`),
+    getBrandType: (params)=> request.get(`/services/admin/api/brand-type-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     deleteBrandType: (id)=> request.delete(`/services/admin/api/brand-type/${id}`),
     postBrandType: (data)=> request.post("/services/admin/api/brand-type" , data),
     updateBrandType: (data)=> request.put(`/services/admin/api/brand-type`, data),

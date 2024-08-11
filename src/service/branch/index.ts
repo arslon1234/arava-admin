@@ -31,8 +31,8 @@ export interface UpdateBranch {
 // test apida qoshilsa qo'shiladi
 export interface GetBranch{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 interface ActivatedBranch{
@@ -44,13 +44,12 @@ interface ActivatedBranch{
 
 
 interface Branch{
-    getBranch : ()=> any,
-    
-    //API da hali qo'shilmadi
+    getBranch : (params:GetBranch)=> any,
     deleteBranch: (id:number)=> any,
     postBranch : (data:postBranch)=> any,
-    updateBranch: (data:UpdateBranch)=> any,
     activatedBranch:(data:ActivatedBranch)=> any,
+
+    updateBranch: (data:UpdateBranch)=> any,
 }
 
 // ---------> Interface Stor Couriers <--------------------
@@ -58,14 +57,12 @@ export interface StoreBranch {
     isLoader:boolean;
     dataBranch:any[];
     totlCount:number;
-    getDataBranch: ()=> Promise <any>;
-    
-    //API da hali qo'shilmadi
+    getDataBranch: (params:GetBranch)=> Promise <any>;
     deleteDataBranch: (id:number)=> Promise <any>;
     postDataBranch: (data:postBranch)=> Promise <any>;
-    updateDataBranch: (data:UpdateBranch)=> Promise <any>;
-
     activatedBranch:(data:ActivatedBranch)=> Promise <any>;
+
+    updateDataBranch: (data:UpdateBranch)=> Promise <any>;
 
 }
 
@@ -74,12 +71,10 @@ export interface StoreBranch {
 
 // ----------------> Instance Couriers <----------------------------
 export const branch:Branch = {
-    getBranch: ()=> request.get(`/services/admin/api/branch-pageList`),
-    
-    //API da hali qo'shilmadi
+    getBranch: (params)=> request.get(`/services/admin/api/branch-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     deleteBranch: (id)=> request.delete(`/services/admin/api/branch/${id}`), 
     postBranch: (data)=> request.post("/services/admin/api/branch" , data),
-    updateBranch: (data)=> request.put(`/services/admin/api/branch`, data),
-
     activatedBranch:(data)=>request.put(`/services/admin/api/branch-activate` , data),
+
+    updateBranch: (data)=> request.put(`/services/admin/api/branch`, data),
 }

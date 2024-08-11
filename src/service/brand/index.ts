@@ -29,8 +29,8 @@ export interface Location {
 // test apida qoshilsa qo'shiladi
 export interface GetBrand{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
@@ -42,7 +42,7 @@ export interface BrandActivated{
 
 
 interface Brand{
-    getBrand : ()=> any,
+    getBrand : (params:GetBrand)=> any,
     postBrand : (data:postBrand)=> any,
     deleteBrand : (id:number)=> any,
     
@@ -58,7 +58,7 @@ export interface StoreBrand {
     dataBrand:any[];
     totlCount:number;
     location :Location;
-    getDataBrand: ()=> Promise <any>;
+    getDataBrand: (params:GetBrand)=> Promise <any>;
     postDataBrand: (data:postBrand)=> Promise <any>;
     deleteDataBrand: (id:number)=> Promise <any>;
     locationUpdate : (data:Location)=> void;
@@ -75,7 +75,7 @@ export interface StoreBrand {
 
 // ----------------> Instance Category <----------------------------
 export const brand:Brand = {
-    getBrand: ()=> request.get(`/services/admin/api/brand-pageList`),
+    getBrand: (params)=> request.get(`/services/admin/api/brand-pageList?page=${params.page}&size=${params.size}&search=${params.search}`),
     deleteBrand: (id)=> request.delete(`/services/admin/api/brand/${id}`),
     postBrand: (data)=> request.post("/services/admin/api/brand" , data),
 

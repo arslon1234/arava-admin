@@ -38,39 +38,39 @@ export default function ResponsiveDrawer() {
   }
 
   const navList: navListInterface[] = [
-    { path: "/home", title: t("couriers"), icon: <ElectricMopedIcon/>},
-    { path: "/home/banner", title: t("banner"), icon: <ViewCarouselIcon /> },
-    { path: "/home/brand-type", title: t("brandType"), icon: <CategoryIcon /> },
-    { path: "/home/brand", title: t("brand"), icon: <MilitaryTechIcon /> },
-    { path: "/home/country", title: t("country"), icon: <PublicIcon /> },
-    { path: "/home/region", title: t("region"), icon: <SouthAmericaIcon /> },
-    { path: "/home/city", title: t("city"), icon: <ApartmentIcon /> },
-    { path: "/home/company", title: t("company"), icon: <HomeWorkIcon /> },
-    { path: "/home/branch", title: t("branch"), icon: <AddHomeWorkIcon /> },
-    { path: "/home/cuisines", title: t("cuisines"), icon: <FastfoodIcon /> },
-    { path: "/home/menu", title: t("menu"), icon: <RestaurantMenuIcon /> },
-    { path: "/home/menu-categories", title: t("menu-categories"), icon: <MenuBookIcon /> },
-    { path: "/home/products", title: t("products"), icon: <ProductionQuantityLimitsIcon /> },
+    { path: "/home", title: t("Couriers"), icon: <ElectricMopedIcon/>},
+    { path: "/home/banner", title: t("Banner"), icon: <ViewCarouselIcon /> },
+    { path: "/home/brand-type", title: t("Brand type"), icon: <CategoryIcon /> },
+    { path: "/home/brand", title: t("Brand"), icon: <MilitaryTechIcon /> },
+    { path: "/home/country", title: t("Country"), icon: <PublicIcon /> },
+    { path: "/home/region", title: t("Region"), icon: <SouthAmericaIcon /> },
+    { path: "/home/city", title: t("City"), icon: <ApartmentIcon /> },
+    { path: "/home/company", title: t("Company"), icon: <HomeWorkIcon /> },
+    { path: "/home/branch", title: t("Branch"), icon: <AddHomeWorkIcon /> },
+    { path: "/home/cuisines", title: t("Cuisines"), icon: <FastfoodIcon /> },
+    { path: "/home/menu", title: t("Menu"), icon: <RestaurantMenuIcon /> },
+    { path: "/home/categories", title: t("Categories"), icon: <MenuBookIcon /> },
+    { path: "/home/products", title: t("Products"), icon: <ProductionQuantityLimitsIcon /> },
   ];
 
   const { pathname } = useLocation();
 
   const getCategoryName = (pathname: string) => {
-    if (pathname === "/home/brand-type") return t("brandType");
-    if (pathname === "/home/brand") return t("brand");
-    if (pathname === "/home/company") return t("company");
-    if (pathname === "/home/city") return t("city");
-    if (pathname === "/home/country") return t("country");
-    if (pathname === "/home") return t("couriers");
-    if (pathname === "/home/banner") return t("banner");
-    if (pathname === "/home/region") return t("region");
-    if (pathname === "/home/branch") return t("branch");
-    if (pathname === "/home/cuisines") return t("cuisines");
-    if (pathname === "/home/menu") return t("menu");
-    if (pathname === "/home/menu-categories") return t("menu-categories");
-    if (pathname === "/home/products") return t("products");
-    if (/^\/home\/branch\/\d+$/.test(pathname)) return "Branch working days"; 
-    if (/^\/home\/menu\/\d+$/.test(pathname)) return "Menu sections"; 
+    if (pathname === "/home/brand-type") return t("Brand type");
+    if (pathname === "/home/brand") return t("Brand");
+    if (pathname === "/home/company") return t("Company");
+    if (pathname === "/home/city") return t("City");
+    if (pathname === "/home/country") return t("Country");
+    if (pathname === "/home") return t("Couriers");
+    if (pathname === "/home/banner") return t("Banner");
+    if (pathname === "/home/region") return t("Region");
+    if (pathname === "/home/branch") return t("Branch");
+    if (pathname === "/home/cuisines") return t("Cuisines");
+    if (pathname === "/home/menu") return t("Menu");
+    if (pathname === "/home/categories") return t("Categories");
+    if (pathname === "/home/products") return t("Products");
+    if (/^\/home\/branch\/\d+$/.test(pathname)) return t("Branch working days"); 
+    if (/^\/home\/menu\/\d+$/.test(pathname)) return t("Menu sections"); 
     return "Error";
   };
 
@@ -140,7 +140,7 @@ export default function ResponsiveDrawer() {
         <Content
           style={{
             margin: "90px 16px 24px 16px",
-            padding: 24,
+            padding: "10px 20px",
             minHeight: 360,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,

@@ -5,26 +5,27 @@ import { useNavigate } from "react-router-dom";
 import {DrawerCompany} from "@drawers"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useCompanyStore} from "@store"
+import { Spin } from "antd";
 
 
 
 function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
-const [ , setParams] = useState({limit: 10, page:1 , search:change})
+const [ params, setParams] = useState({size: 10, page:0 , search:change})
 const {getDataCompany , dataCompany , isLoader } =  useCompanyStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
 useEffect(() =>{
-  getDataCompany();
-},[]);
+  getDataCompany(params);
+},[params]);
 
 useEffect(()=>{
   const params = new URLSearchParams(location.search);
   const page = params.get("page");
   const search = params.get("search");
   const searchString =  search ? search  : ""
-  const pageNuber = page ? parseInt(page): 1;
+  const pageNuber = page ? parseInt(page): 0;
   setParams(preParams=>({
      ...preParams,
       page:pageNuber,
@@ -77,7 +78,9 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <DrawerCompany title="post" 
     />
   </div>
+  <Spin spinning={isLoader} size="large">
    <GlobalTable header={header} body={dataCompany} skelatonLoader={isLoader}/>
+  </Spin>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

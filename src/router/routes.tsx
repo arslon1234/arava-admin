@@ -29,7 +29,7 @@ const index = ()=>{
                 <Route path="cuisines" element={<Cuisines/>} />
                 <Route path="menu" element={<Menu/>} />
                 <Route path="menu/:id" element={<MenuSection/>} />
-                <Route path="menu-categories" element={<MenuCategories/>} />
+                <Route path="categories" element={<MenuCategories/>} />
                 <Route path="products" element={<Products/>} />
             </Route>  
             <Route path="*" element={<Error />} />

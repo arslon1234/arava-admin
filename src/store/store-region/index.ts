@@ -8,10 +8,10 @@ const useRegionStore = create <StoreRegion> ((set)=>({
     isLoader: false,
     dataRegion: [],
     totlCount: 0,
-    getDataRegion : async()=>{
+    getDataRegion : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await region.getRegion()
+           const response = await region.getRegion(params)
            if(response.status === 200){
                set({dataRegion: response?.data});
             //    set({totlCount: respons?.data?.data?.count})

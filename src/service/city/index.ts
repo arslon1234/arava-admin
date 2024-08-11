@@ -15,17 +15,15 @@ export interface UpdateCity {
 // test apida qoshilsa qo'shiladi
 export interface GetCity{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
 
 
 interface City{
-    getCity : ()=> any,
-    
-    //API da hali qo'shilmadi
+    getCity : (params:GetCity)=> any,
     postCity : (data:postCity)=> any,
     updateCity: (data:UpdateCity)=> any,
     deleteCity : (id:number)=> any,
@@ -36,9 +34,7 @@ export interface StoreCity {
     isLoader:boolean;
     dataCity:any[];
     totlCount:number;
-    getDataCity: ()=> Promise <any>;
-    
-    //API da hali qo'shilmadi
+    getDataCity: (params:GetCity)=> Promise <any>;
     postDataCity: (data:postCity)=> Promise <any>;
     updateDataCity: (data:UpdateCity)=> Promise <any>;
     deleteDataCity: (id:number)=> Promise <any>;
@@ -49,9 +45,7 @@ export interface StoreCity {
 
 // ----------------> Instance Category <----------------------------
 export const city:City = {
-    getCity: ()=> request.get(`/services/admin/api/city-pageList`),
-
-    //API da hali qo'shilmadi
+    getCity: (params:GetCity)=> request.get(`/services/admin/api/city-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     deleteCity: (id)=> request.delete(`/services/admin/api/city/${id}`),
     postCity: (data)=> request.post("/services/admin/api/city" , data),
     updateCity: (data)=> request.put(`/services/admin/api/city`, data),

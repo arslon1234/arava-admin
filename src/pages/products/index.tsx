@@ -3,21 +3,22 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import {DrawerProduct} from "@drawers"
-import {GlobalTable , GlobalSearch} from "@ui";
+import {GlobalTable , GlobalSearch , GlobalPogination } from "@ui";
 import {useProductsStore} from "@store"
+import { Spin } from "antd";
 
 
 
 function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
-const [ , setParams] = useState({limit: 10, page:1 , search:change})
-const {getDataProducts, dataProducts  , isLoader } =  useProductsStore();
-// const totleCuont2 = Math.ceil(totlCount / parms?.limit)
+const [ params, setParams] = useState({size: 10, page:1 , search:change})
+const {getDataProducts, dataProducts  , isLoader , totlCount} =  useProductsStore();
+const totleCuont2 = Math.ceil(totlCount / params?.size )
 
 useEffect(() =>{
-  getDataProducts();
-},[]);
+  getDataProducts(params);
+},[params]);
 
 useEffect(()=>{
   const params = new URLSearchParams(location.search);
@@ -50,12 +51,12 @@ useEffect(()=>{
 
 
 //--- pagination tett mui <----
-// const changePage = (value:number)=>{
-//   setParams(preParams=>({
-//       ...preParams,
-//       page:value
-//   }));
-// }
+const changePage = (value:number)=>{
+  setParams(preParams=>({
+      ...preParams,
+      page:value
+  }));
+}
 //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
 
@@ -77,9 +78,14 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <DrawerProduct title="post" 
     />
   </div>
-   <GlobalTable header={header} body={dataProducts} skelatonLoader={isLoader}/>
+  <Spin spinning={isLoader} size="large">
 
-   {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
+   <GlobalTable header={header} body={dataProducts} skelatonLoader={isLoader}/>
+  </Spin>
+   <div className="flex items-center justify-end">
+
+   <GlobalPogination totleCuont={totleCuont2} page={params?.page} setParams={changePage} />
+   </div>
   </>
 }
 

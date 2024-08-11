@@ -13,17 +13,17 @@ export interface UpdateRegion {
 
 
 // test apida qoshilsa qo'shiladi
-export interface GetRegion{
+export interface getRegion{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
 
 
 interface Region{
-    getRegion : ()=> any,
+    getRegion : (params:getRegion)=> any,
     postRegion : (data:postRegion)=> any,
     updateRegion: (data:UpdateRegion)=> any,
     deleteRegion : (id:number)=> any,
@@ -34,7 +34,7 @@ export interface StoreRegion {
     isLoader:boolean;
     dataRegion:any[];
     totlCount:number;
-    getDataRegion: ()=> Promise <any>;
+    getDataRegion: (param :getRegion)=> Promise <any>;
     postDataRegion: (data:postRegion)=> Promise <any>;
     updateDataRegion: (data:UpdateRegion)=> Promise <any>;
     deleteDataRegion: (id:number)=> Promise <any>;
@@ -45,7 +45,7 @@ export interface StoreRegion {
 
 // ----------------> Instance Category <----------------------------
 export const region:Region = {
-    getRegion: ()=> request.get(`/services/admin/api/region-pageList`),
+    getRegion: (param)=> request.get(`/services/admin/api/region-pageList?page=${param?.page}&size=${param?.size}&search=${param?.search}`),
     postRegion: (data)=> request.post("/services/admin/api/region" , data),
     updateRegion: (data)=> request.put(`/services/admin/api/region`, data),
     deleteRegion: (id)=> request.delete(`/services/admin/api/region/${id}`),

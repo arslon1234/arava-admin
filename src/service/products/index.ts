@@ -34,15 +34,15 @@ export interface UpdateProducts {
 // test apida qoshilsa qo'shiladi
 export interface GetProducts{
     search?: string,
-    page?:number;
-    limit?:number;
+    page:number;
+    size:number;
 }
 
 
 
 
 interface Products{
-    getProducts : ()=> any,
+    getProducts : (params:GetProducts)=> any,
     postProducts: (data:postProducts)=> any,
     updateProducts: (data:UpdateProducts)=> any,
     deleteProducts: (id:number)=> any,
@@ -54,7 +54,7 @@ export interface StoreProducts {
     dataProducts:any[];
     imgeList:any[];
     totlCount:number;
-    getDataProducts: ()=> Promise <any>;
+    getDataProducts: (params:GetProducts)=> Promise <any>;
     postDataProducts: (data:postProducts)=> Promise <any>,
     updateDataProducts: (data:UpdateProducts)=> Promise <any>,
     deleteDataProducts: (id:number)=> Promise <any>,
@@ -67,7 +67,7 @@ export interface StoreProducts {
 
 // ----------------> Instance Product <----------------------------
 export const products:Products = {
-    getProducts: ()=> request.get(`/services/admin/api/product-pageList`),
+    getProducts: (params)=> request.get(`/services/admin/api/product-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
     postProducts: (data)=> request.post(`/services/admin/api/product`, data),
     updateProducts: (data)=> request.put(`/services/admin/api/product`, data),
     deleteProducts: (id)=> request.delete(`/services/admin/api/product/${id}`),

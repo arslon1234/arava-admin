@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 import {ModalBanner} from "@modals"
 import {GlobalTable , GlobalSearch} from "@ui";
 import {useBannerStore} from "@store"
+import { Spin } from "antd";
 
 
 
 function Index() {
 const navigate = useNavigate()
 const [change, setChange] = useState("")
-const [ , setParams] = useState({limit: 10, page:1 , search:change})
+const [ , setParams] = useState({size: 10, page:0 , search:change})
 const {getDataBanner , dataBanner , isLoader } =  useBannerStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
@@ -24,7 +25,7 @@ useEffect(()=>{
   const page = params.get("page");
   const search = params.get("search");
   const searchString =  search ? search  : ""
-  const pageNuber = page ? parseInt(page): 1;
+  const pageNuber = page ? parseInt(page): 0;
   setParams(preParams=>({
      ...preParams,
       page:pageNuber,
@@ -76,7 +77,10 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     <ModalBanner title="post" 
     />
   </div>
+  <Spin spinning={isLoader} size="large">
    <GlobalTable header={header} body={dataBanner} skelatonLoader={isLoader}/>
+
+  </Spin>
 
    {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
   </>

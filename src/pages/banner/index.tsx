@@ -1,18 +1,18 @@
 import { useEffect , useState } from "react";
 import { ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import {ModalBanner} from "@modals"
-import {GlobalTable , GlobalSearch} from "@ui";
+import {GlobalTable } from "@ui";
 import {useBannerStore} from "@store"
 import { Spin } from "antd";
 
 
 
 function Index() {
-const navigate = useNavigate()
+// const navigate = useNavigate()
 const [change, setChange] = useState("")
-const [ , setParams] = useState({size: 10, page:0 , search:change})
+const [ , setParams] = useState({size: 10, page:1 , search:change})
 const {getDataBanner , dataBanner , isLoader } =  useBannerStore();
 // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
 
@@ -25,7 +25,7 @@ useEffect(()=>{
   const page = params.get("page");
   const search = params.get("search");
   const searchString =  search ? search  : ""
-  const pageNuber = page ? parseInt(page): 0;
+  const pageNuber = page ? parseInt(page): 1;
   setParams(preParams=>({
      ...preParams,
       page:pageNuber,
@@ -60,20 +60,20 @@ useEffect(()=>{
 
 
 // Hendel chenge ------>
-const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-  const search = e.target.value;
-  setChange(search)
-  setParams(preParams=>({ ...preParams, search }))
-  const searchParams = new URLSearchParams(location.search);
-        searchParams.set("search", search)
-        navigate (`?${searchParams}`)
+// const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+//   const search = e.target.value;
+//   setChange(search)
+//   setParams(preParams=>({ ...preParams, search }))
+//   const searchParams = new URLSearchParams(location.search);
+//         searchParams.set("search", search)
+//         navigate (`?${searchParams}`)
 
-}
+// }
 ///---------------------
   return <>
   <ToastContainer />
-  <div className="py-3 flex items-center justify-between">
-    <GlobalSearch search={change} handleChange={handleChange}/>
+  <div className="py-3 flex items-center justify-end">
+    {/* <GlobalSearch search={change} handleChange={handleChange}/> */}
     <ModalBanner title="post" 
     />
   </div>

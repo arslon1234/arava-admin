@@ -3,16 +3,17 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { DrawerBranch } from "@drawers";
-import { GlobalTable, GlobalSearch } from "@ui";
+import { GlobalTable, GlobalSearch, GlobalPogination } from "@ui";
 import { useBranchStore } from "@store";
 import { Spin } from "antd";
 
 function Index() {
   const navigate = useNavigate();
   const [change, setChange] = useState("");
-  const [params, setParams] = useState({ size: 10, page: 0, search: change });
-  const { getDataBranch, dataBranch, isLoader } = useBranchStore();
-  // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
+  const [params, setParams] = useState({ size: 10, page: 1, search: change });
+  const { getDataBranch, dataBranch, isLoader, totlCount } = useBranchStore();
+  const totleCuont2 = Math.ceil(totlCount / params?.size);
+  // console.log(totleCuont2);
 
   useEffect(() => {
     getDataBranch(params);
@@ -23,7 +24,7 @@ function Index() {
     const page = params.get("page");
     const search = params.get("search");
     const searchString = search ? search : "";
-    const pageNuber = page ? parseInt(page) : 0;
+    const pageNuber = page ? parseInt(page) : 1;
     setParams((preParams) => ({
       ...preParams,
       page: pageNuber,
@@ -44,12 +45,12 @@ function Index() {
   ];
 
   //--- pagination tett mui <----
-  // const changePage = (value:number)=>{
-  //   setParams(preParams=>({
-  //       ...preParams,
-  //       page:value
-  //   }));
-  // }
+  const changePage = (value: number) => {
+    setParams((preParams) => ({
+      ...preParams,
+      page: value,
+    }));
+  };
   //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
   // Hendel chenge handleChange------>
@@ -65,13 +66,15 @@ function Index() {
   return (
     <>
       <ToastContainer />
+
       <div className="py-3 flex items-center justify-between">
         <GlobalSearch search={change} handleChange={handleChange} />
 
         <DrawerBranch title="post" />
       </div>
+
       {/* GlobalTable */}
-      <Spin spinning={isLoader} size="large" >
+      <Spin spinning={isLoader} size="large">
         <GlobalTable
           header={header}
           body={dataBranch}
@@ -79,7 +82,17 @@ function Index() {
         />
       </Spin>
 
-      {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
+      {/* GlobalPogination  */}
+      <div className="flex items-center justify-end">
+        {totleCuont2 > 1 && (
+          <GlobalPogination
+            totleCuont={totleCuont2}
+            page={params?.size}
+            setParams={changePage}
+          />
+        )}
+      </div>
+      
     </>
   );
 }

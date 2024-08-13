@@ -29,8 +29,8 @@ export interface Location {
 // test apida qoshilsa qo'shiladi
 export interface GetBrand{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -75,7 +75,7 @@ export interface StoreBrand {
 
 // ----------------> Instance Category <----------------------------
 export const brand:Brand = {
-    getBrand: (params)=> request.get(`/services/admin/api/brand-pageList?page=${params.page}&size=${params.size}&search=${params.search}`),
+    getBrand: (params)=> request.get(params?.page ? `/services/admin/api/brand-pageList?page=${params.page}&size=${params.size}&search=${params.search}` : `/services/admin/api/brand-pageList`),
     deleteBrand: (id)=> request.delete(`/services/admin/api/brand/${id}`),
     postBrand: (data)=> request.post("/services/admin/api/brand" , data),
 

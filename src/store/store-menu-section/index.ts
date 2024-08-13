@@ -13,8 +13,8 @@ const useMenuSectionStore = create <StoreMenuSection> ((set)=>({
            set({isLoader: true})
            const response = await menuSection.getMenuSection(id)
            if(response.status === 200){
-               set({dataMenuSection: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataMenuSection: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -52,6 +52,7 @@ const useMenuSectionStore = create <StoreMenuSection> ((set)=>({
             if(response.status === 200){
                 set((state)=>({dataMenuSection: state.dataMenuSection.filter((el:any)=>el.id!== id)}))
                 toast.success("Menu section deleted successfully");
+                set((state) => ({totlCount: state.totlCount -= 1}))
             }
         }catch(error){
             console.log(error)

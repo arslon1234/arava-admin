@@ -15,8 +15,8 @@ const useBrandStore = create <StoreBrand> ((set)=>({
            set({isLoader: true})
            const response = await brand.getBrand(params)
            if(response.status === 200){
-               set({dataBrand: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataBrand: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -47,7 +47,7 @@ const useBrandStore = create <StoreBrand> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataBrand: state.dataBrand.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Brand deleted successfully")
            }
         }catch(error:any){

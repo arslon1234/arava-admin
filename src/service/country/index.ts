@@ -14,8 +14,8 @@ export interface UpdateCountry {
 // test apida qoshilsa qo'shiladi
 export interface getCountry{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -44,7 +44,7 @@ export interface StoreCountry {
 
 // ----------------> Instance Category <----------------------------
 export const country:Country = {
-    getCompany: (params)=> request.get(`/services/admin/api/country-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getCompany: (params)=> request.get(params?.page ? `/services/admin/api/country-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/country-pageList`),
     postCompany: (data)=> request.post("/services/admin/api/country" , data),
     updateCompany: (data)=> request.put(`/services/admin/api/country`, data),
     deleteCompany: (id)=> request.delete(`/services/admin/api/country/${id}`),

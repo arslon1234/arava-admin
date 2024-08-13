@@ -21,8 +21,8 @@ export interface UpdateCompany {
 
 export interface GetCompany{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 export interface CompanyActivated{
@@ -64,7 +64,7 @@ export interface StoreCompany {
 
 // ----------------> Instance Category <----------------------------
 export const company:Category = {
-    getCompany: (params)=> request.get(`/services/admin/api/company-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getCompany: (params)=> request.get(params?.page ? `/services/admin/api/company-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/company-pageList`),
 
     // ESLATMA swagger to'grilansa davom etiladi
     deleteCompany: (id)=> request.delete(`/services/admin/api/company/${id}`),

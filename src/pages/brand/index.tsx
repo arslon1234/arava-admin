@@ -3,16 +3,16 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { DrawerBrandAntd } from "@drawers";
-import { GlobalTable, GlobalSearch } from "@ui";
+import { GlobalTable, GlobalSearch, GlobalPogination } from "@ui";
 import { useBrandStore } from "@store";
 import { Spin } from "antd";
 
 function Index() {
   const navigate = useNavigate();
   const [change, setChange] = useState("");
-  const [params, setParams] = useState({ size: 10, page: 0, search: change });
-  const { getDataBrand, dataBrand, isLoader } = useBrandStore();
-  // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
+  const [params, setParams] = useState({ size: 10, page: 1, search: change });
+  const { getDataBrand, dataBrand, isLoader, totlCount } = useBrandStore();
+  const totleCuont2 = Math.ceil(totlCount / params?.size);
 
   useEffect(() => {
     getDataBrand(params);
@@ -23,7 +23,7 @@ function Index() {
     const page = params.get("page");
     const search = params.get("search");
     const searchString = search ? search : "";
-    const pageNuber = page ? parseInt(page) : 0;
+    const pageNuber = page ? parseInt(page) : 1;
     setParams((preParams) => ({
       ...preParams,
       page: pageNuber,
@@ -41,17 +41,17 @@ function Index() {
     // { title: "Region", value: "regionName" },
     // { title: "City", value: "cityName" },
     { title: "Image", value: "imageUrl" },
-    {title: "Activated" , value: "activatedBrand" },
+    { title: "Activated", value: "activatedBrand" },
     { title: "Action", value: "brand" },
   ];
 
   //--- pagination tett mui <----
-  // const changePage = (value:number)=>{
-  //   setParams(preParams=>({
-  //       ...preParams,
-  //       page:value
-  //   }));
-  // }
+  const changePage = (value: number) => {
+    setParams((preParams) => ({
+      ...preParams,
+      page: value,
+    }));
+  };
   //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
   // Hendel chenge ------>
@@ -73,11 +73,22 @@ function Index() {
         <DrawerBrandAntd />
       </div>
       <Spin spinning={isLoader} size="large">
-
-      <GlobalTable header={header} body={dataBrand} skelatonLoader={isLoader} />
+        <GlobalTable
+          header={header}
+          body={dataBrand}
+          skelatonLoader={isLoader}
+        />
       </Spin>
 
-      {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
+      {totleCuont2 > 1 && (
+        <div className="flex items-center justify-end">
+          <GlobalPogination
+            totleCuont={totleCuont2}
+            page={params?.page}
+            setParams={changePage}
+          />
+        </div>
+      )}
     </>
   );
 }

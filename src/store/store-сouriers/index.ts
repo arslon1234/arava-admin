@@ -13,8 +13,8 @@ const useCouriersStore = create <StoreCouriers> ((set)=>({
            set({isLoader: true})
            const response = await сouriers.getCouriers(params)
            if(response.status === 200){
-               set({dataCouriers: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataCouriers: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -45,7 +45,7 @@ const useCouriersStore = create <StoreCouriers> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataCouriers: state.dataCouriers.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Couriers deleted successfully")
            }
         }catch(error:any){

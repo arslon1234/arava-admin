@@ -28,7 +28,7 @@ export interface BannerActivate{
 
 
 interface Banner{
-    getBanner : ()=> any,
+    getBanner : (params :GetBanner)=> any,
     postBanner : (data:postBanner)=> any,
     deleteBanner : (id:number)=> any,
     bannerActivate:(data:BannerActivate)=>any,
@@ -43,7 +43,7 @@ export interface StoreBanner {
     dataBanner:any[];
     totlCount:number;
     imageUrl:string;
-    getDataBanner: ()=> Promise <any>;
+    getDataBanner: (params:GetBanner)=> Promise <any>;
     postDataBanner: (data:postBanner)=> Promise <any>;
     deleteDataBanner: (id:number)=> Promise <any>;
     bannerActivate:(data:BannerActivate)=>Promise<any>,
@@ -59,7 +59,7 @@ export interface StoreBanner {
 
 // ----------------> Instance Category <----------------------------
 export const banner:Banner = {
-    getBanner: ()=> request.get(`/services/admin/api/banner`),
+    getBanner: (params)=> request.get(`/services/admin/api/banner?page=${params.page}&size${params.size}`),
     deleteBanner: (id)=> request.delete(`/services/admin/api/banner/${id}`),
     postBanner: (data)=> request.post("/services/admin/api/banner" , data),
     updateBanner: (data)=> request.put(`/services/admin/api/banner`, data),

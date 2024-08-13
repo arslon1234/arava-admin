@@ -15,8 +15,8 @@ export interface UpdateRegion {
 // test apida qoshilsa qo'shiladi
 export interface getRegion{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -45,7 +45,7 @@ export interface StoreRegion {
 
 // ----------------> Instance Category <----------------------------
 export const region:Region = {
-    getRegion: (param)=> request.get(`/services/admin/api/region-pageList?page=${param?.page}&size=${param?.size}&search=${param?.search}`),
+    getRegion: (param)=> request.get(param?.page ? `/services/admin/api/region-pageList?page=${param?.page}&size=${param?.size}&search=${param?.search}` : `/services/admin/api/region-pageList`),
     postRegion: (data)=> request.post("/services/admin/api/region" , data),
     updateRegion: (data)=> request.put(`/services/admin/api/region`, data),
     deleteRegion: (id)=> request.delete(`/services/admin/api/region/${id}`),

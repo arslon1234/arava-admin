@@ -83,15 +83,15 @@ function Index() {
       </Spin>
 
       {/* GlobalPogination  */}
-      <div className="flex items-center justify-end">
-        {totleCuont2 > 1 && (
+      {totleCuont2 > 1 && (
+        <div className="flex items-center justify-end">
           <GlobalPogination
             totleCuont={totleCuont2}
-            page={params?.size}
+            page={params?.page}
             setParams={changePage}
           />
-        )}
-      </div>
+        </div>
+      )}
       
     </>
   );

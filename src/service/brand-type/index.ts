@@ -18,8 +18,8 @@ export interface UpdateBrandType {
 // test apida qoshilsa qo'shiladi
 export interface GetBrandType{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 export interface brandTypeActivated{
@@ -55,7 +55,7 @@ export interface StoreBrandType {
 
 // ----------------> Instance Category <----------------------------
 export const brandType:BrandType = {
-    getBrandType: (params)=> request.get(`/services/admin/api/brand-type-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getBrandType: (params)=> request.get(params?.page ? `/services/admin/api/brand-type-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/brand-type-pageList`),
     deleteBrandType: (id)=> request.delete(`/services/admin/api/brand-type/${id}`),
     postBrandType: (data)=> request.post("/services/admin/api/brand-type" , data),
     updateBrandType: (data)=> request.put(`/services/admin/api/brand-type`, data),

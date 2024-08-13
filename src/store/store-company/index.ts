@@ -13,8 +13,8 @@ const useCompanyStore = create <StoreCompany> ((set)=>({
            set({isLoader: true})
            const response = await company.getCompany(params)
            if(response.status === 200){
-               set({dataCompany: response?.data});
-            //    set({totlCount: response?.data?.data?.count})
+               set({dataCompany: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -43,7 +43,7 @@ const useCompanyStore = create <StoreCompany> ((set)=>({
            const response = await company.deleteCompany(id)
            if(response.status === 200){
                set((state)=>({dataCompany: state.dataCompany.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Company deleted successfully")
            }
         }catch(error:any){

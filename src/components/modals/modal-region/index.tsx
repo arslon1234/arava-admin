@@ -34,7 +34,7 @@ const Index = ({ title, id, data }: propsData) => {
 
   // useEffect to get country data
   useEffect(() => {
-    getDataCountry({page:0, size:100, search:""});
+    getDataCountry({});
   }, []);
 
 

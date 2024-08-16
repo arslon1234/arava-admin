@@ -22,11 +22,12 @@ export interface UpdateMenuSection {
 export interface GetMenu {
   search?: string;
   page?: number;
-  limit?: number;
+  size?: number;
+  id:string|number|undefined;
 }
 
 interface MenuSection {
-  getMenuSection: (id:number|string|undefined) => any;
+  getMenuSection: (params:GetMenu) => any;
   postMenuSection: (data: createMenuSction) => any;
   updateMenuSection: (data: UpdateMenuSection) => any;
   deleteMenuSection: (id: number) => any;
@@ -37,7 +38,7 @@ export interface StoreMenuSection {
   isLoader: boolean;
   dataMenuSection: any[];
   totlCount: number;
-  getDataMenuSection: (id:number|string|undefined) => Promise<any>;
+  getDataMenuSection: (params:GetMenu) => Promise<any>;
   postDataMenuSection: (data: createMenuSction) => Promise<any>;
   updateDataMenuSection: (data: UpdateMenuSection) => Promise<any>;
   deleteDataMenuSection: (id: number) => Promise<any>;
@@ -45,7 +46,7 @@ export interface StoreMenuSection {
 
 // ----------------> Instance MenuSection <----------------------------
 export const menuSection: MenuSection = {
-  getMenuSection: (id) => request.get(`/services/admin/api/menu-section-pageList/${id}`),
+  getMenuSection: (params) => request.get(params?.page ? `/services/admin/api/menu-section-pageList/${params?.id}?page=${params?.page}&size=${params?.size}&search=${params?.search}` :`/services/admin/api/menu-section-pageList/${params?.id}`),
   postMenuSection: (data) => request.post(`/services/admin/api/menu-section/${data?.menuId}`, data?.data),
   updateMenuSection: (data) => request.put(`/services/admin/api/menu-section`, data),
   deleteMenuSection: (id) => request.delete(`/services/admin/api/menu-section/${id}`),

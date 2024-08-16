@@ -11,7 +11,7 @@ import { Spin } from "antd";
 function Index() {
   const navigate = useNavigate();
   const [change, setChange] = useState("");
-  const [params, setParams] = useState({ size: 10, page: 0, search: change });
+  const [params, setParams] = useState({ size: 10, page: 1, search: change });
   const { getDataMenu, dataMenu, isLoader, totlCount } = useMenuStore();
   const totleCuont2 = Math.ceil(totlCount / params?.size);
 
@@ -24,7 +24,7 @@ function Index() {
     const page = params.get("page");
     const search = params.get("search");
     const searchString = search ? search : "";
-    const pageNuber = page ? parseInt(page) : 0;
+    const pageNuber = page ? parseInt(page) : 1;
     setParams((preParams) => ({
       ...preParams,
       page: pageNuber,

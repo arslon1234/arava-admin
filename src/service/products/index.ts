@@ -34,8 +34,8 @@ export interface UpdateProducts {
 // test apida qoshilsa qo'shiladi
 export interface GetProducts{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -67,7 +67,7 @@ export interface StoreProducts {
 
 // ----------------> Instance Product <----------------------------
 export const products:Products = {
-    getProducts: (params)=> request.get(`/services/admin/api/product-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getProducts: (params)=> request.get(params?.page ? `/services/admin/api/product-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/product-pageList`),
     postProducts: (data)=> request.post(`/services/admin/api/product`, data),
     updateProducts: (data)=> request.put(`/services/admin/api/product`, data),
     deleteProducts: (id)=> request.delete(`/services/admin/api/product/${id}`),

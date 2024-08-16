@@ -13,8 +13,8 @@ const useMenuStore = create <StoreMenu> ((set)=>({
            set({isLoader: true})
            const response = await menu.getMenu(params)
            if(response.status === 200){
-               set({dataMenu: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataMenu: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -51,6 +51,7 @@ const useMenuStore = create <StoreMenu> ((set)=>({
             const response = await menu.deleteMenu(id)
             if(response.status === 200){
                 set((state)=>({dataMenu: state.dataMenu.filter((el:any)=>el.id!== id)}))
+                set((state)=>({totlCount: state.totlCount -=1}))
                 toast.success("Menu deleted successfully");
             }
         }catch(error){

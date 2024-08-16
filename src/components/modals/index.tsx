@@ -13,7 +13,8 @@ import ModalTest from "./modal-test";
 import ModalMenu from "./modal-menu";
 import ModalMenuCategories from "./modal-menu-categories";
 import ModalMenuSection from "./modal-menu-section";
-import ModalMenuProducts from "./modal-menu-products"
+import ModalMenuProducts from "./modal-menu-products";
+import ModalProductsDelete from "./modal-product-delete";
 
 export { 
     ModalDelete , 
@@ -32,4 +33,5 @@ export {
     ModalMenuCategories,
     ModalMenuSection,
     ModalMenuProducts,
+    ModalProductsDelete,
 };

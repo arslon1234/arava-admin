@@ -36,11 +36,11 @@ const useMenuProductsStore = create <StoreMenuProducts> ((set)=>({
             console.log(error)
         }
     },
-    deleteDataMenuProducts: async(id)=>{
+    deleteDataMenuProducts: async(params)=>{
         try{
-            const response = await menuProducts.deleteMenuProducts(id)
+            const response = await menuProducts.deleteMenuProducts(params)
             if(response.status === 200){
-                set((state)=>({dataMenuProducts: state.dataMenuProducts.filter((el:any)=>el.id!== id)}))
+                set((state)=>({dataMenuProducts: state.dataMenuProducts.filter((el:any)=>el.id!== params?.productsId)}))
                 toast.success("Menu product deleted successfully");
                 // set((state) => ({totlCount: state.totlCount -= 1}))
             }

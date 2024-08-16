@@ -32,11 +32,12 @@ import {
   ModalMenu,
   ModalMenuCategories,
   ModalMenuSection,
+  ModalProductsDelete
 } from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id , sectionId} = useParams();
   const menuId: string | undefined = id;
   const URL = import.meta.env.VITE_BASE_URL;
   const [searchPaams] = useSearchParams();
@@ -295,8 +296,9 @@ function Index({ header, body, skelatonLoader }: Props) {
                               ) : header.value == "menu-products" ? (
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
-                                    <ModalDelete
-                                      id={body?.id}
+                                    <ModalProductsDelete
+                                       productsId={ body?.id}
+                                       menuSectionId={sectionId}
                                       title="menu-products"
                                     />
                                   </div>

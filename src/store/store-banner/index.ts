@@ -9,13 +9,13 @@ const useBannerStore = create <StoreBanner> ((set)=>({
     dataBanner: [],
     totlCount: 0,
     imageUrl: "",
-    getDataBanner : async()=>{
+    getDataBanner : async(params)=>{
         try{
            set({isLoader: true})
-           const response = await banner.getBanner()
+           const response = await banner.getBanner(params)
            if(response.status === 200){
-               set({dataBanner: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataBanner: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -46,7 +46,7 @@ const useBannerStore = create <StoreBanner> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataBanner: state.dataBanner.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
               toast.success("Banner deleted successfully")
            }
         }catch(error:any){

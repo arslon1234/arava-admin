@@ -13,8 +13,8 @@ const useCompanyStore = create <StoreCountry> ((set)=>({
            set({isLoader: true})
            const response = await country.getCompany(params)
            if(response.status === 200){
-               set({dataCountry: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataCountry: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -45,7 +45,7 @@ const useCompanyStore = create <StoreCountry> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataCountry: state.dataCountry.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Country deleted successfully")
            }
         }catch(error:any){

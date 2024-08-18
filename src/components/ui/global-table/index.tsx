@@ -10,13 +10,13 @@ import {
   Paper,
   Skeleton,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import TurnRightIcon from "@mui/icons-material/TurnRight";
 import { Image } from "antd"; // <-- test jarayonida
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import ShortcutIcon from '@mui/icons-material/Shortcut';
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { Props } from "@interface";
 import { GlobalSwitch, DescriptionText } from "@ui";
@@ -32,10 +32,13 @@ import {
   ModalMenu,
   ModalMenuCategories,
   ModalMenuSection,
+  ModalProductsDelete
 } from "@modals";
 
 function Index({ header, body, skelatonLoader }: Props) {
   const navigate = useNavigate();
+  const { id , sectionId} = useParams();
+  const menuId: string | undefined = id;
   const URL = import.meta.env.VITE_BASE_URL;
   const [searchPaams] = useSearchParams();
   const page = Number(searchPaams.get("page")) || 1;
@@ -245,6 +248,14 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     menuSectionId={body?.id}
                                     data={body}
                                   />
+                                  <button
+                                    className=" text-gray-500"
+                                    onClick={() =>
+                                      navigate(`/home/menu/${menuId && menuId}/section/${body?.id}`)
+                                    }
+                                  >
+                                    <TurnRightIcon />
+                                  </button>
                                 </div>
                               ) : header.value == "region" ? (
                                 <div className="flex items-center gap-2">
@@ -282,7 +293,17 @@ function Index({ header, body, skelatonLoader }: Props) {
                                     />
                                   </div>
                                 </div>
-                              ) : header.value == "imageUrl" ? (
+                              ) : header.value == "menu-products" ? (
+                                <div className="flex items-center gap-2">
+                                  <div className=" text-gray-500">
+                                    <ModalProductsDelete
+                                       productsId={ body?.id}
+                                       menuSectionId={sectionId}
+                                      title="menu-products"
+                                    />
+                                  </div>
+                                </div>
+                              ): header.value == "imageUrl" ? (
                                 <>
                                   <Image
                                     width={100}
@@ -306,7 +327,7 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   </Link>
                                 </>
                               ) : header.value == "t/r" ? (
-                                 <>{page * size -(size - 1) + index }</> //<>{index + 1}</>
+                                <>{page * size - (size - 1) + index}</> //<>{index + 1}</>
                               ) : header.value == "activatedBanner" ? (
                                 <div>
                                   <GlobalSwitch

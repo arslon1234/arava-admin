@@ -20,8 +20,8 @@ export interface UpdateMenuCategories {
 // test apida qoshilsa qo'shiladi
 export interface GetMenuCategories{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -50,7 +50,7 @@ export interface StoreMenuCategories {
 
 // ----------------> Instance Menu <----------------------------
 export const menuCategories:MenuCategories = {
-    getMenuCategories: (params)=> request.get(`/services/admin/api/categories-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getMenuCategories: (params)=> request.get(params?.page ? `/services/admin/api/categories-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/categories-pageList`),
     postMenuCategories: (data)=> request.post(`/services/admin/api/categories`, data),
     updateMenuCategories: (data)=> request.put(`/services/admin/api/categories`, data),
     deleteMenuCategories: (id)=> request.delete(`/services/admin/api/categories/${id}`),

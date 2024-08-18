@@ -15,8 +15,8 @@ export interface UpdateCity {
 // test apida qoshilsa qo'shiladi
 export interface GetCity{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -45,7 +45,7 @@ export interface StoreCity {
 
 // ----------------> Instance Category <----------------------------
 export const city:City = {
-    getCity: (params:GetCity)=> request.get(`/services/admin/api/city-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getCity: (params:GetCity)=> request.get(params?.page ? `/services/admin/api/city-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/city-pageList`),
     deleteCity: (id)=> request.delete(`/services/admin/api/city/${id}`),
     postCity: (data)=> request.post("/services/admin/api/city" , data),
     updateCity: (data)=> request.put(`/services/admin/api/city`, data),

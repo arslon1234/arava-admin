@@ -13,8 +13,8 @@ const useCuisinesStore = create <StoreCuisines> ((set)=>({
            set({isLoader: true})
            const response = await cuisines.getCuisines(params)
            if(response.status === 200){
-               set({dataCuisines: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataCuisines: response?.data?.content});
+               set({totlCount: response?.data?.totalElrments})
            }
            set({isLoader: false})
        }catch(error){
@@ -45,7 +45,7 @@ const useCuisinesStore = create <StoreCuisines> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataCuisines: state.dataCuisines.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Deleted successfully")
            }
         }catch(error:any){

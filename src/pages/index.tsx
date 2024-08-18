@@ -15,6 +15,7 @@ import Menu from "./menu";
 import MenuSection from "./menu/menu-section"
 import MenuCategories from "./menu-categories";
 import Products from "./products";
+import MenuProducts from "./menu-products";
 
 export { 
     SignIn,
@@ -34,4 +35,6 @@ export {
     MenuSection,
     MenuCategories,
     Products,
+    MenuProducts,
+
 };

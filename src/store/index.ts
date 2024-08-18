@@ -13,6 +13,7 @@ import useMenuCategoriesStore from "./store-menu-categories"
 import useMenuStore from "./store-menu"
 import useProductsStore from "./store-products"
 import useMenuSectionStore from "./store-menu-section"
+import useMenuProductsStore from "./store-menu-products"
 
 
 export {
@@ -30,5 +31,6 @@ export {
     useMenuCategoriesStore,
     useMenuStore,
     useProductsStore,
-    useMenuSectionStore
+    useMenuSectionStore,
+    useMenuProductsStore,
 }

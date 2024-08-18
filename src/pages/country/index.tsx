@@ -3,16 +3,17 @@ import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { ModalCountry } from "@modals";
-import { GlobalTable, GlobalSearch } from "@ui";
+import { GlobalTable, GlobalSearch, GlobalPogination } from "@ui";
 import { useCountryStore } from "@store";
 import { Spin } from "antd";
 
 function Index() {
   const navigate = useNavigate();
   const [change, setChange] = useState("");
-  const [params, setParams] = useState({ size: 10, page: 0, search: change });
-  const { getDataCountry, dataCountry, isLoader } = useCountryStore();
-  // const totleCuont2 = Math.ceil(totlCount / parms?.limit)
+  const [params, setParams] = useState({ size: 10, page: 1, search: change });
+  const { getDataCountry, dataCountry, isLoader, totlCount } =
+    useCountryStore();
+  const totleCuont2 = Math.ceil(totlCount / params?.size);
 
   useEffect(() => {
     getDataCountry(params);
@@ -23,7 +24,7 @@ function Index() {
     const page = params.get("page");
     const search = params.get("search");
     const searchString = search ? search : "";
-    const pageNuber = page ? parseInt(page) : 0;
+    const pageNuber = page ? parseInt(page) : 1;
     setParams((preParams) => ({
       ...preParams,
       page: pageNuber,
@@ -40,12 +41,12 @@ function Index() {
   ];
 
   //--- pagination tett mui <----
-  // const changePage = (value:number)=>{
-  //   setParams(preParams=>({
-  //       ...preParams,
-  //       page:value
-  //   }));
-  // }
+  const changePage = (value: number) => {
+    setParams((preParams) => ({
+      ...preParams,
+      page: value,
+    }));
+  };
   //=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-
 
   // Hendel chenge ------>
@@ -72,8 +73,15 @@ function Index() {
           skelatonLoader={isLoader}
         />
       </Spin>
-
-      {/* <GlobalPogination totleCuont={totleCuont2} page={parms?.page} setParams={changePage} /> */}
+      <div className="flex items-center justify-end">
+        {totleCuont2 > 1 && (
+          <GlobalPogination
+            totleCuont={totleCuont2}
+            page={params?.page}
+            setParams={changePage}
+          />
+        )}
+      </div>
     </>
   );
 }

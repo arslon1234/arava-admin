@@ -33,7 +33,7 @@ const Index = ({ title, data , id}: propsData) => {
   // function useEffect <-----------------
 
   useEffect(() => {
-    getDataBranch({page:0, size:100, search:""});
+    getDataBranch({});
   }, []);
 
   //=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

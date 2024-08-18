@@ -18,8 +18,8 @@ export interface UpdateCuisines {
 // test apida qoshilsa qo'shiladi
 export interface GetCuisines{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 
@@ -48,7 +48,7 @@ export interface StoreCuisines {
 
 // ----------------> Instance Cuisines <----------------------------
 export const cuisines:Cuisines = {
-    getCuisines: (params)=> request.get(`/services/admin/api/cuisines-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getCuisines: (params)=> request.get(params?.page ? `/services/admin/api/cuisines-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/cuisines-pageList`),
     deleteCuisines: (id)=> request.delete(`/services/admin/api/cuisines/${id}`),
     postCuisines: (data)=> request.post("/services/admin/api/cuisines" , data),
     updateCuisines: (data)=> request.put(`/services/admin/api/cuisines`, data),

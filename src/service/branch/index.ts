@@ -31,8 +31,8 @@ export interface UpdateBranch {
 // test apida qoshilsa qo'shiladi
 export interface GetBranch{
     search?: string,
-    page:number;
-    size:number;
+    page?:number;
+    size?:number;
 }
 
 interface ActivatedBranch{
@@ -71,7 +71,7 @@ export interface StoreBranch {
 
 // ----------------> Instance Couriers <----------------------------
 export const branch:Branch = {
-    getBranch: (params)=> request.get(`/services/admin/api/branch-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}`),
+    getBranch: (params)=> request.get(params?.page ? `/services/admin/api/branch-pageList?page=${params?.page}&size=${params?.size}&search=${params?.search}` : `/services/admin/api/branch-pageList`),
     deleteBranch: (id)=> request.delete(`/services/admin/api/branch/${id}`), 
     postBranch: (data)=> request.post("/services/admin/api/branch" , data),
     activatedBranch:(data)=>request.put(`/services/admin/api/branch-activate` , data),

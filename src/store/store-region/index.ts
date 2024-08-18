@@ -13,8 +13,8 @@ const useRegionStore = create <StoreRegion> ((set)=>({
            set({isLoader: true})
            const response = await region.getRegion(params)
            if(response.status === 200){
-               set({dataRegion: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataRegion: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -45,7 +45,7 @@ const useRegionStore = create <StoreRegion> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataRegion: state.dataRegion.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Region deleted successfully")
            }
         }catch(error:any){

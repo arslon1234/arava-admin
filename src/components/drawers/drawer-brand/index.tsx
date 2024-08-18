@@ -47,11 +47,11 @@ const Index = ({ data }: CouriersProps) => {
   };
 
   useEffect(() => {
-    getDataCompany({page:0, size:100, search:""});
-    getDataCountry({page:0, size:100, search:""});
-    getDataRegion({page:0, size:100, search:""});
-    getDataCity({page:0, size:100, search:""});
-    getDataBrandType({page:0, size:100, search:""});
+    getDataCompany({});
+    getDataCountry({});
+    getDataRegion({});
+    getDataCity({});
+    getDataBrandType({});
   }, []);
 
   const handleSubmit = async (values: any) => {

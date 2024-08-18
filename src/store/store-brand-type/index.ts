@@ -13,8 +13,8 @@ const useBrandTypeStore = create <StoreBrandType> ((set)=>({
            set({isLoader: true})
            const response = await brandType.getBrandType(params)
            if(response.status === 200){
-               set({dataBrandType: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataBrandType: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -45,7 +45,7 @@ const useBrandTypeStore = create <StoreBrandType> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataBrandType: state.dataBrandType.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("Brand type deleted successfully")
            }
         }catch(error:any){

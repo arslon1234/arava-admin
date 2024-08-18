@@ -13,8 +13,8 @@ const useCityStore = create <StoreCity> ((set)=>({
            set({isLoader: true})
            const response = await city.getCity(params)
            if(response.status === 200){
-               set({dataCity: response?.data});
-            //    set({totlCount: respons?.data?.data?.count})
+               set({dataCity: response?.data?.content});
+               set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
        }catch(error){
@@ -45,7 +45,7 @@ const useCityStore = create <StoreCity> ((set)=>({
         //    console.log(respons)
            if(response.status === 200){
                set((state)=>({dataCity: state.dataCity.filter((el:any)=>el.id !== id)})) 
-            //    set((state)=>({totlCount: state.totlCount -= 1}))
+               set((state)=>({totlCount: state.totlCount -= 1}))
             toast.success("City deleted successfully")
            }
         }catch(error:any){

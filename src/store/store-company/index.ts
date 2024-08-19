@@ -17,6 +17,7 @@ const useCompanyStore = create <StoreCompany> ((set)=>({
                set({totlCount: response?.data?.totalElements})
            }
            set({isLoader: false})
+           
        }catch(error){
         console.log(error)
         set({isLoader: false})
@@ -28,8 +29,9 @@ const useCompanyStore = create <StoreCompany> ((set)=>({
         
             try{
                 const response = await company.postCompany(data)
-                if(response.status === 201){
-                    set((state)=>({dataCompany: state.dataCompany.length < 10 ? [...state.dataCompany, response?.data?.data] : [...state.dataCompany]})) 
+                console.log(response)
+                if(response.status === 200){
+                    set((state)=>({dataCompany: state.dataCompany.length < 10 ? [...state.dataCompany, data] : [...state.dataCompany]})) 
                     // set((state)=>({totlCount: state.totlCount += 1}))
                     return response?.status
                 }

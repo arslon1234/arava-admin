@@ -69,7 +69,7 @@ export const company:Category = {
     // ESLATMA swagger to'grilansa davom etiladi
     deleteCompany: (id)=> request.delete(`/services/admin/api/company/${id}`),
     postCompany: (data)=> request.post("/services/admin/api/company" , data),
-    updateCompany: (data)=> request.patch(`/services/admin/api/company`, data),
+    updateCompany: (data)=> request.put(`/services/admin/api/company`, data),
 
     activateCompany: (data)=> request.put(`/services/admin/api/company-activate`, data),
 }

@@ -29,7 +29,9 @@ const useMenuProductsStore = create <StoreMenuProducts> ((set)=>({
         try{
             const response = await menuProducts.postMenuProducts(data)
             if(response.status === 200){
-                set((state)=>({dataMenuProducts: [...state.dataMenuProducts, data] }))
+                // set((state)=>({dataMenuProducts: [...state.dataMenuProducts, data] }))
+                console.log(response?.status);
+                
                 return response?.status
             }
         }catch(error){

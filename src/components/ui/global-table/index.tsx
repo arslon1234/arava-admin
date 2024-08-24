@@ -32,12 +32,13 @@ import {
   ModalMenu,
   ModalMenuCategories,
   ModalMenuSection,
-  ModalProductsDelete
+  ModalProductsDelete,
 } from "@modals";
+import { setCookies } from "@cookie";
 
 function Index({ header, body, skelatonLoader }: Props) {
   const navigate = useNavigate();
-  const { id , sectionId} = useParams();
+  const { id, sectionId } = useParams();
   const menuId: string | undefined = id;
   const URL = import.meta.env.VITE_BASE_URL;
   const [searchPaams] = useSearchParams();
@@ -250,9 +251,10 @@ function Index({ header, body, skelatonLoader }: Props) {
                                   />
                                   <button
                                     className=" text-gray-500"
-                                    onClick={() =>
-                                      navigate(`/home/menu/${menuId && menuId}/section/${body?.id}`)
-                                    }
+                                    onClick={() => {
+                                      setCookies("branchId", body?.branchId);
+                                      navigate(`/home/menu/${ menuId && menuId}/section/${body?.id}`);
+                                    }}
                                   >
                                     <TurnRightIcon />
                                   </button>
@@ -297,13 +299,13 @@ function Index({ header, body, skelatonLoader }: Props) {
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
                                     <ModalProductsDelete
-                                       productsId={ body?.id}
-                                       menuSectionId={sectionId}
+                                      productsId={body?.id}
+                                      menuSectionId={sectionId}
                                       title="menu-products"
                                     />
                                   </div>
                                 </div>
-                              ): header.value == "imageUrl" ? (
+                              ) : header.value == "imageUrl" ? (
                                 <>
                                   <Image
                                     width={100}

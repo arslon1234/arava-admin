@@ -80,7 +80,7 @@ const Index = ({ title, id, data }: propsData) => {
           style={{
             color: "#767676",
             border: "none" ,
-            boxShadow: "none",// HEX formatida rang
+            boxShadow: "none",
           }}
         >
           <EditIcon />

@@ -70,6 +70,7 @@ export default function ResponsiveDrawer() {
     if (pathname === "/home/categories") return t("Categories");
     if (pathname === "/home/products") return t("Products");
     if (/^\/home\/branch\/\d+$/.test(pathname)) return t("Branch working days"); 
+    if (/^\/home\/brand\/\d+$/.test(pathname)) return t("Brand id"); 
     if (/^\/home\/menu\/\d+$/.test(pathname)) return t("Menu sections");
     if (/^\/home\/menu\/\d+\/section\/\d+$/.test(pathname)) return t("Menu products");
     return "Error";
@@ -92,7 +93,7 @@ export default function ResponsiveDrawer() {
           <img
            src="https://www.brandbucket.com/sites/default/files/logo_uploads/508113/large_aravva.png"
             alt="logo"
-            style={{ minWidth: "100%", height: "60px" , objectFit:"fill"}}
+            style={{ minWidth: "100%", height: "60px" , objectFit:"contain"}}
           />
         </div>
         <Menu theme="light" mode="inline" selectedKeys={[pathname]}>

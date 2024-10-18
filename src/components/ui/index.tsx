@@ -6,6 +6,7 @@ import GoogleMaps from "./google-maps";
 import GlobalSwitch from "./global-switch";
 import DescriptionText from "./description-text";
 import GlobalPogination from "./global-pogination";
+import GoogleMapsIframe from "./google-maps-iframe";
 
 
-export {Account , GlobalTable , GlobalSearch , DropdownLanguage ,GlobalPogination , GoogleMaps , GlobalSwitch , DescriptionText }
+export {Account , GoogleMapsIframe , GlobalTable , GlobalSearch , DropdownLanguage ,GlobalPogination , GoogleMaps , GlobalSwitch , DescriptionText }

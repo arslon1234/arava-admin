@@ -16,6 +16,7 @@ import MenuSection from "./menu/menu-section"
 import MenuCategories from "./menu-categories";
 import Products from "./products";
 import MenuProducts from "./menu-products";
+import BrandId from "./brand-id";
 
 export { 
     SignIn,
@@ -36,5 +37,5 @@ export {
     MenuCategories,
     Products,
     MenuProducts,
-
+    BrandId,
 };

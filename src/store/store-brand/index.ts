@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const useBrandStore = create <StoreBrand> ((set)=>({
     isLoader: false,
     dataBrand: [],
+    dataBrandId: null,
     totlCount: 0,
     location:{lat: 0, lng: 0},
 
@@ -24,6 +25,20 @@ const useBrandStore = create <StoreBrand> ((set)=>({
         set({isLoader: false})
        }
        
+    },
+
+    getBrandId : async(id)=>{
+        try{
+           set({isLoader: true})
+           const response = await brand.getBrandId(id)
+           if(response.status === 200){
+               set({dataBrandId: response?.data})
+           }
+           set({isLoader: false})
+       }catch(error){
+        console.log(error)
+        set({isLoader: false})
+       }
     },
 
     postDataBrand: async(data)=>{

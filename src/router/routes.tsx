@@ -7,7 +7,9 @@ import {
 
 import App from "../App";
 import { Error, SignIn, Brand, BrandType,
-  Country, City, Company, Couriers, Banner, Region, Branch, Cuisines, WorkingDays, Menu, MenuSection, MenuCategories, Products, MenuProducts } from "@pages";
+  Country, City, Company, Couriers, Banner, Region, Branch,
+   Cuisines, WorkingDays, Menu, MenuSection, MenuCategories,
+    Products, MenuProducts , BrandId } from "@pages";
 import { HomeLayout } from "@layout";
 
 const index = () => {
@@ -18,6 +20,7 @@ const index = () => {
               <Route path="/home/*" element={<HomeLayout />} >
                   <Route index element={<Couriers />} />
                   <Route path="brand" element={<Brand />} />
+                  <Route path="brand/:id" element={<BrandId/>} />
                   <Route path="country" element={<Country />} />
                   <Route path="city" element={<City />} />
                   <Route path="company" element={<Company />} />

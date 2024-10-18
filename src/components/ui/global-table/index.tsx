@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import TurnRightIcon from "@mui/icons-material/TurnRight";
 import { Image } from "antd"; // <-- test jarayonida
 // import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -128,6 +129,9 @@ function Index({ header, body, skelatonLoader }: Props) {
                                 <div className="flex items-center gap-2">
                                   <div className=" text-gray-500">
                                     <ModalDelete id={body?.id} title="brand" />
+                                  </div>
+                                  <div className=" text-gray-500">
+                                     <button onClick={()=>{navigate(`/home/brand/${body?.id}`)}}><VisibilityIcon/></button>
                                   </div>
                                   {/* <ModalTest title="put" id={body?.id} data={body}/> */}
                                 </div>

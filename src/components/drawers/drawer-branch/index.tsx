@@ -32,9 +32,11 @@ interface CouriersProps {
 
 const Index = ({ data, title }: CouriersProps) => {
   const [open, setOpen] = useState(false);
+  const [countryId , setCountryId] = useState(0);
+  const [regionId, setRegionId] = useState(0);
   const { getDataCountry, dataCountry } = useCountryStore();
-  const { getDataRegion, dataRegion } = useRegionStore();
-  const { getDataCity, dataCity } = useCityStore();
+  const { getDataRegionHelper , dataRegionHelper} = useRegionStore();
+  const { getDataCityHelper , dataCityHelper } = useCityStore();
   const { getDataBrandType, dataBrandType } = useBrandTypeStore();
   const { getDataBrand, dataBrand, location } = useBrandStore();
   const { getDataCuisines, dataCuisines } = useCuisinesStore();
@@ -56,12 +58,23 @@ const Index = ({ data, title }: CouriersProps) => {
 
   useEffect(() => {
     getDataCountry({});
-    getDataRegion({});
-    getDataCity({});
     getDataBrandType({});
     getDataBrand({});
     getDataCuisines({});
   }, []);
+
+  // get region in country id =-=-=-=-==-=-=-=-=-==-=-
+  useEffect(() => {
+      if (countryId) {
+          getDataRegionHelper( countryId );
+      }
+  }, [countryId]);
+// get city in region id =-=-=-=-==-=-=-=-=-==-=-
+  useEffect(() => {
+    if (regionId) {
+        getDataCityHelper( regionId );
+    }
+}, [regionId]);
 
   const handleSubmit = async (values: any) => {
     const lat = location && location?.lat;
@@ -199,8 +212,11 @@ const Index = ({ data, title }: CouriersProps) => {
                   <Select
                     size="large"
                     value={data?.countryId && data?.countryId}
+                    onChange={(value:number) => {
+                      setCountryId(value);
+                    }}
                   >
-                    {dataCountry.map((item: any) => (
+                    {dataCountry && dataCountry.map((item: any) => (
                       <Option key={item?.id} value={item?.id}>
                         {item?.nameUz || item?.nameRu}
                       </Option>
@@ -227,10 +243,15 @@ const Index = ({ data, title }: CouriersProps) => {
                   hasFeedback
                   rules={[{ required: true, message: "Select region" }]}
                 >
-                  <Select size="large" value={data?.regionId && data?.regionId}>
-                    {dataRegion.map((item: any) => (
+                  <Select size="large" value={data?.regionId && data?.regionId}
+                  disabled={!countryId}
+                  onChange={(value:number) => {
+                    setRegionId(value);
+                  }}
+                  >
+                    {dataRegionHelper && dataRegionHelper.map((item: any) => (
                       <Option key={item?.id} value={item?.id}>
-                        {item?.nameUz || item?.nameRu}
+                        {item?.name}
                       </Option>
                     ))}
                   </Select>
@@ -255,10 +276,10 @@ const Index = ({ data, title }: CouriersProps) => {
                   hasFeedback
                   rules={[{ required: true, message: "Select city" }]}
                 >
-                  <Select size="large" value={data?.cityId && data?.cityId}>
-                    {dataCity.map((item: any) => (
+                  <Select size="large" value={data?.cityId && data?.cityId} disabled={!regionId}>
+                    {dataCityHelper && dataCityHelper.map((item: any) => (
                       <Option key={item?.id} value={item?.id}>
-                        {item?.nameUz || item?.nameRu}
+                        {item?.name}
                       </Option>
                     ))}
                   </Select>

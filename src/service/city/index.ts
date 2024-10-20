@@ -27,17 +27,20 @@ interface City{
     postCity : (data:postCity)=> any,
     updateCity: (data:UpdateCity)=> any,
     deleteCity : (id:number)=> any,
+    getCityHelper :(id:number|undefined)=> any
 }
 
 // ---------> Interface Stor City <--------------------
 export interface StoreCity {
     isLoader:boolean;
     dataCity:any[];
+    dataCityHelper:any[];
     totlCount:number;
     getDataCity: (params:GetCity)=> Promise <any>;
     postDataCity: (data:postCity)=> Promise <any>;
     updateDataCity: (data:UpdateCity)=> Promise <any>;
     deleteDataCity: (id:number)=> Promise <any>;
+    getDataCityHelper:(id:number|undefined)=> Promise <any>,
 }
 
 
@@ -49,5 +52,6 @@ export const city:City = {
     deleteCity: (id)=> request.delete(`/services/admin/api/city/${id}`),
     postCity: (data)=> request.post("/services/admin/api/city" , data),
     updateCity: (data)=> request.put(`/services/admin/api/city`, data),
+    getCityHelper:(id)=>  request.get(`/services/admin/api/city-helper/${id}`),
 
 }

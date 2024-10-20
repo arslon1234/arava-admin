@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const useCityStore = create <StoreCity> ((set)=>({
     isLoader: false,
     dataCity: [],
+    dataCityHelper: [],
     totlCount: 0,
     getDataCity : async(params)=>{
         try{
@@ -22,6 +23,17 @@ const useCityStore = create <StoreCity> ((set)=>({
         set({isLoader: false})
        }
        
+    },
+
+    getDataCityHelper: async(id)=>{
+        try{
+            const response = await city.getCityHelper(id)
+            if(response.status === 200){
+                set({dataCityHelper: response?.data})
+            }
+       }catch(error){
+        console.log(error)
+       }
     },
 
     postDataCity: async(data)=>{

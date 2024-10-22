@@ -30,13 +30,15 @@ interface CouriersProps {
 
 const Index = ({ data }: CouriersProps) => {
   const [open, setOpen] = useState(false);
+  const [countryId, setCountryId] = useState(0);
+  const [regionId, setRegionId] = useState(0);
   const { getDataCompany, dataCompany } = useCompanyStore();
   const { getDataCountry, dataCountry } = useCountryStore();
-  const { getDataRegion, dataRegion } = useRegionStore();
-  const { getDataCity, dataCity } = useCityStore();
+  const { getDataRegionHelper, dataRegionHelper } = useRegionStore();
+  const { getDataCityHelper, dataCityHelper } = useCityStore();
   const { getDataBrandType, dataBrandType } = useBrandTypeStore();
   const { postDataBrand, location } = useBrandStore();
-  const { imageUrl , imageUrlUpdated } = useBannerStore();
+  const { imageUrl, imageUrlUpdated } = useBannerStore();
 
   const showDrawer = () => {
     setOpen(true);
@@ -49,10 +51,21 @@ const Index = ({ data }: CouriersProps) => {
   useEffect(() => {
     getDataCompany({});
     getDataCountry({});
-    getDataRegion({});
-    getDataCity({});
     getDataBrandType({});
   }, []);
+
+  // get region in country id =-=-=-=-==-=-=-=-=-==-=-
+  useEffect(() => {
+    if (countryId) {
+      getDataRegionHelper(countryId);
+    }
+  }, [countryId]);
+  // get city in region id =-=-=-=-==-=-=-=-=-==-=-
+  useEffect(() => {
+    if (regionId) {
+      getDataCityHelper(regionId);
+    }
+  }, [regionId]);
 
   const handleSubmit = async (values: any) => {
     console.log("Received values of form: ", values);
@@ -103,12 +116,7 @@ const Index = ({ data }: CouriersProps) => {
       >
         To add
       </Button>
-      <Drawer
-        title="Brand create"
-        onClose={onClose}
-        open={open}
-        width={620}
-      >
+      <Drawer title="Brand create" onClose={onClose} open={open} width={620}>
         <div className="">
           <ConfigProvider
             theme={{
@@ -176,8 +184,11 @@ const Index = ({ data }: CouriersProps) => {
                   <Select
                     size="large"
                     value={data?.countryId && data?.countryId}
+                    onChange={(value:number) => {
+                      setCountryId(value);
+                    }}
                   >
-                    {dataCountry.map((item: any) => (
+                    {dataCountry && dataCountry.map((item: any) => (
                       <Option key={item?.id} value={item?.id}>
                         {item?.nameUz || item?.nameRu}
                       </Option>
@@ -204,10 +215,10 @@ const Index = ({ data }: CouriersProps) => {
                   hasFeedback
                   rules={[{ required: true, message: "Select region" }]}
                 >
-                  <Select size="large" value={data?.regionId && data?.regionId}>
-                    {dataRegion.map((item: any) => (
+                  <Select size="large" disabled={!countryId} value={data?.regionId && data?.regionId} onChange={(value:number)=>{setRegionId(value)}}>
+                    {dataRegionHelper && dataRegionHelper.map((item: any) => (
                       <Option key={item?.id} value={item?.id}>
-                        {item?.nameUz || item?.nameRu}
+                        {item?.name}
                       </Option>
                     ))}
                   </Select>
@@ -220,7 +231,9 @@ const Index = ({ data }: CouriersProps) => {
                   label="Main Office Address"
                   style={{ width: "100%" }}
                   rules={[{ required: true }]}
-                  initialValue={data?.mainOfficeAddress ? data.mainOfficeAddress : ""}
+                  initialValue={
+                    data?.mainOfficeAddress ? data.mainOfficeAddress : ""
+                  }
                 >
                   <Input style={{ width: "100%" }} size="large" />
                 </Form.Item>
@@ -232,10 +245,10 @@ const Index = ({ data }: CouriersProps) => {
                   hasFeedback
                   rules={[{ required: true, message: "Select city" }]}
                 >
-                  <Select size="large" value={data?.cityId && data?.cityId}>
-                    {dataCity.map((item: any) => (
+                  <Select size="large" value={data?.cityId && data?.cityId} disabled={!regionId}>
+                    {dataCityHelper && dataCityHelper.map((item: any) => (
                       <Option key={item?.id} value={item?.id}>
-                        {item?.nameUz || item?.nameRu}
+                        {item?.name}
                       </Option>
                     ))}
                   </Select>

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const useRegionStore = create <StoreRegion> ((set)=>({
     isLoader: false,
     dataRegion: [],
+    dataRegionHelper: [],
     totlCount: 0,
     getDataRegion : async(params)=>{
         try{
@@ -22,6 +23,17 @@ const useRegionStore = create <StoreRegion> ((set)=>({
         set({isLoader: false})
        }
        
+    },
+
+    getDataRegionHelper :async(id)=>{
+        try{
+            const response = await region.getRegionHelper(id)
+            if(response.status === 200){
+                set({dataRegionHelper: response?.data})
+            }
+       }catch(error){
+        console.log(error)
+       }
     },
 
     postDataRegion: async(data)=>{

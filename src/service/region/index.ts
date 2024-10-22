@@ -24,6 +24,7 @@ export interface getRegion{
 
 interface Region{
     getRegion : (params:getRegion)=> any,
+    getRegionHelper: (id:number | undefined)=>any,
     postRegion : (data:postRegion)=> any,
     updateRegion: (data:UpdateRegion)=> any,
     deleteRegion : (id:number)=> any,
@@ -33,11 +34,13 @@ interface Region{
 export interface StoreRegion {
     isLoader:boolean;
     dataRegion:any[];
+    dataRegionHelper:any[];
     totlCount:number;
     getDataRegion: (param :getRegion)=> Promise <any>;
     postDataRegion: (data:postRegion)=> Promise <any>;
     updateDataRegion: (data:UpdateRegion)=> Promise <any>;
     deleteDataRegion: (id:number)=> Promise <any>;
+    getDataRegionHelper: (id:number|undefined)=> Promise <any>;
 }
 
 
@@ -49,4 +52,5 @@ export const region:Region = {
     postRegion: (data)=> request.post("/services/admin/api/region" , data),
     updateRegion: (data)=> request.put(`/services/admin/api/region`, data),
     deleteRegion: (id)=> request.delete(`/services/admin/api/region/${id}`),
+    getRegionHelper: (id) => request.get(`/services/admin/api/region-helper/${id}`),
 }
